@@ -1,0 +1,2684 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Toán Lớp 3 – Kết Nối Tri Thức Với Cuộc Sống</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #F0F6FF; color: #1C2B3A; min-height: 100vh; }
+
+  .header { background: linear-gradient(135deg, #1565C0 0%, #1976D2 55%, #42A5F5 100%); padding: 1.5rem 1.5rem 2.5rem; text-align: center; }
+  .header-badge { background: rgba(255,255,255,0.22); border-radius: 20px; display: inline-block; padding: 4px 16px; font-size: 12px; color: #fff; margin-bottom: 8px; letter-spacing: 1px; font-weight: 700; }
+  .header h1 { color: #fff; font-size: 1.8rem; font-weight: 800; line-height: 1.2; margin-bottom: 4px; }
+  .header p { color: rgba(255,255,255,0.85); font-size: 0.88rem; }
+  .medal { font-size: 2.2rem; margin-bottom: 8px; display: block; }
+
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  .home-wrap { max-width: 720px; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
+  .home-intro { text-align: center; margin-bottom: 1.5rem; }
+  .home-intro h2 { font-size: 1.1rem; color: #1C2B3A; margin-bottom: 6px; }
+  .home-intro p { font-size: 0.88rem; color: #666; }
+
+  .chapters-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 500px) { .chapters-grid { grid-template-columns: 1fr; } }
+
+  .chapter-card { background: #fff; border-radius: 16px; padding: 1.1rem; cursor: pointer; border: 2px solid transparent; transition: all 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .chapter-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.11); border-color: currentColor; }
+  .ch-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 10px; }
+  .ch-num { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
+  .ch-title { font-size: 0.92rem; font-weight: 700; color: #1C2B3A; line-height: 1.3; margin-bottom: 4px; }
+  .ch-desc { font-size: 0.78rem; color: #777; line-height: 1.4; }
+  .ch-topics { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 4px; }
+  .ch-tag { font-size: 10px; padding: 2px 8px; border-radius: 20px; font-weight: 600; }
+
+  .c1 { color: #1565C0; } .c1 .ch-icon { background: #E3F2FD; } .c1 .ch-num { color: #1565C0; } .c1 .ch-tag { background: #E3F2FD; color: #0D47A1; }
+  .c2 { color: #2E7D32; } .c2 .ch-icon { background: #E8F5E9; } .c2 .ch-num { color: #1B5E20; } .c2 .ch-tag { background: #E8F5E9; color: #1B5E20; }
+  .c3 { color: #C62828; } .c3 .ch-icon { background: #FFEBEE; } .c3 .ch-num { color: #B71C1C; } .c3 .ch-tag { background: #FFEBEE; color: #B71C1C; }
+  .c4 { color: #6A1B9A; } .c4 .ch-icon { background: #F3E5F5; } .c4 .ch-num { color: #4A148C; } .c4 .ch-tag { background: #F3E5F5; color: #4A148C; }
+  .c5 { color: #E65100; } .c5 .ch-icon { background: #FFF3E0; } .c5 .ch-num { color: #BF360C; } .c5 .ch-tag { background: #FFF3E0; color: #BF360C; }
+  .c6 { color: #00695C; } .c6 .ch-icon { background: #E0F2F1; } .c6 .ch-num { color: #004D40; } .c6 .ch-tag { background: #E0F2F1; color: #004D40; }
+  .c7 { color: #558B2F; } .c7 .ch-icon { background: #F1F8E9; } .c7 .ch-num { color: #33691E; } .c7 .ch-tag { background: #F1F8E9; color: #33691E; }
+  .c8 { color: #AD1457; } .c8 .ch-icon { background: #FCE4EC; } .c8 .ch-num { color: #880E4F; } .c8 .ch-tag { background: #FCE4EC; color: #880E4F; }
+  .c9 { color: #4527A0; } .c9 .ch-icon { background: #EDE7F6; } .c9 .ch-num { color: #311B92; } .c9 .ch-tag { background: #EDE7F6; color: #311B92; }
+
+  .practice-wrap { max-width: 680px; margin: 0 auto; padding: 1rem; }
+  .back-btn { display: inline-flex; align-items: center; gap: 6px; background: #fff; border: 1.5px solid #DDD; border-radius: 10px; padding: 6px 14px; font-size: 0.85rem; font-weight: 600; cursor: pointer; color: #444; margin-bottom: 1rem; transition: all 0.15s; }
+  .back-btn:hover { background: #F0F4FF; }
+
+  .practice-header { background: #fff; border-radius: 16px; padding: 1.2rem 1.4rem; margin-bottom: 1rem; border: 1.5px solid #DDEAFF; }
+  .practice-header h2 { font-size: 1.05rem; font-weight: 800; color: #1C2B3A; margin-bottom: 4px; }
+  .practice-header p { font-size: 0.8rem; color: #888; }
+
+  .level-row { display: flex; gap: 8px; margin-bottom: 1.2rem; flex-wrap: wrap; }
+  .level-btn { flex: 1; min-width: 80px; padding: 10px 8px; border-radius: 12px; border: 2px solid #E0E0E0; background: #fff; cursor: pointer; font-size: 0.8rem; font-weight: 700; text-align: center; transition: all 0.2s; color: #666; }
+  .level-btn.active-easy { border-color: #2E7D32; background: #E8F5E9; color: #1B5E20; }
+  .level-btn.active-medium { border-color: #E65100; background: #FFF3E0; color: #BF360C; }
+  .level-btn.active-hard { border-color: #B71C1C; background: #FFEBEE; color: #B71C1C; }
+  .level-btn:hover:not(.active-easy):not(.active-medium):not(.active-hard) { border-color: #BBB; background: #F5F8FF; }
+
+  .topic-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 1.2rem; }
+  .topic-pill { padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; border: 1.5px solid #DDD; cursor: pointer; background: #fff; color: #666; transition: all 0.15s; }
+  .topic-pill.active-topic { border-color: transparent; }
+
+  .question-card { background: #fff; border-radius: 20px; padding: 2rem 1.5rem 1.5rem; border: 1.5px solid #DDEAFF; margin-bottom: 1rem; text-align: center; }
+  .q-progress { font-size: 0.78rem; color: #AAA; margin-bottom: 1.2rem; }
+  .q-icon { font-size: 2.5rem; margin-bottom: 0.8rem; display: block; }
+  .q-text { font-size: 1.25rem; font-weight: 800; color: #1C2B3A; margin-bottom: 0.4rem; line-height: 1.45; white-space: pre-line; }
+  .q-hint { font-size: 0.82rem; color: #AAA; margin-bottom: 1.5rem; }
+
+  .answers-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .ans-btn { padding: 14px 10px; border-radius: 14px; border: 2px solid #E8E8E8; background: #fff; cursor: pointer; font-size: 1rem; font-weight: 700; color: #1C2B3A; transition: all 0.18s; }
+  .ans-btn:hover:not(:disabled) { border-color: #AACCFF; background: #F0F6FF; transform: scale(1.02); }
+  .ans-btn.correct { border-color: #2E7D32; background: #E8F5E9; color: #1B5E20; }
+  .ans-btn.wrong { border-color: #C62828; background: #FFEBEE; color: #B71C1C; }
+  .ans-btn:disabled { cursor: default; }
+
+  .fill-wrap { display: flex; gap: 10px; justify-content: center; align-items: center; margin-top: 0.5rem; flex-wrap: wrap; }
+  .fill-input { width: 130px; text-align: center; padding: 12px; border-radius: 12px; border: 2px solid #CCC; font-size: 1.25rem; font-weight: 700; background: #fff; color: #1C2B3A; transition: border 0.15s; }
+  .fill-input:focus { outline: none; border-color: #1976D2; }
+  .fill-input.correct-inp { border-color: #2E7D32; background: #E8F5E9; color: #1B5E20; }
+  .fill-input.wrong-inp { border-color: #C62828; background: #FFEBEE; color: #B71C1C; }
+  .check-btn { padding: 12px 20px; border-radius: 12px; background: #1565C0; border: none; color: #fff; font-size: 0.9rem; font-weight: 700; cursor: pointer; transition: background 0.15s; }
+  .check-btn:hover { background: #0D47A1; }
+  .check-btn:disabled { background: #CCC; cursor: default; }
+
+  .feedback { margin-top: 1rem; padding: 10px 14px; border-radius: 12px; font-size: 0.88rem; font-weight: 600; display: none; }
+  .feedback.show { display: block; }
+  .feedback.correct { background: #E8F5E9; color: #1B5E20; border: 1px solid #A5D6A7; }
+  .feedback.wrong { background: #FFEBEE; color: #B71C1C; border: 1px solid #EF9A9A; }
+
+  .next-btn { width: 100%; margin-top: 1rem; padding: 14px; border-radius: 14px; background: #1565C0; color: #fff; font-size: 1rem; font-weight: 700; border: none; cursor: pointer; display: none; transition: background 0.15s; }
+  .next-btn:hover { background: #0D47A1; }
+  .next-btn.show { display: block; }
+
+  .score-bar { background: #fff; border-radius: 14px; padding: 12px 16px; margin-bottom: 1rem; border: 1.5px solid #DDEAFF; display: flex; gap: 16px; justify-content: center; }
+  .score-item { text-align: center; }
+  .score-num { font-size: 1.4rem; font-weight: 800; }
+  .score-label { font-size: 0.72rem; color: #AAA; font-weight: 600; }
+  .score-correct { color: #2E7D32; }
+  .score-wrong { color: #C62828; }
+  .score-streak { color: #E65100; }
+
+  .result-card { background: #fff; border-radius: 20px; padding: 2.5rem 2rem; text-align: center; border: 1.5px solid #DDEAFF; }
+  .result-emoji { font-size: 4rem; margin-bottom: 1rem; display: block; }
+  .result-title { font-size: 1.5rem; font-weight: 800; margin-bottom: 8px; }
+  .result-score { font-size: 3rem; font-weight: 900; color: #1565C0; margin-bottom: 8px; }
+  .result-sub { font-size: 0.9rem; color: #888; margin-bottom: 2rem; }
+  .result-btns { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+  .result-btns button { padding: 12px 24px; border-radius: 12px; font-size: 0.9rem; font-weight: 700; cursor: pointer; border: 2px solid transparent; transition: all 0.15s; }
+  .btn-retry { background: #1565C0; color: #fff; } .btn-retry:hover { background: #0D47A1; }
+  .btn-home { background: #fff; color: #444; border-color: #DDD; } .btn-home:hover { background: #F0F4FF; }
+  .btn-harder { background: #FFF3E0; color: #BF360C; border-color: #FFCC80; } .btn-harder:hover { background: #FFE0B2; }
+
+  .stars { font-size: 2rem; margin-bottom: 12px; letter-spacing: 4px; }
+
+  .site-home-btn { position: fixed; top: 14px; left: 14px; z-index: 999; display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.95); color: #1565C0; border: 1.5px solid #fff; border-radius: 20px; padding: 8px 14px; font-size: 0.8rem; font-weight: 700; text-decoration: none; box-shadow: 0 2px 10px rgba(0,0,0,0.18); transition: all 0.15s; }
+  .site-home-btn:hover { background: #fff; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(0,0,0,0.22); }
+  @media (max-width: 420px) { .site-home-btn { font-size: 0.72rem; padding: 7px 11px; top: 10px; left: 10px; } }
+
+  @media (max-width: 420px) {
+    .header h1 { font-size: 1.4rem; }
+    .q-text { font-size: 1.05rem; }
+    .chapters-grid { grid-template-columns: 1fr; }
+  }
+
+  /* SVG Illustration styles */
+  .q-illustration {
+    margin: 0.5rem auto 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .q-illustration svg {
+    max-width: 100%;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.10));
+  }
+  .svg-label {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-weight: 700;
+    fill: #1C2B3A;
+  }
+  .svg-dim {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-weight: 600;
+    fill: #1565C0;
+    font-size: 13px;
+  }
+  .svg-angle-label {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-weight: 700;
+    fill: #C62828;
+    font-size: 14px;
+  }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="site-home-btn">🏠 Trang chủ</a>
+
+<div class="header">
+  <span class="medal">🎓</span>
+  <div class="header-badge">TOÁN LỚP 3</div>
+  <h1>Kết Nối Tri Thức Với Cuộc Sống</h1>
+  <p>Luyện tập toán theo chương trình sách giáo khoa lớp 3 mới</p>
+</div>
+
+<!-- HOME -->
+<div id="screen-home" class="screen active">
+  <div class="home-wrap">
+    <div class="home-intro">
+      <h2>📚 Chọn chương để luyện tập</h2>
+      <p>Bấm vào chương muốn ôn, rồi chọn chủ đề và cấp độ phù hợp!</p>
+    </div>
+    <div class="chapters-grid" id="chapters-grid"></div>
+  </div>
+</div>
+
+<!-- PRACTICE -->
+<div id="screen-practice" class="screen">
+  <div class="practice-wrap">
+    <button class="back-btn" onclick="goHome()">← Quay lại</button>
+    <div class="practice-header">
+      <h2 id="prac-chapter-title">Chương 1</h2>
+      <p id="prac-chapter-desc"></p>
+    </div>
+    <div class="topic-row" id="topic-row"></div>
+    <div class="level-row">
+      <button class="level-btn active-easy" onclick="setLevel('easy',this)" id="btn-easy">😊 Dễ</button>
+      <button class="level-btn" onclick="setLevel('medium',this)" id="btn-medium">🤔 Trung bình</button>
+      <button class="level-btn" onclick="setLevel('hard',this)" id="btn-hard">🔥 Khó</button>
+    </div>
+    <div class="score-bar">
+      <div class="score-item"><div class="score-num score-correct" id="sc-correct">0</div><div class="score-label">✅ ĐÚNG</div></div>
+      <div class="score-item"><div class="score-num score-wrong" id="sc-wrong">0</div><div class="score-label">❌ SAI</div></div>
+      <div class="score-item"><div class="score-num score-streak" id="sc-streak">0</div><div class="score-label">🔥 CHUỖI</div></div>
+    </div>
+    <div class="question-card">
+      <div class="q-progress" id="q-progress">Câu 1 / 10</div>
+      <span class="q-icon" id="q-icon">🔢</span>
+      <div id="q-illustration" class="q-illustration" style="display:none"></div>
+      <div class="q-text" id="q-text"></div>
+      <div class="q-hint" id="q-hint"></div>
+      <div id="answer-area"></div>
+      <div class="feedback" id="feedback"></div>
+      <button class="next-btn" id="next-btn" onclick="nextQuestion()">Câu tiếp theo →</button>
+    </div>
+  </div>
+</div>
+
+<!-- RESULT -->
+<div id="screen-result" class="screen">
+  <div class="practice-wrap">
+    <div class="result-card">
+      <span class="result-emoji" id="res-emoji">🎉</span>
+      <div class="stars" id="res-stars">⭐⭐⭐</div>
+      <div class="result-title" id="res-title">Xuất sắc!</div>
+      <div class="result-score" id="res-score">10/10</div>
+      <div class="result-sub" id="res-sub"></div>
+      <div class="result-btns">
+        <button class="btn-retry" onclick="retryChapter()">🔄 Làm lại</button>
+        <button class="btn-harder" onclick="goHarder()">🔥 Cấp độ cao hơn</button>
+        <button class="btn-home" onclick="goHome()">🏠 Trang chủ</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+//  DỮ LIỆU CHƯƠNG – SGK TOÁN 3 KẾT NỐI TRI THỨC VỚI CUỘC SỐNG
+// ============================================================
+const CHAPTERS = [
+  {
+    id:1, color:'c1', icon:'💯',
+    num:'CHƯƠNG 1',
+    title:'Ôn tập và bổ sung',
+    desc:'Số đến 1000, so sánh, cộng trừ, nhân chia trong phạm vi bảng tính',
+    tags:['Số đến 1000','So sánh','Cộng trừ','Nhân chia'],
+    topics:[
+      {id:'t1a', label:'🔢 Số đến 1000', key:'num1000'},
+      {id:'t1b', label:'⚖️ So sánh số', key:'compare1000'},
+      {id:'t1c', label:'➕➖ Cộng trừ', key:'addSub1000'},
+      {id:'t1d', label:'✖️➗ Nhân chia', key:'mulDiv_ot'},
+    ]
+  },
+  {
+    id:2, color:'c2', icon:'🔟',
+    num:'CHƯƠNG 2',
+    title:'Các số đến 10 000',
+    desc:'Đọc, viết, so sánh số đến 10 000; cấu tạo số, hàng nghìn',
+    tags:['Đến 10000','Hàng nghìn','So sánh','Tròn nghìn'],
+    topics:[
+      {id:'t2a', label:'💯 Hàng nghìn', key:'thousands'},
+      {id:'t2b', label:'📝 Đọc viết 10000', key:'readwrite10000'},
+      {id:'t2c', label:'⚖️ So sánh 10000', key:'compare10000'},
+      {id:'t2d', label:'🔢 Số tròn nghìn', key:'roundThousands'},
+    ]
+  },
+  {
+    id:3, color:'c3', icon:'➕',
+    num:'CHƯƠNG 3',
+    title:'Phép cộng, phép trừ trong phạm vi 10 000',
+    desc:'Cộng trừ có nhớ, đặt tính, bài toán có lời văn',
+    tags:['Cộng có nhớ','Trừ có nhớ','Đặt tính','Lời văn'],
+    topics:[
+      {id:'t3a', label:'➕ Phép cộng', key:'add10000'},
+      {id:'t3b', label:'➖ Phép trừ', key:'sub10000'},
+      {id:'t3c', label:'📐 Đặt tính dọc', key:'colCalc'},
+      {id:'t3d', label:'📝 Bài toán lời văn', key:'wordProbAdd'},
+    ]
+  },
+  {
+    id:4, color:'c4', icon:'✖️',
+    num:'CHƯƠNG 4',
+    title:'Phép nhân, phép chia',
+    desc:'Bảng nhân 6,7,8,9; chia hết, chia có dư, tính chất',
+    tags:['Bảng nhân 6-9','Chia hết','Chia dư','Tính chất'],
+    topics:[
+      {id:'t4a', label:'✖️ Bảng nhân 6', key:'mul6'},
+      {id:'t4b', label:'✖️ Bảng nhân 7', key:'mul7'},
+      {id:'t4c', label:'✖️ Bảng nhân 8,9', key:'mul89'},
+      {id:'t4d', label:'➗ Chia hết & chia dư', key:'divRem'},
+    ]
+  },
+  {
+    id:5, color:'c5', icon:'🔢',
+    num:'CHƯƠNG 5',
+    title:'Số có bốn chữ số – Phép tính trong phạm vi 100 000',
+    desc:'Số đến 100 000, cộng trừ nhân chia số lớn, bài toán tổng hiệu',
+    tags:['Đến 100000','Tổng hiệu','Nhân chia lớn','Bài toán'],
+    topics:[
+      {id:'t5a', label:'💯 Số đến 100 000', key:'num100000'},
+      {id:'t5b', label:'➕➖ Cộng trừ lớn', key:'addSub100k'},
+      {id:'t5c', label:'✖️➗ Nhân chia lớn', key:'mulDivLarge'},
+      {id:'t5d', label:'⚖️ Bài toán tổng–hiệu', key:'sumDiff'},
+    ]
+  },
+  {
+    id:6, color:'c6', icon:'📐',
+    num:'CHƯƠNG 6',
+    title:'Hình học và đo lường',
+    desc:'Góc, diện tích, chu vi; đơn vị đo độ dài, khối lượng, dung tích',
+    tags:['Chu vi','Diện tích','Góc vuông','Đơn vị đo'],
+    topics:[
+      {id:'t6a', label:'📐 Góc và hình học', key:'shapes3'},
+      {id:'t6b', label:'📏 Chu vi hình', key:'perimeter'},
+      {id:'t6c', label:'⬛ Diện tích hình', key:'area'},
+      {id:'t6d', label:'⚖️ Đơn vị đo lường', key:'units'},
+    ]
+  },
+  {
+    id:7, color:'c7', icon:'⏰',
+    num:'CHƯƠNG 7',
+    title:'Thời gian',
+    desc:'Giờ, phút, giây; ngày, tháng, năm; tính khoảng thời gian',
+    tags:['Giờ phút giây','Ngày tháng','Lịch','Khoảng cách'],
+    topics:[
+      {id:'t7a', label:'⏰ Giờ phút giây', key:'timeHMS'},
+      {id:'t7b', label:'📅 Ngày tháng năm', key:'calendar3'},
+      {id:'t7c', label:'🕐 Tính khoảng thời gian', key:'timeDiff'},
+    ]
+  },
+  {
+    id:8, color:'c8', icon:'💰',
+    num:'CHƯƠNG 8',
+    title:'Tiền Việt Nam',
+    desc:'Các mệnh giá tiền, đổi tiền, bài toán tiền thực tế',
+    tags:['Mệnh giá','Đổi tiền','Tính tiền','Thối tiền'],
+    topics:[
+      {id:'t8a', label:'💵 Nhận biết mệnh giá', key:'moneyDenom'},
+      {id:'t8b', label:'🔄 Đổi tiền', key:'moneyChange'},
+      {id:'t8c', label:'🛒 Bài toán mua bán', key:'moneyShopping'},
+    ]
+  },
+  {
+    id:9, color:'c9', icon:'📊',
+    num:'CHƯƠNG 9',
+    title:'Thống kê và xác suất',
+    desc:'Bảng số liệu, biểu đồ cột, thu thập số liệu, xác suất thực nghiệm',
+    tags:['Bảng số liệu','Biểu đồ cột','Xác suất','Phân tích'],
+    topics:[
+      {id:'t9a', label:'📊 Bảng số liệu', key:'statTable'},
+      {id:'t9b', label:'📈 Biểu đồ cột', key:'barChart'},
+      {id:'t9c', label:'🎲 Xác suất thực nghiệm', key:'probability'},
+    ]
+  }
+];
+
+// ============================================================
+//  TIỆN ÍCH
+// ============================================================
+function rnd(a,b){ return Math.floor(Math.random()*(b-a+1))+a; }
+function shuffle(arr){ return [...arr].sort(()=>Math.random()-0.5); }
+function pick(arr){ return arr[rnd(0,arr.length-1)]; }
+
+function mcq(question, correct, wrongs, icon, hint){
+  const opts = shuffle([String(correct), ...wrongs.map(String)]).slice(0,4);
+  if(!opts.includes(String(correct))) opts[0]=String(correct);
+  return { type:'mcq', question, correct:String(correct), options:shuffle(opts), icon, hint };
+}
+function fill(question, correct, icon, hint){
+  return { type:'fill', question, correct:String(correct), icon, hint };
+}
+
+function numWords(n){
+  if(n===0) return 'không';
+  const ones=['','một','hai','ba','bốn','năm','sáu','bảy','tám','chín'];
+  const teens=['mười','mười một','mười hai','mười ba','mười bốn','mười lăm','mười sáu','mười bảy','mười tám','mười chín'];
+  if(n<10) return ones[n];
+  if(n<20) return teens[n-10];
+  if(n<100){
+    const t=['','','hai mươi','ba mươi','bốn mươi','năm mươi','sáu mươi','bảy mươi','tám mươi','chín mươi'];
+    const r=n%10;
+    return t[Math.floor(n/10)]+(r?` ${r===1?'mốt':r===5?'lăm':ones[r]}`:'');
+  }
+  if(n<1000){
+    const h=Math.floor(n/100), rest=n%100;
+    return ones[h]+' trăm'+(rest?' '+numWords(rest):'');
+  }
+  if(n<10000){
+    const th=Math.floor(n/1000), rest=n%1000;
+    return numWords(th)+' nghìn'+(rest?(rest<100?' không trăm '+numWords(rest):' '+numWords(rest)):'');
+  }
+  return String(n);
+}
+
+// ============================================================
+//  BỘ TẠO CÂU HỎI
+// ============================================================
+const GEN = {
+
+  // --- CHƯƠNG 1 ---
+  num1000:{
+    easy:()=>{
+      const n=rnd(100,999);
+      const h=Math.floor(n/100),c=Math.floor((n%100)/10),d=n%10;
+      // SVG: place-value blocks (hundreds=big square, tens=rectangle, ones=small square)
+      const bx=18,by=30,bs=38; // hundred block size
+      const tx=bx+h*bs+10,ty=by+8,tw=14,th=bs-10; // tens
+      const ox=tx+c*tw+10,oy=by+18,os=12; // ones
+      const blocks=[];
+      for(let i=0;i<Math.min(h,5);i++) blocks.push(`<rect x="${bx+i*(bs+3)}" y="${by}" width="${bs-2}" height="${bs-2}" rx="4" fill="#BBDEFB" stroke="#1565C0" stroke-width="1.8"/><text x="${bx+i*(bs+3)+(bs-2)/2}" y="${by+(bs-2)/2+5}" font-size="10" text-anchor="middle" fill="#0D47A1" font-weight="700">100</text>`);
+      for(let i=0;i<Math.min(c,5);i++) blocks.push(`<rect x="${tx+i*(tw+2)}" y="${ty}" width="${tw-1}" height="${th}" rx="3" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/><text x="${tx+i*(tw+2)+(tw-1)/2}" y="${ty+th/2+4}" font-size="8" text-anchor="middle" fill="#1B5E20" font-weight="700">10</text>`);
+      for(let i=0;i<Math.min(d,5);i++) blocks.push(`<rect x="${ox+i*(os+2)}" y="${oy}" width="${os}" height="${os}" rx="2" fill="#FFE0B2" stroke="#E65100" stroke-width="1.5"/>`);
+      const svg=`<svg width="280" height="110" viewBox="0 0 280 110" xmlns="http://www.w3.org/2000/svg">
+        ${blocks.join('')}
+        <text x="10" y="100" font-size="11" fill="#1565C0" font-weight="700">${h>5?h+' trăm (chỉ vẽ 5)':h+' trăm'}</text>
+        <text x="100" y="100" font-size="11" fill="#2E7D32" font-weight="700">${c>5?c+' chục (chỉ vẽ 5)':c+' chục'}</text>
+        <text x="195" y="100" font-size="11" fill="#E65100" font-weight="700">${d>5?d+' đv (chỉ vẽ 5)':d+' đv'}</text>
+      </svg>`;
+      const q=fill(`Số ${n} gồm ${h} trăm, ${c} chục và ${d} đơn vị.\nViết số đó: _____`, n, '🔢', 'Đọc cấu tạo rồi viết lại số');
+      q.svg=svg; return q;
+    },
+    medium:()=>{
+      const n=rnd(200,999);
+      const svg=`<svg width="260" height="80" viewBox="0 0 260 80" xmlns="http://www.w3.org/2000/svg">
+        <rect x="10" y="20" width="54" height="40" rx="8" fill="#E3F2FD" stroke="#1565C0" stroke-width="2"/>
+        <text x="37" y="46" font-size="15" font-weight="800" fill="#0D47A1" text-anchor="middle">${n-1}</text>
+        <line x1="64" y1="40" x2="82" y2="40" stroke="#888" stroke-width="2"/>
+        <rect x="84" y="15" width="62" height="50" rx="10" fill="#1565C0" stroke="#0D47A1" stroke-width="2.5"/>
+        <text x="115" y="47" font-size="17" font-weight="800" fill="#fff" text-anchor="middle">${n}</text>
+        <line x1="146" y1="40" x2="164" y2="40" stroke="#888" stroke-width="2"/>
+        <rect x="166" y="20" width="54" height="40" rx="8" fill="#E3F2FD" stroke="#1565C0" stroke-width="2"/>
+        <text x="193" y="46" font-size="15" font-weight="800" fill="#0D47A1" text-anchor="middle">${n+1}</text>
+        <text x="193" y="72" font-size="11" font-weight="700" fill="#C62828" text-anchor="middle">← liền sau</text>
+        <line x1="164" y1="40" x2="166" y2="40" stroke="#888" stroke-width="2"/>
+        <polygon points="237,36 246,40 237,44" fill="#1565C0"/>
+        <rect x="246" y="20" width="8" height="40" rx="4" fill="#E0E0E0"/>
+      </svg>`;
+      const q=mcq(`Số liền sau của ${n} là?`, n+1, [n-1,n+2,n+10], '🔢', 'Số liền sau = số đó + 1');
+      q.svg=svg; return q;
+    },
+    hard:()=>{
+      const n=rnd(100,990);
+      const svg=`<svg width="260" height="75" viewBox="0 0 260 75" xmlns="http://www.w3.org/2000/svg">
+        <rect x="10" y="18" width="58" height="38" rx="8" fill="#FFCDD2" stroke="#C62828" stroke-width="2"/>
+        <text x="39" y="42" font-size="14" font-weight="800" fill="#B71C1C" text-anchor="middle">${n-1}</text>
+        <text x="39" y="68" font-size="10" font-weight="700" fill="#C62828" text-anchor="middle">← đây!</text>
+        <line x1="68" y1="37" x2="86" y2="37" stroke="#888" stroke-width="2"/>
+        <rect x="88" y="12" width="68" height="50" rx="10" fill="#ECEFF1" stroke="#607D8B" stroke-width="2"/>
+        <text x="122" y="44" font-size="16" font-weight="800" fill="#37474F" text-anchor="middle">${n}</text>
+        <line x1="156" y1="37" x2="174" y2="37" stroke="#888" stroke-width="2"/>
+        <rect x="176" y="18" width="58" height="38" rx="8" fill="#E3F2FD" stroke="#1565C0" stroke-width="2"/>
+        <text x="205" y="42" font-size="14" font-weight="800" fill="#0D47A1" text-anchor="middle">${n+1}</text>
+      </svg>`;
+      const q=fill(`Số lớn nhất có 3 chữ số nhỏ hơn ${n} là: _____`, n-1, '🔢', 'Tìm số ngay trước n');
+      q.svg=svg; return q;
+    }
+  },
+
+  compare1000:{
+    easy:()=>{
+      const a=rnd(100,500),b=rnd(501,999);
+      const sym=a<b?'<':a>b?'>':'=';
+      // Number line SVG
+      const total=260,pad=30;
+      const scale=v=>pad+(v-100)/(999-100)*(total-2*pad);
+      const xa=scale(a),xb=scale(b);
+      const svg=`<svg width="260" height="80" viewBox="0 0 260 80" xmlns="http://www.w3.org/2000/svg">
+        <line x1="${pad}" y1="40" x2="${total-pad}" y2="40" stroke="#90A4AE" stroke-width="2.5"/>
+        <polygon points="${total-pad},36 ${total-pad+8},40 ${total-pad},44" fill="#90A4AE"/>
+        <text x="${pad}" y="58" font-size="10" fill="#888" text-anchor="middle">100</text>
+        <text x="${total-pad}" y="58" font-size="10" fill="#888" text-anchor="middle">999</text>
+        <!-- a marker -->
+        <line x1="${xa}" y1="32" x2="${xa}" y2="48" stroke="#1565C0" stroke-width="2.5"/>
+        <circle cx="${xa}" cy="40" r="6" fill="#1565C0"/>
+        <text x="${xa}" y="25" font-size="12" font-weight="700" fill="#1565C0" text-anchor="middle">${a}</text>
+        <!-- b marker -->
+        <line x1="${xb}" y1="32" x2="${xb}" y2="48" stroke="#C62828" stroke-width="2.5"/>
+        <circle cx="${xb}" cy="40" r="6" fill="#C62828"/>
+        <text x="${xb}" y="25" font-size="12" font-weight="700" fill="#C62828" text-anchor="middle">${b}</text>
+        <!-- arrow indicating direction -->
+        <text x="${(xa+xb)/2}" y="72" font-size="13" font-weight="800" fill="#E65100" text-anchor="middle">${a} ${sym} ${b}</text>
+      </svg>`;
+      const q=mcq(`${a} ○ ${b} — Điền dấu thích hợp?`, sym, ['>','=','≠'], '⚖️', 'So sánh hai số có 3 chữ số');
+      q.svg=svg; return q;
+    },
+    medium:()=>{
+      const arr=[rnd(100,300),rnd(301,600),rnd(601,999),rnd(100,999)];
+      const mx=Math.max(...arr);
+      const total=250,pad=25;
+      const scale=v=>pad+(v-100)/(999-100)*(total-2*pad);
+      const colors=['#1565C0','#2E7D32','#C62828','#E65100'];
+      const dots=arr.map((v,i)=>`<circle cx="${scale(v)}" cy="38" r="7" fill="${colors[i]}"/><text x="${scale(v)}" y="25" font-size="11" font-weight="700" fill="${colors[i]}" text-anchor="middle">${v}</text>`);
+      const svg=`<svg width="260" height="75" viewBox="0 0 260 75" xmlns="http://www.w3.org/2000/svg">
+        <line x1="${pad}" y1="38" x2="${total-pad}" y2="38" stroke="#90A4AE" stroke-width="2"/>
+        <polygon points="${total-pad},34 ${total-pad+8},38 ${total-pad},42" fill="#90A4AE"/>
+        <text x="${pad}" y="58" font-size="9" fill="#888" text-anchor="middle">100</text>
+        <text x="${total-pad}" y="58" font-size="9" fill="#888" text-anchor="middle">999</text>
+        ${dots.join('')}
+        <!-- Crown on max -->
+        <text x="${scale(mx)}" y="15" font-size="14" text-anchor="middle">👑</text>
+      </svg>`;
+      const q=mcq(`Số nào lớn nhất: ${arr.join(', ')}?`, mx, [Math.min(...arr),arr[0],arr[1]], '⚖️', 'Chọn số có giá trị lớn nhất');
+      q.svg=svg; return q;
+    },
+    hard:()=>{
+      const a=rnd(100,998);
+      const nums=[a,a+1,a+2,a+3,a+4];
+      const w=220,pad=20,step=(w-2*pad)/4;
+      const svg=`<svg width="260" height="80" viewBox="0 0 260 80" xmlns="http://www.w3.org/2000/svg">
+        <line x1="${pad+20}" y1="38" x2="${w}" y2="38" stroke="#90A4AE" stroke-width="2.5"/>
+        ${nums.map((v,i)=>`
+          <line x1="${pad+20+i*step}" y1="30" x2="${pad+20+i*step}" y2="46" stroke="${i===0||i===4?'#C62828':'#2E7D32'}" stroke-width="${i===0||i===4?2.5:1.8}"/>
+          <circle cx="${pad+20+i*step}" cy="38" r="5" fill="${i===0||i===4?'#C62828':'#2E7D32'}"/>
+          <text x="${pad+20+i*step}" y="22" font-size="10" font-weight="700" fill="${i===0||i===4?'#B71C1C':'#1B5E20'}" text-anchor="middle">${v}</text>
+        `).join('')}
+        <text x="140" y="70" font-size="11" text-anchor="middle" fill="#1565C0" font-weight="700">Giữa ${a} và ${a+4}: có 3 số nguyên</text>
+      </svg>`;
+      const q=fill(`Có bao nhiêu số nguyên nằm giữa ${a} và ${a+4}? (không kể hai đầu): _____`, 3, '⚖️', 'Đếm số nguyên nằm giữa');
+      q.svg=svg; return q;
+    }
+  },
+
+  addSub1000:{
+    easy:()=>{
+      const a=rnd(100,500),b=rnd(50,200);
+      // Vertical addition layout
+      const svg=`<svg width="180" height="120" viewBox="0 0 180 120" xmlns="http://www.w3.org/2000/svg">
+        <rect x="20" y="10" width="140" height="100" rx="12" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
+        <text x="120" y="42" font-size="22" font-weight="800" fill="#1C2B3A" text-anchor="end">${a}</text>
+        <text x="30" y="42" font-size="20" fill="#1565C0" font-weight="700">+</text>
+        <text x="120" y="68" font-size="22" font-weight="800" fill="#1C2B3A" text-anchor="end">${b}</text>
+        <line x1="30" y1="76" x2="130" y2="76" stroke="#1565C0" stroke-width="2"/>
+        <rect x="55" y="82" width="65" height="26" rx="6" fill="#BBDEFB" stroke="#1565C0" stroke-width="1.5" stroke-dasharray="4,2"/>
+        <text x="87" y="100" font-size="16" font-weight="800" fill="#0D47A1" text-anchor="middle">?</text>
+      </svg>`;
+      const q=fill(`${a} + ${b} = _____`, a+b, '➕', 'Phép cộng trong phạm vi 1000');
+      q.svg=svg; return q;
+    },
+    medium:()=>{
+      const a=rnd(400,900),b=rnd(100,a-50);
+      const svg=`<svg width="180" height="120" viewBox="0 0 180 120" xmlns="http://www.w3.org/2000/svg">
+        <rect x="20" y="10" width="140" height="100" rx="12" fill="#FFEBEE" stroke="#C62828" stroke-width="1.5"/>
+        <text x="120" y="42" font-size="22" font-weight="800" fill="#1C2B3A" text-anchor="end">${a}</text>
+        <text x="30" y="42" font-size="20" fill="#C62828" font-weight="700">−</text>
+        <text x="120" y="68" font-size="22" font-weight="800" fill="#1C2B3A" text-anchor="end">${b}</text>
+        <line x1="30" y1="76" x2="130" y2="76" stroke="#C62828" stroke-width="2"/>
+        <rect x="55" y="82" width="65" height="26" rx="6" fill="#FFCDD2" stroke="#C62828" stroke-width="1.5" stroke-dasharray="4,2"/>
+        <text x="87" y="100" font-size="16" font-weight="800" fill="#B71C1C" text-anchor="middle">?</text>
+      </svg>`;
+      const q=fill(`${a} − ${b} = _____`, a-b, '➖', 'Phép trừ trong phạm vi 1000');
+      q.svg=svg; return q;
+    },
+    hard:()=>{
+      const res=rnd(300,800),a=rnd(100,res-50);
+      const b=res-a;
+      const svg=`<svg width="220" height="80" viewBox="0 0 220 80" xmlns="http://www.w3.org/2000/svg">
+        <rect x="8" y="20" width="56" height="38" rx="8" fill="#FFF3E0" stroke="#E65100" stroke-width="2" stroke-dasharray="5,3"/>
+        <text x="36" y="44" font-size="17" font-weight="800" fill="#E65100" text-anchor="middle">?</text>
+        <text x="74" y="44" font-size="18" font-weight="700" fill="#1565C0">+</text>
+        <rect x="90" y="20" width="56" height="38" rx="8" fill="#E3F2FD" stroke="#1565C0" stroke-width="2"/>
+        <text x="118" y="44" font-size="16" font-weight="800" fill="#0D47A1" text-anchor="middle">${b}</text>
+        <text x="156" y="44" font-size="18" font-weight="700" fill="#1565C0">=</text>
+        <rect x="170" y="20" width="42" height="38" rx="8" fill="#E8F5E9" stroke="#2E7D32" stroke-width="2"/>
+        <text x="191" y="44" font-size="15" font-weight="800" fill="#1B5E20" text-anchor="middle">${res}</text>
+      </svg>`;
+      const q=fill(`_____ + ${b} = ${res}`, a, '➕', 'Tìm số hạng chưa biết');
+      q.svg=svg; return q;
+    }
+  },
+
+  mulDiv_ot:{
+    easy:()=>{
+      const x=pick([2,3,4,5]),b=rnd(2,9);
+      // Grid of dots showing multiplication
+      const dotRows=Math.min(b,5),dotCols=Math.min(x,5);
+      const dotSvg=[];
+      for(let r=0;r<dotRows;r++) for(let c=0;c<dotCols;c++)
+        dotSvg.push(`<circle cx="${30+c*22}" cy="${20+r*20}" r="7" fill="#1565C0" opacity="0.85"/>`);
+      const svg=`<svg width="200" height="${20+dotRows*20+25}" viewBox="0 0 200 ${20+dotRows*20+25}" xmlns="http://www.w3.org/2000/svg">
+        ${dotSvg.join('')}
+        ${b>5?`<text x="8" y="${20+dotRows*20+16}" font-size="10" fill="#888">(chỉ vẽ ${dotRows} hàng...)</text>`:''}
+        <text x="${30+dotCols*22+10}" y="${10+dotRows*10}" font-size="13" font-weight="700" fill="#1565C0">${b>5?b+'hàng':''}</text>
+        <text x="150" y="${10+dotRows*10+5}" font-size="13" text-anchor="middle" fill="#E65100" font-weight="700">${b}×${x}</text>
+      </svg>`;
+      const q=mcq(`${b} × ${x} = ?`, b*x, [b*x+x,b*x-x,b*x+2], '✖️', 'Bảng nhân đã học lớp 2');
+      q.svg=svg; return q;
+    },
+    medium:()=>{
+      const x=pick([2,3,4,5]),b=rnd(3,9);
+      const total=b*x;
+      const cols=Math.min(x,5),rows=Math.min(b,4);
+      const dotSvg=[];
+      for(let r=0;r<rows;r++) for(let c=0;c<cols;c++)
+        dotSvg.push(`<circle cx="${20+c*22}" cy="${20+r*20}" r="7" fill="#2E7D32" opacity="0.85"/>`);
+      const svg=`<svg width="220" height="110" viewBox="0 0 220 110" xmlns="http://www.w3.org/2000/svg">
+        <rect x="4" y="6" width="${cols*22+10}" height="${rows*20+10}" rx="6" fill="#F1F8E9" stroke="#558B2F" stroke-width="1.5"/>
+        ${dotSvg.join('')}
+        <text x="${cols*22+24}" y="50" font-size="13" font-weight="700" fill="#388E3C">${b}×${x}=${total}</text>
+        <text x="${cols*22+24}" y="70" font-size="13" font-weight="700" fill="#C62828">${total}÷${x}=?</text>
+        <text x="110" y="100" font-size="11" fill="#888" text-anchor="middle">Mỗi nhóm ${x} chấm → có ${b} nhóm</text>
+      </svg>`;
+      const q=fill(`${b*x} ÷ ${x} = _____`, b, '➗', 'Phép chia từ bảng nhân');
+      q.svg=svg; return q;
+    },
+    hard:()=>{
+      const x=pick([2,3,4,5]),b=rnd(4,9);
+      const svg=`<svg width="230" height="80" viewBox="0 0 230 80" xmlns="http://www.w3.org/2000/svg">
+        <rect x="8" y="18" width="52" height="38" rx="8" fill="#F3E5F5" stroke="#6A1B9A" stroke-width="2" stroke-dasharray="5,3"/>
+        <text x="34" y="42" font-size="17" font-weight="800" fill="#6A1B9A" text-anchor="middle">?</text>
+        <text x="70" y="42" font-size="18" font-weight="700" fill="#6A1B9A">×</text>
+        <rect x="86" y="18" width="42" height="38" rx="8" fill="#E8EAF6" stroke="#3949AB" stroke-width="2"/>
+        <text x="107" y="42" font-size="17" font-weight="800" fill="#1A237E" text-anchor="middle">${x}</text>
+        <text x="140" y="42" font-size="18" font-weight="700" fill="#6A1B9A">=</text>
+        <rect x="156" y="18" width="60" height="38" rx="8" fill="#EDE7F6" stroke="#6A1B9A" stroke-width="2"/>
+        <text x="186" y="42" font-size="17" font-weight="800" fill="#4A148C" text-anchor="middle">${b*x}</text>
+      </svg>`;
+      const q=fill(`_____ × ${x} = ${b*x}`, b, '✖️', 'Tìm thừa số còn thiếu');
+      q.svg=svg; return q;
+    }
+  },
+
+  // --- CHƯƠNG 2 ---
+  thousands:{
+    easy:()=>{
+      const h=rnd(1,9);
+      return mcq(`${h} nghìn = ?`, h*1000, [h*1000+100,h*1000-100,h*100], '💯', '1 nghìn = 1 000');
+    },
+    medium:()=>{
+      const n=rnd(1000,9999);
+      const ng=Math.floor(n/1000),tr=Math.floor((n%1000)/100),c=Math.floor((n%100)/10),d=n%10;
+      return fill(`Số ${n} có _____ nghìn`, ng, '💯', 'Đọc chữ số hàng nghìn');
+    },
+    hard:()=>{
+      const ng=rnd(1,9),tr=rnd(0,9),c=rnd(0,9),d=rnd(0,9);
+      return fill(`${ng} nghìn + ${tr} trăm + ${c} chục + ${d} đơn vị = _____`, ng*1000+tr*100+c*10+d, '💯', 'Tổng hợp số 4 chữ số');
+    }
+  },
+
+  readwrite10000:{
+    easy:()=>{
+      const n=rnd(1000,4999);
+      const opts=[n+1000,n-500,n+100];
+      return mcq(`"${numWords(n)}" được viết là?`, n, shuffle(opts).slice(0,3), '📝', 'Nghe đọc rồi viết số');
+    },
+    medium:()=>{
+      const n=rnd(2000,9000);
+      return fill(`Số "${numWords(n)}" = _____`, n, '📝', 'Chuyển chữ thành số');
+    },
+    hard:()=>{
+      const n=rnd(1001,9998);
+      return fill(`Số liền trước của ${n} là: _____`, n-1, '📝', 'Số liền trước = n − 1');
+    }
+  },
+
+  compare10000:{
+    easy:()=>{
+      const a=rnd(1000,5000),b=rnd(5001,9999);
+      return mcq(`${a} ○ ${b}`, '<', ['>','=','≠'], '⚖️', 'So sánh số đến 10 000');
+    },
+    medium:()=>{
+      const a=rnd(2000,8000),b=a+rnd(1,500);
+      return mcq(`Số nào nhỏ hơn: ${a} hay ${b}?`, a, [b,a+b,Math.abs(a-b)], '⚖️', 'Chọn số nhỏ hơn');
+    },
+    hard:()=>{
+      const arr=[rnd(1000,3000),rnd(3001,6000),rnd(6001,9999),rnd(1000,9999)];
+      return fill(`Trong dãy số ${arr.join(', ')}, số nhỏ nhất là _____`, Math.min(...arr), '⚖️', 'Tìm số nhỏ nhất trong dãy');
+    }
+  },
+
+  roundThousands:{
+    easy:()=>{
+      const t=rnd(1,9);
+      return mcq(`Số tròn nghìn nào nằm giữa ${t*1000-1000} và ${t*1000+1000}?`, t*1000, [(t+1)*1000,(t-1)*1000,t*1000+500], '🔢', 'Số tròn nghìn');
+    },
+    medium:()=>{
+      const n=rnd(1100,8900);
+      const rounded=Math.round(n/1000)*1000;
+      return mcq(`${n} làm tròn đến hàng nghìn là?`, rounded, [rounded+1000,rounded-1000,rounded+500], '🔢', 'Làm tròn đến hàng nghìn');
+    },
+    hard:()=>{
+      const n=rnd(1500,9500);
+      const fl=Math.floor(n/1000)*1000,ce=fl+1000;
+      return fill(`${n} gần hơn với số tròn nghìn nào: ${fl} hay ${ce}? Điền số đó: _____`, n-fl<ce-n?fl:ce, '🔢', 'So sánh khoảng cách đến hai số tròn nghìn');
+    }
+  },
+
+  // --- CHƯƠNG 3 ---
+  add10000:{
+    easy:()=>{
+      const a=rnd(1000,4000),b=rnd(500,2000);
+      // SVG: số hàng nghìn - cột dọc có nhớ
+      const svg=`<svg width="200" height="145" viewBox="0 0 200 145" xmlns="http://www.w3.org/2000/svg">
+        <rect x="20" y="10" width="160" height="120" rx="12" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
+        <text x="160" y="45" font-size="21" font-weight="800" fill="#1C2B3A" text-anchor="end">${a.toLocaleString('vi-VN')}</text>
+        <text x="30" y="45" font-size="19" fill="#1565C0" font-weight="700">+</text>
+        <text x="160" y="76" font-size="21" font-weight="800" fill="#1C2B3A" text-anchor="end">${b.toLocaleString('vi-VN')}</text>
+        <line x1="30" y1="84" x2="168" y2="84" stroke="#1565C0" stroke-width="2"/>
+        <rect x="60" y="91" width="80" height="27" rx="6" fill="#BBDEFB" stroke="#1565C0" stroke-width="1.5" stroke-dasharray="4,2"/>
+        <text x="100" y="110" font-size="16" font-weight="800" fill="#0D47A1" text-anchor="middle">?</text>
+      </svg>`;
+      const q=fill(`\${a.toLocaleString('vi-VN')} + \${b.toLocaleString('vi-VN')} = _____`, a+b, '➕', 'Phép cộng số 4 chữ số');
+      q.svg=svg; return q;
+    },
+    medium:()=>{
+      // Bài toán chữ – tránh trùng với easy
+      const a=rnd(2000,5000),b=rnd(1000,3000);
+      const svg=`<svg width="240" height="100" viewBox="0 0 240 100" xmlns="http://www.w3.org/2000/svg">
+        <rect x="8" y="8" width="224" height="84" rx="12" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1.5"/>
+        <text x="120" y="35" font-size="11" fill="#1B5E20" text-anchor="middle" font-weight="700">🏭 Nhà máy sản xuất</text>
+        <text x="120" y="55" font-size="12" fill="#1C2B3A" text-anchor="middle">Sáng: <tspan font-weight="800">${a.toLocaleString('vi-VN')}</tspan> sản phẩm</text>
+        <text x="120" y="72" font-size="12" fill="#1C2B3A" text-anchor="middle">Chiều: <tspan font-weight="800">${b.toLocaleString('vi-VN')}</tspan> sản phẩm</text>
+        <text x="120" y="88" font-size="11" fill="#2E7D32" text-anchor="middle">Cả ngày = ? sản phẩm</text>
+      </svg>`;
+      const q=fill(`Nhà máy: sáng sản xuất \${a.toLocaleString('vi-VN')} sp, chiều sản xuất \${b.toLocaleString('vi-VN')} sp.\nCả ngày sản xuất _____ sản phẩm.`, a+b, '➕', 'Bài toán thực tế – cộng 4 chữ số');
+      q.svg=svg; return q;
+    },
+    hard:()=>{
+      const sum=rnd(5000,9500),a=rnd(2000,sum-1000);
+      const svg=`<svg width="230" height="82" viewBox="0 0 230 82" xmlns="http://www.w3.org/2000/svg">
+        <rect x="8" y="18" width="60" height="38" rx="8" fill="#FFF3E0" stroke="#E65100" stroke-width="2" stroke-dasharray="5,3"/>
+        <text x="38" y="42" font-size="16" font-weight="800" fill="#E65100" text-anchor="middle">?</text>
+        <text x="80" y="42" font-size="18" font-weight="700" fill="#1565C0">+</text>
+        <rect x="94" y="18" width="68" height="38" rx="8" fill="#E3F2FD" stroke="#1565C0" stroke-width="2"/>
+        <text x="128" y="42" font-size="15" font-weight="800" fill="#0D47A1" text-anchor="middle">${(sum-a).toLocaleString('vi-VN')}</text>
+        <text x="174" y="42" font-size="18" font-weight="700" fill="#1565C0">=</text>
+        <rect x="188" y="18" width="34" height="38" rx="8" fill="#E8F5E9" stroke="#2E7D32" stroke-width="2"/>
+        <text x="205" y="42" font-size="13" font-weight="800" fill="#1B5E20" text-anchor="middle">${sum.toLocaleString('vi-VN')}</text>
+      </svg>`;
+      const q=fill(`_____ + \${(sum-a).toLocaleString('vi-VN')} = \${sum.toLocaleString('vi-VN')}`, a, '➕', 'Tìm số hạng chưa biết (tổng đến 10 000)');
+      q.svg=svg; return q;
+    }
+  },
+
+  sub10000:{
+    easy:()=>{
+      const a=rnd(2000,9000),b=rnd(500,a-500);
+      const svg=`<svg width="200" height="145" viewBox="0 0 200 145" xmlns="http://www.w3.org/2000/svg">
+        <rect x="20" y="10" width="160" height="120" rx="12" fill="#FFEBEE" stroke="#C62828" stroke-width="1.5"/>
+        <text x="160" y="45" font-size="21" font-weight="800" fill="#1C2B3A" text-anchor="end">${a.toLocaleString('vi-VN')}</text>
+        <text x="30" y="45" font-size="19" fill="#C62828" font-weight="700">−</text>
+        <text x="160" y="76" font-size="21" font-weight="800" fill="#1C2B3A" text-anchor="end">${b.toLocaleString('vi-VN')}</text>
+        <line x1="30" y1="84" x2="168" y2="84" stroke="#C62828" stroke-width="2"/>
+        <rect x="60" y="91" width="80" height="27" rx="6" fill="#FFCDD2" stroke="#C62828" stroke-width="1.5" stroke-dasharray="4,2"/>
+        <text x="100" y="110" font-size="16" font-weight="800" fill="#B71C1C" text-anchor="middle">?</text>
+      </svg>`;
+      const q=fill(`\${a.toLocaleString('vi-VN')} − \${b.toLocaleString('vi-VN')} = _____`, a-b, '➖', 'Phép trừ số 4 chữ số');
+      q.svg=svg; return q;
+    },
+    medium:()=>{
+      const a=rnd(3000,9000),b=rnd(1000,a-500);
+      const wrong=[a-b+rnd(100,500),a-b-rnd(100,500),a-b+1000];
+      return mcq(`${a} − ${b} = ?`, a-b, shuffle(wrong).slice(0,3), '➖', 'Chọn kết quả đúng');
+    },
+    hard:()=>{
+      const a=rnd(5000,9000),b=rnd(1000,a-1000);
+      return fill(`${a} − _____ = ${b}`, a-b, '➖', 'Tìm số trừ chưa biết');
+    }
+  },
+
+  colCalc:{
+    easy:()=>{
+      const a=rnd(1200,3000),b=rnd(600,1500);
+      // Vẽ cột dọc thực sự
+      const aStr=String(a).padStart(4,' ');
+      const bStr=String(b).padStart(4,' ');
+      const sumStr=String(a+b).padStart(5,' ');
+      const svg=`<svg width="200" height="148" viewBox="0 0 200 148" xmlns="http://www.w3.org/2000/svg">
+        <rect x="18" y="6" width="164" height="136" rx="12" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
+        <!-- Digit columns headers -->
+        <text x="148" y="26" font-size="9" fill="#90A4AE" text-anchor="middle">N</text>
+        <text x="128" y="26" font-size="9" fill="#90A4AE" text-anchor="middle">T</text>
+        <text x="108" y="26" font-size="9" fill="#90A4AE" text-anchor="middle">C</text>
+        <text x="88" y="26" font-size="9" fill="#90A4AE" text-anchor="middle">Đ</text>
+        <!-- Row 1: a -->
+        ${String(a).split('').map((d,i,arr)=>`<text x="${148-(arr.length-1-i)*20}" y="50" font-size="22" font-weight="800" fill="#1C2B3A" text-anchor="middle">${d}</text>`).join('')}
+        <!-- + sign and row 2: b -->
+        <text x="36" y="75" font-size="20" fill="#1565C0" font-weight="700">+</text>
+        ${String(b).split('').map((d,i,arr)=>`<text x="${148-(arr.length-1-i)*20}" y="75" font-size="22" font-weight="800" fill="#1C2B3A" text-anchor="middle">${d}</text>`).join('')}
+        <line x1="48" y1="84" x2="162" y2="84" stroke="#1565C0" stroke-width="2.2"/>
+        <!-- Result row (blank) -->
+        <rect x="62" y="91" width="90" height="26" rx="6" fill="#BBDEFB" stroke="#1565C0" stroke-width="1.5" stroke-dasharray="4,2"/>
+        <text x="107" y="109" font-size="16" font-weight="800" fill="#0D47A1" text-anchor="middle">?</text>
+        <text x="100" y="138" font-size="10" fill="#888" text-anchor="middle">Đặt tính cột dọc: Đ→C→T→N</text>
+      </svg>`;
+      const q=fill(`Đặt tính và tính:\n\${a} + \${b} = _____`, a+b, '📐', 'Cộng đặt tính theo cột dọc');
+      q.svg=svg; return q;
+    },
+    medium:()=>{
+      const a=rnd(3000,7000),b=rnd(1000,a-500);
+      const svg=`<svg width="200" height="148" viewBox="0 0 200 148" xmlns="http://www.w3.org/2000/svg">
+        <rect x="18" y="6" width="164" height="136" rx="12" fill="#FFEBEE" stroke="#C62828" stroke-width="1.5"/>
+        <text x="148" y="26" font-size="9" fill="#90A4AE" text-anchor="middle">N</text>
+        <text x="128" y="26" font-size="9" fill="#90A4AE" text-anchor="middle">T</text>
+        <text x="108" y="26" font-size="9" fill="#90A4AE" text-anchor="middle">C</text>
+        <text x="88" y="26" font-size="9" fill="#90A4AE" text-anchor="middle">Đ</text>
+        ${String(a).split('').map((d,i,arr)=>`<text x="${148-(arr.length-1-i)*20}" y="50" font-size="22" font-weight="800" fill="#1C2B3A" text-anchor="middle">${d}</text>`).join('')}
+        <text x="36" y="75" font-size="20" fill="#C62828" font-weight="700">−</text>
+        ${String(b).split('').map((d,i,arr)=>`<text x="${148-(arr.length-1-i)*20}" y="75" font-size="22" font-weight="800" fill="#1C2B3A" text-anchor="middle">${d}</text>`).join('')}
+        <line x1="48" y1="84" x2="162" y2="84" stroke="#C62828" stroke-width="2.2"/>
+        <rect x="62" y="91" width="90" height="26" rx="6" fill="#FFCDD2" stroke="#C62828" stroke-width="1.5" stroke-dasharray="4,2"/>
+        <text x="107" y="109" font-size="16" font-weight="800" fill="#B71C1C" text-anchor="middle">?</text>
+        <text x="100" y="138" font-size="10" fill="#888" text-anchor="middle">Trừ đặt cột dọc: mượn nếu cần</text>
+      </svg>`;
+      const q=fill(`Đặt tính và tính:\n\${a} − \${b} = _____`, a-b, '📐', 'Trừ đặt tính theo cột dọc');
+      q.svg=svg; return q;
+    },
+    hard:()=>{
+      // Chuỗi 3 số: a + b - c, khác hẳn dạng khác
+      const a=rnd(2000,5000),b=rnd(1000,3000),c=rnd(500,Math.min(2000,a+b-1000));
+      const result=a+b-c;
+      const svg=`<svg width="260" height="72" viewBox="0 0 260 72" xmlns="http://www.w3.org/2000/svg">
+        <rect x="6" y="10" width="248" height="52" rx="10" fill="#EDE7F6" stroke="#6A1B9A" stroke-width="1.5"/>
+        <text x="130" y="44" font-size="15" font-weight="800" fill="#4A148C" text-anchor="middle">${a.toLocaleString('vi-VN')} + ${b.toLocaleString('vi-VN')} − ${c.toLocaleString('vi-VN')} = ?</text>
+        <text x="130" y="58" font-size="10" fill="#9C27B0" text-anchor="middle">Tính lần lượt từ trái sang phải</text>
+      </svg>`;
+      const q=fill(`\${a.toLocaleString('vi-VN')} + \${b.toLocaleString('vi-VN')} − \${c.toLocaleString('vi-VN')} = _____`, result, '📐', 'Tính biểu thức 3 số, từ trái sang phải');
+      q.svg=svg; return q;
+    }
+  },
+
+  wordProbAdd:{
+    easy:()=>{
+      const a=rnd(1000,3000),b=rnd(500,2000);
+      return fill(`Kho A có ${a} kg gạo, kho B có ${b} kg gạo.\nCả hai kho có tất cả _____ kg gạo.`, a+b, '📝', 'Tổng hai đại lượng');
+    },
+    medium:()=>{
+      const total=rnd(4000,9000),a=rnd(1500,total-1000);
+      return fill(`Trường có ${total} học sinh, trong đó có ${a} học sinh nữ.\nSố học sinh nam là _____ em.`, total-a, '📝', 'Tìm phần còn lại');
+    },
+    hard:()=>{
+      const a=rnd(2000,5000),inc=rnd(500,2000);
+      return fill(`Tháng 1 bán được ${a} sản phẩm.\nTháng 2 bán nhiều hơn ${inc} sản phẩm.\nTổng hai tháng = _____ sản phẩm.`, a+(a+inc), '📝', 'Bài toán hai bước');
+    }
+  },
+
+  // --- CHƯƠNG 4 ---
+  mul6:{
+    easy:()=>{ const b=rnd(1,5); return mcq(`${b} × 6 = ?`, b*6, [b*6+6,b*6-6,b*6+3], '✖️', 'Bảng nhân 6 (1–5)'); },
+    medium:()=>{ const b=rnd(6,10); return fill(`6 × ${b} = _____`, 6*b, '✖️', 'Bảng nhân 6 (6–10)'); },
+    hard:()=>{ const b=rnd(4,10); return fill(`_____ × 6 = ${b*6}`, b, '✖️', 'Tìm thừa số bảng nhân 6'); }
+  },
+
+  mul7:{
+    easy:()=>{ const b=rnd(1,5); return mcq(`${b} × 7 = ?`, b*7, [b*7+7,b*7-7,b*7+2], '✖️', 'Bảng nhân 7 (1–5)'); },
+    medium:()=>{ const b=rnd(5,10); return fill(`7 × ${b} = _____`, 7*b, '✖️', 'Bảng nhân 7 (5–10)'); },
+    hard:()=>{ const b=rnd(3,9); return fill(`${b*7} ÷ 7 = _____`, b, '➗', 'Chia trong bảng nhân 7'); }
+  },
+
+  mul89:{
+    easy:()=>{
+      const x=pick([8,9]);
+      const b=rnd(2,9);
+      const wrong1=b*x+x, wrong2=b*x-x, wrong3=b*x+(x===8?4:3);
+      // SVG: dãy số nhân – highlight tích
+      const results=Array.from({length:10},(_,i)=>(i+1)*x);
+      const svg=`<svg width="270" height="108" viewBox="0 0 270 108" xmlns="http://www.w3.org/2000/svg">
+        <text x="135" y="18" font-size="11" font-weight="700" fill="#6A1B9A" text-anchor="middle">Bảng nhân ${x}</text>
+        ${results.map((r,i)=>`<rect x="${10+i*26}" y="26" width="24" height="24" rx="5" fill="${r===b*x?'#6A1B9A':'#EDE7F6'}" stroke="#6A1B9A" stroke-width="${r===b*x?2:1}"/>
+        <text x="${22+i*26}" y="43" font-size="${r===b*x?11:9}" font-weight="${r===b*x?'800':'600'}" fill="${r===b*x?'white':'#4A148C'}" text-anchor="middle">${r}</text>`).join('')}
+        <text x="135" y="68" font-size="12" font-weight="700" fill="#1C2B3A" text-anchor="middle">${b} × ${x} = ? (chọn đáp án đúng)</text>
+        ${results.map((r,i)=>`<text x="${22+i*26}" y="86" font-size="8" fill="#9C27B0" text-anchor="middle">${i+1}×${x}</text>`).join('')}
+      </svg>`;
+      const q=mcq(`\${b} × \${x} = ?`,b*x,[wrong1,wrong2,wrong3],'✖️',`Bảng nhân \${x}: kết quả = \${b*x}`);
+      q.svg=svg; return q;
+    },
+    medium:()=>{ const x=pick([8,9]),b=rnd(5,10); return fill(`${x} × ${b} = _____`, x*b, '✖️', `Bảng nhân ${x} (5–10)`); },
+    hard:()=>{
+      const x=pick([8,9]);
+      const b=rnd(3,10);
+      const total=b*x;
+      // SVG: chia kẹo vào hộp
+      const svg=`<svg width="240" height="110" viewBox="0 0 240 110" xmlns="http://www.w3.org/2000/svg">
+        <rect x="8" y="8" width="224" height="94" rx="12" fill="#F3E5F5" stroke="#6A1B9A" stroke-width="1.5"/>
+        <text x="120" y="30" font-size="11" fill="#4A148C" text-anchor="middle" font-weight="700">🍬 Chia kẹo vào hộp</text>
+        <text x="120" y="52" font-size="12" fill="#1C2B3A" text-anchor="middle">Có <tspan font-weight="800">${total} viên kẹo</tspan>, mỗi hộp <tspan font-weight="800">${x} viên</tspan></text>
+        <text x="120" y="72" font-size="12" fill="#1C2B3A" text-anchor="middle">Được <tspan font-weight="800">?</tspan> hộp đầy</text>
+        <text x="120" y="92" font-size="11" fill="#6A1B9A" text-anchor="middle">${total} ÷ ${x} = ?</text>
+      </svg>`;
+      const q=fill(`Có \${total} viên kẹo, xếp đều vào hộp, mỗi hộp \${x} viên.\nĐược _____ hộp.`,b,'➗',`\${total} ÷ \${x} = \${b}`);
+      q.svg=svg; return q;
+    }
+  },
+
+  divRem:{
+    easy:()=>{
+      const d=pick([2,3,4,5]),q=rnd(2,8);
+      return fill(`${d*q} ÷ ${d} = _____`, q, '➗', 'Phép chia hết');
+    },
+    medium:()=>{
+      const d=pick([2,3,4,5,6,7]),q=rnd(2,8),r=rnd(1,d-1);
+      return mcq(`${d*q+r} ÷ ${d} = ? (dư ?)`, `${q} dư ${r}`,
+        [`${q+1} dư ${r}`,`${q} dư ${r+1}`,`${q-1} dư ${r}`], '➗', 'Phép chia có dư: thương và số dư');
+    },
+    hard:()=>{
+      const d=pick([3,4,6,7]),q=rnd(3,9),r=rnd(1,d-1);
+      return fill(`${d*q+r} ÷ ${d} = ${q} dư _____`, r, '➗', 'Tìm số dư của phép chia');
+    }
+  },
+
+  // --- CHƯƠNG 5 ---
+  num100000:{
+    easy:()=>{
+      const n=rnd(10000,50000);
+      return fill(`Số ${n.toLocaleString('vi-VN')} có _____ chữ số`, String(n).length, '🔢', 'Đếm chữ số của số đã cho');
+    },
+    medium:()=>{
+      const ng=rnd(1,9),tr=rnd(0,9),c=rnd(0,9),ch=rnd(0,9),d=rnd(0,9);
+      const n=ng*10000+tr*1000+c*100+ch*10+d;
+      return fill(`${ng} chục nghìn + ${tr} nghìn + ${c} trăm + ${ch} chục + ${d} đv = _____`, n, '🔢', 'Tổng hợp số 5 chữ số');
+    },
+    hard:()=>{
+      const n=rnd(10001,99999);
+      return fill(`Chữ số hàng chục nghìn của số ${n} là: _____`, Math.floor(n/10000), '🔢', 'Xác định hàng chục nghìn');
+    }
+  },
+
+  addSub100k:{
+    easy:()=>{
+      const a=rnd(10000,40000),b=rnd(5000,20000);
+      return fill(`${a.toLocaleString('vi-VN')} + ${b.toLocaleString('vi-VN')} = _____`, a+b, '➕', 'Cộng hai số đến 100 000');
+    },
+    medium:()=>{
+      const a=rnd(30000,90000),b=rnd(10000,a-5000);
+      return fill(`${a.toLocaleString('vi-VN')} − ${b.toLocaleString('vi-VN')} = _____`, a-b, '➖', 'Trừ hai số đến 100 000');
+    },
+    hard:()=>{
+      const a=rnd(20000,50000),b=rnd(10000,30000);
+      return fill(`(${a.toLocaleString('vi-VN')} + ${b.toLocaleString('vi-VN')}) − ${Math.floor((a+b)/4).toLocaleString('vi-VN')} = _____`, a+b-Math.floor((a+b)/4), '➕', 'Biểu thức cộng rồi trừ');
+    }
+  },
+
+  mulDivLarge:{
+    easy:()=>{
+      const a=rnd(100,999),b=rnd(2,9);
+      // SVG: cột dọc nhân
+      const svg=`<svg width="200" height="130" viewBox="0 0 200 130" xmlns="http://www.w3.org/2000/svg">
+        <rect x="18" y="6" width="164" height="118" rx="12" fill="#F3E5F5" stroke="#6A1B9A" stroke-width="1.5"/>
+        ${String(a).split('').map((d,i,arr)=>`<text x="${148-(arr.length-1-i)*22}" y="46" font-size="22" font-weight="800" fill="#1C2B3A" text-anchor="middle">${d}</text>`).join('')}
+        <text x="36" y="70" font-size="20" fill="#6A1B9A" font-weight="700">×</text>
+        <text x="148" y="70" font-size="22" font-weight="800" fill="#1C2B3A" text-anchor="middle">${b}</text>
+        <line x1="48" y1="78" x2="162" y2="78" stroke="#6A1B9A" stroke-width="2.2"/>
+        <rect x="52" y="86" width="98" height="24" rx="6" fill="#E1BEE7" stroke="#6A1B9A" stroke-width="1.5" stroke-dasharray="4,2"/>
+        <text x="101" y="103" font-size="15" font-weight="800" fill="#4A148C" text-anchor="middle">?</text>
+      </svg>`;
+      const q=fill(`\${a} × \${b} = _____`, a*b, '✖️', 'Nhân số có 3 chữ số với số có 1 chữ số');
+      q.svg=svg; return q;
+    },
+    medium:()=>{
+      const a=rnd(100,999),b=rnd(2,9);
+      const svg=`<svg width="200" height="130" viewBox="0 0 200 130" xmlns="http://www.w3.org/2000/svg">
+        <rect x="18" y="6" width="164" height="118" rx="12" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1.5"/>
+        <text x="148" y="46" font-size="22" font-weight="800" fill="#1C2B3A" text-anchor="end">${(a*b).toLocaleString('vi-VN')}</text>
+        <text x="36" y="70" font-size="20" fill="#2E7D32" font-weight="700">÷</text>
+        <text x="148" y="70" font-size="22" font-weight="800" fill="#1C2B3A" text-anchor="middle" x="142">${b}</text>
+        <line x1="48" y1="78" x2="162" y2="78" stroke="#2E7D32" stroke-width="2.2"/>
+        <rect x="62" y="86" width="78" height="24" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5" stroke-dasharray="4,2"/>
+        <text x="101" y="103" font-size="15" font-weight="800" fill="#1B5E20" text-anchor="middle">?</text>
+      </svg>`;
+      const q=fill(`\${(a*b).toLocaleString('vi-VN')} ÷ \${b} = _____`, a, '➗', 'Chia số có 3-4 chữ số cho số có 1 chữ số');
+      q.svg=svg; return q;
+    },
+    hard:()=>{
+      // Bài toán nhân thực tế – tránh trùng dạng a×b=___
+      const price=rnd(2,9)*1000,qty=rnd(3,8);
+      const total=price*qty;
+      const svg=`<svg width="250" height="110" viewBox="0 0 250 110" xmlns="http://www.w3.org/2000/svg">
+        <rect x="8" y="8" width="234" height="94" rx="12" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+        <text x="125" y="32" font-size="12" fill="#BF360C" text-anchor="middle" font-weight="700">🛒 Bài toán mua hàng</text>
+        <text x="125" y="54" font-size="12" fill="#1C2B3A" text-anchor="middle">Mỗi quyển sách: <tspan font-weight="800">${price.toLocaleString('vi-VN')} đồng</tspan></text>
+        <text x="125" y="72" font-size="12" fill="#1C2B3A" text-anchor="middle">Mua <tspan font-weight="800">${qty} quyển</tspan></text>
+        <text x="125" y="90" font-size="11" fill="#E65100" text-anchor="middle">Tổng tiền = ? đồng</text>
+      </svg>`;
+      const q=fill(`Mỗi quyển sách giá \${price.toLocaleString('vi-VN')} đồng. Mua \${qty} quyển.\nTổng tiền = _____ đồng.`, total, '✖️', `\${price.toLocaleString('vi-VN')} × \${qty} = \${total.toLocaleString('vi-VN')}`);
+      q.svg=svg; return q;
+    }
+  },
+
+  sumDiff:{
+    easy:()=>{
+      const a=rnd(50,200),b=rnd(10,a-5);
+      return fill(`Tổng hai số là ${a+b}, hiệu là ${a-b}.\nSố lớn hơn là: _____`, a, '⚖️', 'Số lớn = (tổng + hiệu) ÷ 2');
+    },
+    medium:()=>{
+      const a=rnd(100,500),b=rnd(50,a-10);
+      return fill(`Tổng hai số là ${a+b}, hiệu là ${a-b}.\nSố nhỏ hơn là: _____`, b, '⚖️', 'Số nhỏ = (tổng − hiệu) ÷ 2');
+    },
+    hard:()=>{
+      const s=rnd(200,600)*2,d=rnd(20,s/2-10)*2;
+      return fill(`Hai số có tổng ${s} và hiệu ${d}.\nSố lớn = _____, Số nhỏ = _____?\nĐiền số lớn:`, (s+d)/2, '⚖️', 'Dạng toán tổng – hiệu');
+    }
+  },
+
+  // =====================================================================
+  // --- CHƯƠNG 6 : Hình học & Đo lường  (đa dạng hình + góc)
+  // =====================================================================
+
+  shapes3:{
+    easy:()=>{
+      const variant=rnd(0,3);
+      if(variant===0){
+        const svg=`<svg width="280" height="175" viewBox="0 0 280 175" xmlns="http://www.w3.org/2000/svg">
+          <polyline points="30,140 30,60 110,140" fill="none" stroke="#00695C" stroke-width="2.5"/>
+          <polyline points="30,128 42,128 42,140" fill="none" stroke="#C62828" stroke-width="2"/>
+          <text x="60" y="155" font-size="12" font-weight="700" fill="#00695C" text-anchor="middle">Góc vuông 90°</text>
+          <polyline points="130,140 130,70 175,140" fill="none" stroke="#1565C0" stroke-width="2.5"/>
+          <path d="M130,125 A15,15 0 0,1 143,130" fill="none" stroke="#E65100" stroke-width="1.8"/>
+          <text x="152" y="155" font-size="12" font-weight="700" fill="#1565C0" text-anchor="middle">Góc nhọn <90°</text>
+          <polyline points="195,140 240,60 280,140" fill="none" stroke="#6A1B9A" stroke-width="2.5"/>
+          <path d="M210,140 A18,18 0 0,1 225,115" fill="none" stroke="#E65100" stroke-width="1.8"/>
+          <text x="237" y="155" font-size="12" font-weight="700" fill="#6A1B9A" text-anchor="middle">Góc tù >90°</text>
+        </svg>`;
+        const q=mcq('Góc nào nhỏ hơn góc vuông?','Góc nhọn',['Góc tù','Góc bẹt','Góc vuông'],'📐','Góc nhọn < 90° < Góc tù');
+        q.svg=svg; return q;
+      }
+      if(variant===1){
+        const svg=`<svg width="260" height="130" viewBox="0 0 260 130" xmlns="http://www.w3.org/2000/svg">
+          <line x1="20" y1="80" x2="240" y2="80" stroke="#1565C0" stroke-width="3"/>
+          <line x1="130" y1="80" x2="130" y2="20" stroke="#C62828" stroke-width="2.5"/>
+          <path d="M100,80 A30,30 0 0,1 160,80" fill="none" stroke="#E65100" stroke-width="2.5"/>
+          <text x="130" y="68" font-size="13" font-weight="700" fill="#E65100" text-anchor="middle">180°</text>
+          <text x="130" y="115" font-size="12" font-weight="700" fill="#1565C0" text-anchor="middle">Góc bẹt = đường thẳng</text>
+          <circle cx="130" cy="80" r="4" fill="#C62828"/>
+        </svg>`;
+        const q=mcq('Góc bẹt có số đo là?','180°',['90°','120°','360°'],'📐','Góc bẹt = hai cạnh tạo thành đường thẳng = 180°');
+        q.svg=svg; return q;
+      }
+      if(variant===2){
+        const svg=`<svg width="240" height="170" viewBox="0 0 240 170" xmlns="http://www.w3.org/2000/svg">
+          <rect x="40" y="30" width="160" height="110" rx="3" fill="#E8F5E9" stroke="#2E7D32" stroke-width="2.5"/>
+          <polyline points="40,42 52,42 52,30" fill="none" stroke="#C62828" stroke-width="2"/>
+          <polyline points="188,42 188,30 200,30" fill="none" stroke="#C62828" stroke-width="2"/>
+          <polyline points="40,128 52,128 52,140" fill="none" stroke="#C62828" stroke-width="2"/>
+          <polyline points="188,128 188,140 200,140" fill="none" stroke="#C62828" stroke-width="2"/>
+          <text x="120" y="90" font-size="13" font-weight="800" fill="#1B5E20" text-anchor="middle">Hình chữ nhật</text>
+          <text x="120" y="108" font-size="11" fill="#C62828" text-anchor="middle">4 góc vuông (90°)</text>
+        </svg>`;
+        const q=mcq('Hình chữ nhật có tất cả bao nhiêu góc vuông?','4 góc vuông',['2 góc vuông','3 góc vuông','0 góc vuông'],'📐','Hình chữ nhật có 4 góc đều là góc vuông');
+        q.svg=svg; return q;
+      }
+      const svg=`<svg width="240" height="185" viewBox="0 0 240 185" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="40,155 40,35 190,155" fill="#E3F2FD" stroke="#1565C0" stroke-width="2.5"/>
+        <polyline points="40,143 52,143 52,155" fill="none" stroke="#C62828" stroke-width="2.2"/>
+        <path d="M40,55 A20,20 0 0,1 54,47" fill="none" stroke="#E65100" stroke-width="2"/>
+        <text x="64" y="52" font-size="11" fill="#E65100" font-weight="700">nhọn</text>
+        <path d="M172,155 A20,20 0 0,1 166,140" fill="none" stroke="#E65100" stroke-width="2"/>
+        <text x="148" y="138" font-size="11" fill="#E65100" font-weight="700">nhọn</text>
+        <text x="110" y="178" font-size="12" font-weight="700" fill="#1565C0" text-anchor="middle">Tam giác vuông</text>
+      </svg>`;
+      const q=mcq('Tam giác vuông có bao nhiêu góc vuông?','1 góc vuông',['2 góc vuông','3 góc vuông','0 góc vuông'],'📐','Tam giác vuông có đúng 1 góc vuông, 2 góc còn lại là góc nhọn');
+      q.svg=svg; return q;
+    },
+
+    medium:()=>{
+      const variant=rnd(0,3);
+      if(variant===0){
+        const svg=`<svg width="280" height="165" viewBox="0 0 280 165" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(10,20)">
+            <line x1="10" y1="110" x2="10" y2="30" stroke="#1565C0" stroke-width="2.5"/>
+            <line x1="10" y1="110" x2="70" y2="110" stroke="#1565C0" stroke-width="2.5"/>
+            <path d="M10,92 A18,18 0 0,1 28,110" fill="none" stroke="#E65100" stroke-width="2"/>
+            <text x="38" y="142" font-size="11" font-weight="700" fill="#1565C0" text-anchor="middle">~45°</text>
+            <text x="38" y="157" font-size="11" fill="#888" text-anchor="middle">Góc nhọn</text>
+          </g>
+          <g transform="translate(95,20)">
+            <line x1="10" y1="110" x2="10" y2="30" stroke="#2E7D32" stroke-width="2.5"/>
+            <line x1="10" y1="110" x2="70" y2="110" stroke="#2E7D32" stroke-width="2.5"/>
+            <polyline points="10,98 22,98 22,110" fill="none" stroke="#C62828" stroke-width="2"/>
+            <text x="38" y="142" font-size="11" font-weight="700" fill="#2E7D32" text-anchor="middle">90°</text>
+            <text x="38" y="157" font-size="11" fill="#888" text-anchor="middle">Góc vuông</text>
+          </g>
+          <g transform="translate(178,20)">
+            <line x1="10" y1="110" x2="80" y2="30" stroke="#6A1B9A" stroke-width="2.5"/>
+            <line x1="10" y1="110" x2="80" y2="110" stroke="#6A1B9A" stroke-width="2.5"/>
+            <path d="M10,92 A18,18 0 0,1 23,97" fill="none" stroke="#E65100" stroke-width="2"/>
+            <text x="45" y="142" font-size="11" font-weight="700" fill="#6A1B9A" text-anchor="middle">~135°</text>
+            <text x="45" y="157" font-size="11" fill="#888" text-anchor="middle">Góc tù</text>
+          </g>
+        </svg>`;
+        const q=mcq('Góc 135° thuộc loại góc nào?','Góc tù',['Góc nhọn','Góc vuông','Góc bẹt'],'📐','135° > 90° nên là góc tù');
+        q.svg=svg; return q;
+      }
+      if(variant===1){
+        const svg=`<svg width="260" height="200" viewBox="0 0 260 200" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="130,18 215,100 130,182 45,100" fill="#E0F2F1" stroke="#00695C" stroke-width="2.5"/>
+          <line x1="171" y1="54" x2="181" y2="60" stroke="#C62828" stroke-width="2.2"/>
+          <line x1="174" y1="49" x2="184" y2="55" stroke="#C62828" stroke-width="2.2"/>
+          <line x1="171" y1="146" x2="181" y2="140" stroke="#C62828" stroke-width="2.2"/>
+          <line x1="174" y1="151" x2="184" y2="145" stroke="#C62828" stroke-width="2.2"/>
+          <line x1="89" y1="54" x2="79" y2="60" stroke="#C62828" stroke-width="2.2"/>
+          <line x1="86" y1="49" x2="76" y2="55" stroke="#C62828" stroke-width="2.2"/>
+          <line x1="89" y1="146" x2="79" y2="140" stroke="#C62828" stroke-width="2.2"/>
+          <line x1="86" y1="151" x2="76" y2="145" stroke="#C62828" stroke-width="2.2"/>
+          <path d="M148,22 A22,22 0 0,1 134,40" fill="none" stroke="#E65100" stroke-width="2" stroke-dasharray="3,2"/>
+          <text x="155" y="40" font-size="11" fill="#E65100" font-weight="700">nhọn</text>
+          <path d="M210,100 A22,22 0 0,1 194,112" fill="none" stroke="#9C27B0" stroke-width="2" stroke-dasharray="3,2"/>
+          <text x="192" y="128" font-size="11" fill="#9C27B0" font-weight="700">tù</text>
+          <text x="130" y="197" font-size="12" font-weight="700" fill="#00695C" text-anchor="middle">Hình thoi – 4 cạnh bằng nhau</text>
+        </svg>`;
+        const q=mcq('Hình nào có 4 cạnh bằng nhau nhưng góc không nhất thiết là 90°?','Hình thoi',['Hình vuông','Hình chữ nhật','Hình thang'],'📐','Hình thoi có góc nhọn và góc tù');
+        q.svg=svg; return q;
+      }
+      if(variant===2){
+        const svg=`<svg width="240" height="195" viewBox="0 0 240 195" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="120,15 215,170 25,170" fill="#FFF9C4" stroke="#F57F17" stroke-width="2.5"/>
+          <path d="M120,33 A20,20 0 0,1 134,40" fill="none" stroke="#C62828" stroke-width="2"/>
+          <path d="M120,33 A20,20 0 0,0 106,40" fill="none" stroke="#C62828" stroke-width="2"/>
+          <text x="120" y="60" font-size="12" font-weight="700" fill="#C62828" text-anchor="middle">60°</text>
+          <path d="M40,170 A20,20 0 0,1 56,156" fill="none" stroke="#C62828" stroke-width="2"/>
+          <text x="60" y="183" font-size="12" font-weight="700" fill="#C62828">60°</text>
+          <path d="M200,170 A20,20 0 0,0 184,156" fill="none" stroke="#C62828" stroke-width="2"/>
+          <text x="160" y="183" font-size="12" font-weight="700" fill="#C62828">60°</text>
+          <text x="120" y="190" font-size="11" fill="#888" text-anchor="middle">Tam giác đều – 3 cạnh, 3 góc bằng nhau</text>
+        </svg>`;
+        const q=mcq('Tam giác đều có mỗi góc bằng bao nhiêu độ?','60°',['90°','45°','120°'],'📐','Tam giác đều: tổng 180° chia 3 = 60°');
+        q.svg=svg; return q;
+      }
+      const svg=`<svg width="260" height="185" viewBox="0 0 260 185" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="70,35 190,35 230,155 30,155" fill="#FCE4EC" stroke="#AD1457" stroke-width="2.5"/>
+        <polyline points="30,143 42,143 42,155" fill="none" stroke="#C62828" stroke-width="1.8"/>
+        <text x="130" y="58" font-size="11" fill="#AD1457" font-weight="700" text-anchor="middle">đáy bé</text>
+        <text x="130" y="172" font-size="11" fill="#AD1457" font-weight="700" text-anchor="middle">đáy lớn</text>
+        <text x="130" y="100" font-size="13" font-weight="800" fill="#880E4F" text-anchor="middle">Hình thang</text>
+        <text x="130" y="118" font-size="11" fill="#AD1457" text-anchor="middle">1 cặp cạnh song song</text>
+      </svg>`;
+      const q=mcq('Hình thang có đặc điểm gì?','1 cặp cạnh song song',['2 cặp cạnh song song','4 cạnh bằng nhau','4 góc vuông'],'📐','Hình thang có đúng 1 cặp cạnh đối song song');
+      q.svg=svg; return q;
+    },
+
+    hard:()=>{
+      const variant=rnd(0,3);
+      if(variant===0){
+        // Ngũ giác đều – tổng góc
+        const cx=130,cy=95,r=75;
+        const pts=Array.from({length:5},(_,i)=>{const a=i*72-90;return [cx+r*Math.cos(a*Math.PI/180),cy+r*Math.sin(a*Math.PI/180)];});
+        const poly=pts.map(p=>p.map(v=>Math.round(v)).join(',')).join(' ');
+        const arcsSvg=pts.map((_,i)=>{
+          const prev=pts[(i+4)%5],curr=pts[i],next=pts[(i+1)%5];
+          const dx1=prev[0]-curr[0],dy1=prev[1]-curr[1],l1=Math.hypot(dx1,dy1);
+          const dx2=next[0]-curr[0],dy2=next[1]-curr[1],l2=Math.hypot(dx2,dy2);
+          const r1=18/l1,r2=18/l2;
+          return `<path d="M${Math.round(curr[0]+dx1*r1)},${Math.round(curr[1]+dy1*r1)} A18,18 0 0,1 ${Math.round(curr[0]+dx2*r2)},${Math.round(curr[1]+dy2*r2)}" fill="none" stroke="#C62828" stroke-width="1.8"/>`;
+        }).join('');
+        const labelsSvg=pts.map((p,i)=>{
+          const ox=(p[0]-cx)*0.38,oy=(p[1]-cy)*0.38;
+          return `<text x="${Math.round(p[0]+ox)}" y="${Math.round(p[1]+oy)+4}" font-size="9" fill="#C62828" font-weight="700" text-anchor="middle">108°</text>`;
+        }).join('');
+        const svg=`<svg width="260" height="200" viewBox="0 0 260 200" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="${poly}" fill="#E8F5E9" stroke="#2E7D32" stroke-width="2.5"/>
+          ${arcsSvg}${labelsSvg}
+          <text x="130" y="192" font-size="11" font-weight="700" fill="#2E7D32" text-anchor="middle">Ngũ giác đều – 5 góc bằng nhau</text>
+        </svg>`;
+        const q=fill('Hình ngũ giác đều có tổng số đo các góc = _____ °',540,'📐','(5−2)×180° = 3×180° = 540°');
+        q.svg=svg; return q;
+      }
+      if(variant===1){
+        // Hình thoi – chu vi
+        const s=rnd(3,14);
+        const svg=`<svg width="220" height="195" viewBox="0 0 220 195" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="110,15 200,97 110,180 20,97" fill="#E0F2F1" stroke="#00695C" stroke-width="2.5"/>
+          <text x="162" y="60" font-size="11" font-weight="700" fill="#1565C0" text-anchor="middle" transform="rotate(42,162,60)">${s} cm</text>
+          <text x="162" y="138" font-size="11" font-weight="700" fill="#1565C0" text-anchor="middle" transform="rotate(-42,162,138)">${s} cm</text>
+          <text x="58" y="60" font-size="11" font-weight="700" fill="#1565C0" text-anchor="middle" transform="rotate(-42,58,60)">${s} cm</text>
+          <text x="58" y="138" font-size="11" font-weight="700" fill="#1565C0" text-anchor="middle" transform="rotate(42,58,138)">${s} cm</text>
+          <line x1="152" y1="52" x2="162" y2="58" stroke="#C62828" stroke-width="2"/>
+          <line x1="154" y1="48" x2="164" y2="54" stroke="#C62828" stroke-width="2"/>
+          <line x1="152" y1="142" x2="162" y2="136" stroke="#C62828" stroke-width="2"/>
+          <line x1="154" y1="146" x2="164" y2="140" stroke="#C62828" stroke-width="2"/>
+          <line x1="68" y1="52" x2="58" y2="58" stroke="#C62828" stroke-width="2"/>
+          <line x1="66" y1="48" x2="56" y2="54" stroke="#C62828" stroke-width="2"/>
+          <line x1="68" y1="142" x2="58" y2="136" stroke="#C62828" stroke-width="2"/>
+          <line x1="66" y1="146" x2="56" y2="140" stroke="#C62828" stroke-width="2"/>
+          <text x="110" y="192" font-size="11" font-weight="700" fill="#00695C" text-anchor="middle">CV = 4 × ${s} = ?</text>
+        </svg>`;
+        const q=fill(`Hình thoi có cạnh ${s} cm. Chu vi = _____ cm`,s*4,'📐','CV hình thoi = 4 × cạnh');
+        q.svg=svg; return q;
+      }
+      if(variant===2){
+        // Hình chữ L – chu vi
+        const a=rnd(5,11),b=rnd(2,a-2),c=rnd(4,9),d=rnd(1,c-2);
+        const cv=2*(a+c);
+        const U=13,px=18,py=15;
+        const svg=`<svg width="240" height="205" viewBox="0 0 240 205" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="${px},${py} ${px+a*U},${py} ${px+a*U},${py+d*U} ${px+(a-b)*U},${py+d*U} ${px+(a-b)*U},${py+c*U} ${px},${py+c*U}" fill="#EDE7F6" stroke="#6A1B9A" stroke-width="2.5"/>
+          <polyline points="${px+12},${py} ${px+12},${py+12} ${px},${py+12}" fill="none" stroke="#C62828" stroke-width="1.8"/>
+          <polyline points="${px+(a-b)*U-12},${py+d*U} ${px+(a-b)*U-12},${py+d*U+12} ${px+(a-b)*U},${py+d*U+12}" fill="none" stroke="#C62828" stroke-width="1.8"/>
+          <text x="${px+a*U/2}" y="${py-6}" font-size="11" font-weight="700" fill="#6A1B9A" text-anchor="middle">${a} cm</text>
+          <text x="${px+a*U+8}" y="${py+d*U/2+4}" font-size="11" font-weight="700" fill="#6A1B9A">${d} cm</text>
+          <text x="${px+(a-b)*U+b*U/2}" y="${py+d*U+14}" font-size="11" font-weight="700" fill="#6A1B9A" text-anchor="middle">${b} cm</text>
+          <text x="${px+(a-b)*U+8}" y="${py+d*U+(c-d)*U/2+4}" font-size="11" font-weight="700" fill="#6A1B9A">${c-d} cm</text>
+          <text x="${px-6}" y="${py+c*U/2+4}" font-size="11" font-weight="700" fill="#6A1B9A" text-anchor="end">${c} cm</text>
+          <text x="${px+a*U/2}" y="${py+c*U+18}" font-size="11" font-weight="700" fill="#6A1B9A" text-anchor="middle">CV = tổng tất cả cạnh = ?</text>
+          <text x="${px+a*U/2}" y="${py+c*U+33}" font-size="10" fill="#888" text-anchor="middle">CV hình chữ L = 2×(${a}+${c}) = ${cv}</text>
+        </svg>`;
+        const q=fill(`Hình chữ L có các cạnh: ${a}cm, ${d}cm, ${b}cm, ${c-d}cm, ${a-b}cm, ${c}cm.\nChu vi = _____ cm`,cv,'📐',`CV = ${a}+${d}+${b}+${c-d}+${a-b}+${c} = ${cv}`);
+        q.svg=svg; return q;
+      }
+      // Tam giác – chu vi 3 cạnh khác nhau
+      const a=rnd(3,10),b=rnd(3,10),c=rnd(3,10);
+      const svg=`<svg width="240" height="185" viewBox="0 0 240 185" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="30,160 210,160 120,20" fill="#FFF3E0" stroke="#E65100" stroke-width="2.5"/>
+        <text x="120" y="13" font-size="11" font-weight="700" fill="#E65100" text-anchor="middle">${c} cm</text>
+        <text x="62" y="100" font-size="11" font-weight="700" fill="#E65100" transform="rotate(-62,62,100)">${a} cm</text>
+        <text x="180" y="100" font-size="11" font-weight="700" fill="#E65100" transform="rotate(55,180,100)">${b} cm</text>
+        <path d="M120,38 A18,18 0 0,1 132,44" fill="none" stroke="#C62828" stroke-width="2"/>
+        <path d="M120,38 A18,18 0 0,0 108,44" fill="none" stroke="#C62828" stroke-width="2"/>
+        <path d="M46,160 A18,18 0 0,1 56,148" fill="none" stroke="#9C27B0" stroke-width="2"/>
+        <path d="M194,160 A18,18 0 0,0 184,148" fill="none" stroke="#2E7D32" stroke-width="2"/>
+        <text x="120" y="178" font-size="11" font-weight="700" fill="#E65100" text-anchor="middle">CV = ${a}+${b}+${c} = ?</text>
+      </svg>`;
+      const q=fill(`Tam giác có 3 cạnh ${a} cm, ${b} cm, ${c} cm.\nChu vi = _____ cm`,a+b+c,'📐','CV tam giác = tổng 3 cạnh');
+      q.svg=svg; return q;
+    }
+  },
+
+  perimeter:{
+    easy:()=>{
+      const variant=rnd(0,3);
+      if(variant===0){
+        // Hình vuông
+        const s=rnd(3,15);
+        const W=110,ox=55,oy=30;
+        const svg=`<svg width="220" height="185" viewBox="0 0 220 185" xmlns="http://www.w3.org/2000/svg">
+          <rect x="${ox}" y="${oy}" width="${W}" height="${W}" rx="3" fill="#E0F2F1" stroke="#00695C" stroke-width="2.5"/>
+          <polyline points="${ox+12},${oy} ${ox+12},${oy+12} ${ox},${oy+12}" fill="none" stroke="#C62828" stroke-width="1.8"/>
+          <polyline points="${ox+W-12},${oy} ${ox+W-12},${oy+12} ${ox+W},${oy+12}" fill="none" stroke="#C62828" stroke-width="1.8"/>
+          <polyline points="${ox+12},${oy+W} ${ox+12},${oy+W-12} ${ox},${oy+W-12}" fill="none" stroke="#C62828" stroke-width="1.8"/>
+          <polyline points="${ox+W-12},${oy+W} ${ox+W-12},${oy+W-12} ${ox+W},${oy+W-12}" fill="none" stroke="#C62828" stroke-width="1.8"/>
+          <line x1="${ox+W/2-5}" y1="${oy-2}" x2="${ox+W/2+5}" y2="${oy-2}" stroke="#E65100" stroke-width="2"/>
+          <line x1="${ox+W/2-5}" y1="${oy+W+2}" x2="${ox+W/2+5}" y2="${oy+W+2}" stroke="#E65100" stroke-width="2"/>
+          <line x1="${ox-2}" y1="${oy+W/2-5}" x2="${ox-2}" y2="${oy+W/2+5}" stroke="#E65100" stroke-width="2"/>
+          <line x1="${ox+W+2}" y1="${oy+W/2-5}" x2="${ox+W+2}" y2="${oy+W/2+5}" stroke="#E65100" stroke-width="2"/>
+          <text x="${ox+W/2}" y="${oy-8}" font-size="11" font-weight="700" fill="#1565C0" text-anchor="middle">${s} cm</text>
+          <text x="${ox+W+12}" y="${oy+W/2+5}" font-size="11" font-weight="700" fill="#1565C0">${s} cm</text>
+          <text x="${ox+W/2}" y="${oy+W+20}" font-size="11" font-weight="700" fill="#00695C" text-anchor="middle">CV = 4 × ${s} = ?</text>
+        </svg>`;
+        const q=fill(`Hình vuông cạnh ${s} cm. Chu vi = _____ cm`,s*4,'📏','CV hình vuông = 4 × cạnh');
+        q.svg=svg; return q;
+      }
+      if(variant===1){
+        // Tam giác đều
+        const s=rnd(3,12);
+        const cx=120,cy=95,r=72;
+        const pts=[[cx,cy-r],[cx-r*0.866,cy+r*0.5],[cx+r*0.866,cy+r*0.5]];
+        const poly=pts.map(p=>p.map(v=>Math.round(v)).join(',')).join(' ');
+        const mids=[[Math.round((pts[0][0]+pts[1][0])/2),Math.round((pts[0][1]+pts[1][1])/2)],[Math.round((pts[1][0]+pts[2][0])/2),Math.round((pts[1][1]+pts[2][1])/2)],[Math.round((pts[0][0]+pts[2][0])/2),Math.round((pts[0][1]+pts[2][1])/2)]];
+        const svg=`<svg width="240" height="195" viewBox="0 0 240 195" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="${poly}" fill="#FFF9C4" stroke="#F57F17" stroke-width="2.5"/>
+          <text x="${mids[0][0]-20}" y="${mids[0][1]}" font-size="11" font-weight="700" fill="#E65100" transform="rotate(-60,${mids[0][0]-20},${mids[0][1]})">${s} cm</text>
+          <text x="${mids[1][0]}" y="${mids[1][1]+16}" font-size="11" font-weight="700" fill="#E65100" text-anchor="middle">${s} cm</text>
+          <text x="${mids[2][0]+20}" y="${mids[2][1]}" font-size="11" font-weight="700" fill="#E65100" transform="rotate(60,${mids[2][0]+20},${mids[2][1]})">${s} cm</text>
+          <line x1="${mids[0][0]-6}" y1="${mids[0][1]-3}" x2="${mids[0][0]+4}" y2="${mids[0][1]+5}" stroke="#C62828" stroke-width="2"/>
+          <line x1="${mids[1][0]-5}" y1="${mids[1][1]-3}" x2="${mids[1][0]+5}" y2="${mids[1][1]-3}" stroke="#C62828" stroke-width="2"/>
+          <line x1="${mids[2][0]-4}" y1="${mids[2][1]-3}" x2="${mids[2][0]+6}" y2="${mids[2][1]+5}" stroke="#C62828" stroke-width="2"/>
+          <text x="120" y="190" font-size="11" font-weight="700" fill="#F57F17" text-anchor="middle">CV = 3 × ${s} = ?</text>
+        </svg>`;
+        const q=fill(`Tam giác đều cạnh ${s} cm. Chu vi = _____ cm`,s*3,'📏','CV tam giác đều = 3 × cạnh');
+        q.svg=svg; return q;
+      }
+      if(variant===2){
+        // Hình thoi
+        const s=rnd(4,13);
+        const svg=`<svg width="220" height="185" viewBox="0 0 220 185" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="110,16 200,93 110,170 20,93" fill="#E3F2FD" stroke="#1565C0" stroke-width="2.5"/>
+          <text x="160" y="55" font-size="11" font-weight="700" fill="#1565C0" text-anchor="middle" transform="rotate(42,160,55)">${s} cm</text>
+          <text x="160" y="138" font-size="11" font-weight="700" fill="#1565C0" text-anchor="middle" transform="rotate(-42,160,138)">${s} cm</text>
+          <text x="60" y="55" font-size="11" font-weight="700" fill="#1565C0" text-anchor="middle" transform="rotate(-42,60,55)">${s} cm</text>
+          <text x="60" y="138" font-size="11" font-weight="700" fill="#1565C0" text-anchor="middle" transform="rotate(42,60,138)">${s} cm</text>
+          <line x1="150" y1="50" x2="160" y2="56" stroke="#C62828" stroke-width="2"/>
+          <line x1="152" y1="46" x2="162" y2="52" stroke="#C62828" stroke-width="2"/>
+          <line x1="150" y1="136" x2="160" y2="130" stroke="#C62828" stroke-width="2"/>
+          <line x1="152" y1="140" x2="162" y2="134" stroke="#C62828" stroke-width="2"/>
+          <line x1="70" y1="50" x2="60" y2="56" stroke="#C62828" stroke-width="2"/>
+          <line x1="68" y1="46" x2="58" y2="52" stroke="#C62828" stroke-width="2"/>
+          <line x1="70" y1="136" x2="60" y2="130" stroke="#C62828" stroke-width="2"/>
+          <line x1="68" y1="140" x2="58" y2="134" stroke="#C62828" stroke-width="2"/>
+          <text x="110" y="182" font-size="11" font-weight="700" fill="#1565C0" text-anchor="middle">CV = 4 × ${s} = ?</text>
+        </svg>`;
+        const q=fill(`Hình thoi cạnh ${s} cm. Chu vi = _____ cm`,s*4,'📏','CV hình thoi = 4 × cạnh');
+        q.svg=svg; return q;
+      }
+      // Tam giác vuông cân
+      const s=rnd(4,10);
+      const hyp=Math.round(s*1.414*10)/10;
+      const svg=`<svg width="230" height="185" viewBox="0 0 230 185" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="30,160 30,30 160,160" fill="#FCE4EC" stroke="#AD1457" stroke-width="2.5"/>
+        <polyline points="30,148 42,148 42,160" fill="none" stroke="#C62828" stroke-width="2"/>
+        <text x="18" y="96" font-size="11" font-weight="700" fill="#AD1457">${s} cm</text>
+        <text x="88" y="175" font-size="11" font-weight="700" fill="#AD1457" text-anchor="middle">${s} cm</text>
+        <text x="108" y="98" font-size="10" fill="#888" transform="rotate(38,108,98)">${hyp} cm</text>
+        <line x1="26" y1="96" x2="34" y2="96" stroke="#AD1457" stroke-width="2"/>
+        <line x1="92" y1="160" x2="92" y2="152" stroke="#AD1457" stroke-width="2"/>
+        <text x="115" y="180" font-size="10" fill="#AD1457" text-anchor="middle">CV=${s}+${s}+${hyp}=?</text>
+      </svg>`;
+      const q=fill(`Tam giác vuông cân, hai cạnh góc vuông = ${s} cm, cạnh huyền ≈ ${hyp} cm.\nChu vi ≈ _____ cm`,Math.round((s+s+hyp)*10)/10,'📏',`CV = ${s}+${s}+${hyp}`);
+      q.svg=svg; return q;
+    },
+
+    medium:()=>{
+      const variant=rnd(0,3);
+      if(variant===0){
+        // Hình chữ nhật
+        const l=rnd(6,20),w=rnd(3,l-1);
+        const sW=Math.min(130,l*7),sH=Math.min(85,w*7),ox=45,oy=38;
+        const svg=`<svg width="240" height="192" viewBox="0 0 240 192" xmlns="http://www.w3.org/2000/svg">
+          <rect x="${ox}" y="${oy}" width="${sW}" height="${sH}" rx="3" fill="#E0F2F1" stroke="#00695C" stroke-width="2.5"/>
+          <polyline points="${ox+12},${oy} ${ox+12},${oy+12} ${ox},${oy+12}" fill="none" stroke="#C62828" stroke-width="1.8"/>
+          <polyline points="${ox+sW-12},${oy} ${ox+sW-12},${oy+12} ${ox+sW},${oy+12}" fill="none" stroke="#C62828" stroke-width="1.8"/>
+          <polyline points="${ox+12},${oy+sH} ${ox+12},${oy+sH-12} ${ox},${oy+sH-12}" fill="none" stroke="#C62828" stroke-width="1.8"/>
+          <polyline points="${ox+sW-12},${oy+sH} ${ox+sW-12},${oy+sH-12} ${ox+sW},${oy+sH-12}" fill="none" stroke="#C62828" stroke-width="1.8"/>
+          <text x="${ox+sW/2}" y="${oy-8}" font-size="11" font-weight="700" fill="#1565C0" text-anchor="middle">${l} cm</text>
+          <text x="${ox+sW/2}" y="${oy+sH+16}" font-size="11" font-weight="700" fill="#1565C0" text-anchor="middle">${l} cm</text>
+          <text x="${ox-8}" y="${oy+sH/2+5}" font-size="11" font-weight="700" fill="#1565C0" text-anchor="end">${w} cm</text>
+          <text x="${ox+sW+10}" y="${oy+sH/2+5}" font-size="11" font-weight="700" fill="#1565C0">${w} cm</text>
+          <text x="120" y="185" font-size="11" font-weight="700" fill="#00695C" text-anchor="middle">CV = 2×(${l}+${w}) = ?</text>
+        </svg>`;
+        const q=fill(`Hình chữ nhật dài ${l} cm, rộng ${w} cm.\nChu vi = _____ cm`,2*(l+w),'📏','CV HCN = 2×(dài+rộng)');
+        q.svg=svg; return q;
+      }
+      if(variant===1){
+        // Tam giác 3 cạnh khác nhau
+        const a=rnd(5,12),b=rnd(4,11),c=rnd(4,10);
+        const svg=`<svg width="240" height="185" viewBox="0 0 240 185" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="30,160 210,160 130,25" fill="#FFF3E0" stroke="#E65100" stroke-width="2.5"/>
+          <text x="128" y="17" font-size="11" font-weight="700" fill="#E65100" text-anchor="middle">${c} cm</text>
+          <text x="65" y="104" font-size="11" font-weight="700" fill="#E65100" transform="rotate(-58,65,104)">${a} cm</text>
+          <text x="178" y="104" font-size="11" font-weight="700" fill="#E65100" transform="rotate(50,178,104)">${b} cm</text>
+          <path d="M130,43 A18,18 0 0,1 142,50" fill="none" stroke="#C62828" stroke-width="1.8"/>
+          <path d="M130,43 A18,18 0 0,0 118,50" fill="none" stroke="#C62828" stroke-width="1.8"/>
+          <path d="M46,160 A18,18 0 0,1 56,148" fill="none" stroke="#9C27B0" stroke-width="1.8"/>
+          <path d="M194,160 A18,18 0 0,0 184,148" fill="none" stroke="#2E7D32" stroke-width="1.8"/>
+          <text x="120" y="180" font-size="11" font-weight="700" fill="#E65100" text-anchor="middle">CV = ${a}+${b}+${c} = ?</text>
+        </svg>`;
+        const q=fill(`Tam giác có 3 cạnh ${a} cm, ${b} cm, ${c} cm.\nChu vi = _____ cm`,a+b+c,'📏','CV tam giác = tổng 3 cạnh');
+        q.svg=svg; return q;
+      }
+      if(variant===2){
+        // Lục giác đều
+        const s=rnd(3,9);
+        const cx=120,cy=95,r=68;
+        const pts=Array.from({length:6},(_,i)=>{const a=i*60-90;return [Math.round(cx+r*Math.cos(a*Math.PI/180)),Math.round(cy+r*Math.sin(a*Math.PI/180))];});
+        const poly=pts.map(p=>p.join(',')).join(' ');
+        const mids=pts.map((_,i)=>[Math.round((pts[i][0]+pts[(i+1)%6][0])/2),Math.round((pts[i][1]+pts[(i+1)%6][1])/2)]);
+        const svg=`<svg width="240" height="200" viewBox="0 0 240 200" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="${poly}" fill="#E8F5E9" stroke="#2E7D32" stroke-width="2.5"/>
+          ${mids.map(m=>`<text x="${m[0]}" y="${m[1]+4}" font-size="10" font-weight="700" fill="#1B5E20" text-anchor="middle">${s}cm</text>`).join('')}
+          <text x="120" y="192" font-size="11" font-weight="700" fill="#2E7D32" text-anchor="middle">CV = 6 × ${s} = ?</text>
+        </svg>`;
+        const q=fill(`Lục giác đều cạnh ${s} cm. Chu vi = _____ cm`,s*6,'📏','CV lục giác đều = 6 × cạnh');
+        q.svg=svg; return q;
+      }
+      // Hình thang – chu vi
+      const a=rnd(8,16),b=rnd(4,a-2),c=rnd(4,9),d=rnd(4,9);
+      const U=8,off=Math.round((a-b)*U*0.5);
+      const sA=a*U,sB=b*U,ox=25,oy=35;
+      const svg=`<svg width="240" height="178" viewBox="0 0 240 178" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="${ox},${oy+80} ${ox+sA},${oy+80} ${ox+sA-off},${oy} ${ox+off},${oy}" fill="#FCE4EC" stroke="#AD1457" stroke-width="2.5"/>
+        <text x="${ox+sA/2}" y="${oy+97}" font-size="11" font-weight="700" fill="#AD1457" text-anchor="middle">${a} cm</text>
+        <text x="${ox+sA/2}" y="${oy-8}" font-size="11" font-weight="700" fill="#AD1457" text-anchor="middle">${b} cm</text>
+        <text x="${ox+off/2-8}" y="${oy+42}" font-size="11" font-weight="700" fill="#C62828" transform="rotate(-70,${ox+off/2-8},${oy+42})">${c} cm</text>
+        <text x="${ox+sA-off/2+10}" y="${oy+42}" font-size="11" font-weight="700" fill="#C62828" transform="rotate(70,${ox+sA-off/2+10},${oy+42})">${d} cm</text>
+        <text x="120" y="162" font-size="11" font-weight="700" fill="#AD1457" text-anchor="middle">CV = ${a}+${b}+${c}+${d} = ?</text>
+      </svg>`;
+      const q=fill(`Hình thang: đáy lớn ${a}cm, đáy bé ${b}cm, 2 cạnh bên ${c}cm và ${d}cm.\nChu vi = _____ cm`,a+b+c+d,'📏','CV hình thang = tổng 4 cạnh');
+      q.svg=svg; return q;
+    },
+
+    hard:()=>{
+      const variant=rnd(0,2);
+      if(variant===0){
+        // Tìm chiều rộng HCN khi biết CV + chiều dài
+        const p=rnd(20,60)*2,l=rnd(5,Math.floor(p/2)-2);
+        const w=p/2-l;
+        const sW=Math.min(140,l*8),sH=Math.min(90,w*8),ox=40,oy=35;
+        const svg=`<svg width="240" height="190" viewBox="0 0 240 190" xmlns="http://www.w3.org/2000/svg">
+          <rect x="${ox}" y="${oy}" width="${sW}" height="${sH}" rx="3" fill="#FFF3E0" stroke="#E65100" stroke-width="2.5"/>
+          <polyline points="${ox+12},${oy} ${ox+12},${oy+12} ${ox},${oy+12}" fill="none" stroke="#C62828" stroke-width="1.8"/>
+          <polyline points="${ox+sW-12},${oy} ${ox+sW-12},${oy+12} ${ox+sW},${oy+12}" fill="none" stroke="#C62828" stroke-width="1.8"/>
+          <polyline points="${ox+12},${oy+sH} ${ox+12},${oy+sH-12} ${ox},${oy+sH-12}" fill="none" stroke="#C62828" stroke-width="1.8"/>
+          <polyline points="${ox+sW-12},${oy+sH} ${ox+sW-12},${oy+sH-12} ${ox+sW},${oy+sH-12}" fill="none" stroke="#C62828" stroke-width="1.8"/>
+          <text x="${ox+sW/2}" y="${oy-8}" font-size="11" font-weight="700" fill="#1565C0" text-anchor="middle">${l} cm</text>
+          <rect x="${ox+sW+6}" y="${oy+sH/2-12}" width="44" height="20" rx="5" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+          <text x="${ox+sW+28}" y="${oy+sH/2+3}" font-size="11" font-weight="700" fill="#E65100" text-anchor="middle">? cm</text>
+          <text x="120" y="178" font-size="11" font-weight="700" fill="#E65100" text-anchor="middle">CV=${p}cm, dài=${l}cm → rộng=?</text>
+        </svg>`;
+        const q=fill(`HCN có chu vi ${p}cm, chiều dài ${l}cm.\nChiều rộng = _____ cm`,w,'📏','Rộng = CV÷2 − Dài');
+        q.svg=svg; return q;
+      }
+      if(variant===1){
+        // Hình chữ L nâng cao
+        const a=rnd(8,14),c=rnd(5,10),b=rnd(3,a-3),d=rnd(2,c-2);
+        const cv=2*(a+c);
+        const U=11,px=20,py=15;
+        const svg=`<svg width="240" height="200" viewBox="0 0 240 200" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="${px},${py} ${px+a*U},${py} ${px+a*U},${py+d*U} ${px+(a-b)*U},${py+d*U} ${px+(a-b)*U},${py+c*U} ${px},${py+c*U}" fill="#EDE7F6" stroke="#6A1B9A" stroke-width="2.5"/>
+          <polyline points="${px+11},${py} ${px+11},${py+11} ${px},${py+11}" fill="none" stroke="#C62828" stroke-width="1.8"/>
+          <text x="${px+a*U/2}" y="${py-5}" font-size="11" font-weight="700" fill="#6A1B9A" text-anchor="middle">${a} cm</text>
+          <text x="${px+a*U+8}" y="${py+d*U/2+4}" font-size="11" font-weight="700" fill="#6A1B9A">${d} cm</text>
+          <rect x="${px+(a-b)*U+3}" y="${py+d*U+5}" width="26" height="15" rx="4" fill="#EDE7F6" stroke="#6A1B9A" stroke-width="1.3"/>
+          <text x="${px+(a-b)*U+16}" y="${py+d*U+16}" font-size="9" text-anchor="middle" fill="#6A1B9A">?cm</text>
+          <text x="${px-6}" y="${py+c*U/2+4}" font-size="11" font-weight="700" fill="#6A1B9A" text-anchor="end">${c} cm</text>
+          <rect x="${px+a*U/2-18}" y="${py+c*U+5}" width="36" height="15" rx="4" fill="#EDE7F6" stroke="#6A1B9A" stroke-width="1.3"/>
+          <text x="${px+a*U/2}" y="${py+c*U+16}" font-size="9" text-anchor="middle" fill="#6A1B9A">?cm</text>
+          <text x="120" y="188" font-size="11" font-weight="700" fill="#6A1B9A" text-anchor="middle">CV=2×(${a}+${c})=${cv} cm</text>
+        </svg>`;
+        const q=fill(`Hình chữ L: chiều dài ngoài ${a}cm, chiều cao ngoài ${c}cm.\nChu vi = _____ cm`,cv,'📏','CV hình chữ L = 2×(dài ngoài + cao ngoài)');
+        q.svg=svg; return q;
+      }
+      // Tìm cạnh tam giác đều khi biết CV
+      const cv2=rnd(3,10)*3;
+      const s2=cv2/3;
+      const cx=120,cy=92,r=65;
+      const pts2=[[cx,cy-r],[cx-r*0.866,cy+r*0.5],[cx+r*0.866,cy+r*0.5]];
+      const poly2=pts2.map(p=>p.map(v=>Math.round(v)).join(',')).join(' ');
+      const mids2=pts2.map((_,i)=>[Math.round((pts2[i][0]+pts2[(i+1)%3][0])/2),Math.round((pts2[i][1]+pts2[(i+1)%3][1])/2)]);
+      const svg2=`<svg width="240" height="190" viewBox="0 0 240 190" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="${poly2}" fill="#FFF9C4" stroke="#F57F17" stroke-width="2.5"/>
+        ${mids2.map(m=>`<rect x="${m[0]-17}" y="${m[1]-10}" width="34" height="16" rx="5" fill="#FFF9C4" stroke="#F57F17" stroke-width="1.5"/><text x="${m[0]}" y="${m[1]+3}" font-size="10" text-anchor="middle" fill="#E65100" font-weight="700">? cm</text>`).join('')}
+        <text x="120" y="178" font-size="11" font-weight="700" fill="#F57F17" text-anchor="middle">CV=${cv2}cm → cạnh=?</text>
+      </svg>`;
+      const q2=fill(`Tam giác đều có chu vi ${cv2}cm.\nĐộ dài mỗi cạnh = _____ cm`,s2,'📏','Cạnh = CV ÷ 3');
+      q2.svg=svg2; return q2;
+    }
+  },
+
+  area:{
+    easy:()=>{
+      const variant=rnd(0,3);
+      if(variant===0){
+        const s=rnd(3,8);
+        const cp=Math.min(18,Math.floor(128/s));
+        const gW=cp*s,gH=cp*s,ox=Math.floor((220-gW)/2),oy=18;
+        let grid='';
+        for(let r=0;r<s;r++) for(let c=0;c<s;c++)
+          grid+=`<rect x="${ox+c*cp}" y="${oy+r*cp}" width="${cp}" height="${cp}" fill="${(r+c)%2===0?'#E0F2F1':'#B2DFDB'}" stroke="#00695C" stroke-width="0.8"/>`;
+        const svg=`<svg width="220" height="185" viewBox="0 0 220 185" xmlns="http://www.w3.org/2000/svg">
+          ${grid}
+          <rect x="${ox}" y="${oy}" width="${gW}" height="${gH}" fill="none" stroke="#00695C" stroke-width="2.5"/>
+          <polyline points="${ox+10},${oy} ${ox+10},${oy+10} ${ox},${oy+10}" fill="none" stroke="#C62828" stroke-width="1.8"/>
+          <text x="${ox+gW/2}" y="${oy-6}" font-size="11" font-weight="700" fill="#1565C0" text-anchor="middle">${s} cm</text>
+          <text x="${ox-8}" y="${oy+gH/2+5}" font-size="11" font-weight="700" fill="#1565C0" text-anchor="end">${s} cm</text>
+          <text x="110" y="${oy+gH+20}" font-size="11" font-weight="700" fill="#00695C" text-anchor="middle">S = ${s}×${s} = ? cm²</text>
+          <text x="110" y="${oy+gH+34}" font-size="10" text-anchor="middle" fill="#888">(mỗi ô = 1 cm²)</text>
+        </svg>`;
+        const q=fill(`Hình vuông cạnh ${s} cm. Diện tích = _____ cm²`,s*s,'⬛','S hình vuông = cạnh × cạnh');
+        q.svg=svg; return q;
+      }
+      if(variant===1){
+        const l=rnd(4,8),w=rnd(3,6);
+        const cp=Math.min(18,Math.floor(140/l));
+        const gW=cp*l,gH=cp*w,ox=Math.floor((240-gW)/2),oy=22;
+        let grid='',nums='';
+        for(let r=0;r<w;r++) for(let c=0;c<l;c++){
+          grid+=`<rect x="${ox+c*cp}" y="${oy+r*cp}" width="${cp}" height="${cp}" fill="${(r+c)%2===0?'#BBDEFB':'#90CAF9'}" stroke="#1565C0" stroke-width="0.8"/>`;
+          if(cp>13) nums+=`<text x="${ox+c*cp+cp/2}" y="${oy+r*cp+cp/2+4}" font-size="8" text-anchor="middle" fill="#0D47A1" font-weight="700">${r*l+c+1}</text>`;
+        }
+        const svg=`<svg width="240" height="190" viewBox="0 0 240 190" xmlns="http://www.w3.org/2000/svg">
+          ${grid}${nums}
+          <rect x="${ox}" y="${oy}" width="${gW}" height="${gH}" fill="none" stroke="#1565C0" stroke-width="2.5"/>
+          <polyline points="${ox+10},${oy} ${ox+10},${oy+10} ${ox},${oy+10}" fill="none" stroke="#C62828" stroke-width="1.8"/>
+          <text x="${ox+gW/2}" y="${oy-7}" font-size="11" font-weight="700" fill="#1565C0" text-anchor="middle">${l} cm</text>
+          <text x="${ox-8}" y="${oy+gH/2+5}" font-size="11" font-weight="700" fill="#1565C0" text-anchor="end">${w} cm</text>
+          <text x="120" y="${oy+gH+20}" font-size="11" font-weight="700" fill="#1565C0" text-anchor="middle">S = ${l}×${w} = ? cm² (đếm ô)</text>
+        </svg>`;
+        const q=fill(`HCN chia thành ${l*w} ô (1cm²/ô). Diện tích = _____ cm²`,l*w,'⬛','Đếm tổng số ô = diện tích');
+        q.svg=svg; return q;
+      }
+      if(variant===2){
+        const l=rnd(5,12),w=rnd(3,8);
+        const sW=Math.min(140,l*9),sH=Math.min(90,w*9),ox=Math.floor((240-sW)/2),oy=25;
+        let grid='';
+        const cpx=Math.floor(sW/l),cpy=Math.floor(sH/w);
+        for(let r=0;r<w;r++) for(let c=0;c<l;c++)
+          grid+=`<rect x="${ox+c*cpx}" y="${oy+r*cpy}" width="${cpx}" height="${cpy}" fill="${(r+c)%2===0?'#E8F5E9':'#C8E6C9'}" stroke="#2E7D32" stroke-width="0.6"/>`;
+        const svg=`<svg width="240" height="190" viewBox="0 0 240 190" xmlns="http://www.w3.org/2000/svg">
+          ${grid}
+          <rect x="${ox}" y="${oy}" width="${sW}" height="${sH}" fill="none" stroke="#2E7D32" stroke-width="2.5"/>
+          <polyline points="${ox+10},${oy} ${ox+10},${oy+10} ${ox},${oy+10}" fill="none" stroke="#C62828" stroke-width="1.8"/>
+          <text x="${ox+sW/2}" y="${oy-8}" font-size="11" font-weight="700" fill="#1565C0" text-anchor="middle">${l} cm</text>
+          <text x="${ox-8}" y="${oy+sH/2+5}" font-size="11" font-weight="700" fill="#1565C0" text-anchor="end">${w} cm</text>
+          <text x="120" y="${oy+sH+20}" font-size="11" font-weight="700" fill="#2E7D32" text-anchor="middle">S = ${l}×${w} = ? cm²</text>
+        </svg>`;
+        const q=fill(`Hình chữ nhật dài ${l}cm, rộng ${w}cm. Diện tích = _____ cm²`,l*w,'⬛','S = dài × rộng');
+        q.svg=svg; return q;
+      }
+      // Nhận biết đơn vị diện tích
+      const svg=`<svg width="240" height="170" viewBox="0 0 240 170" xmlns="http://www.w3.org/2000/svg">
+        <rect x="30" y="30" width="60" height="60" fill="#E3F2FD" stroke="#1565C0" stroke-width="2.5"/>
+        <text x="60" y="67" font-size="14" font-weight="800" fill="#1565C0" text-anchor="middle">1 cm²</text>
+        <text x="60" y="107" font-size="11" fill="#888" text-anchor="middle">1cm × 1cm</text>
+        <text x="108" y="65" font-size="18" fill="#888">=</text>
+        <rect x="128" y="30" width="30" height="30" fill="#BBDEFB" stroke="#1565C0" stroke-width="1.5"/>
+        <rect x="158" y="30" width="30" height="30" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
+        <rect x="128" y="60" width="30" height="30" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
+        <rect x="158" y="60" width="30" height="30" fill="#BBDEFB" stroke="#1565C0" stroke-width="1.5"/>
+        <text x="173" y="107" font-size="11" fill="#888" text-anchor="middle">4 ô = 4 cm²</text>
+        <text x="120" y="145" font-size="12" font-weight="700" fill="#1565C0" text-anchor="middle">Đơn vị: cm² (xăng-ti-mét vuông)</text>
+      </svg>`;
+      const q=mcq('Đơn vị đo diện tích thông dụng là?','cm²',['cm','m','kg'],'⬛','Diện tích đo bằng cm²');
+      q.svg=svg; return q;
+    },
+
+    medium:()=>{
+      const variant=rnd(0,3);
+      if(variant===0){
+        // Diện tích tờ giấy màu – hình chữ nhật tô màu gradient
+        const l=rnd(6,18),w=rnd(4,12);
+        const sW=Math.min(145,l*8),sH=Math.min(92,w*8),ox=38,oy=25;
+        const svg=`<svg width="240" height="195" viewBox="0 0 240 195" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="paperGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#BBDEFB"/>
+              <stop offset="100%" stop-color="#90CAF9"/>
+            </linearGradient>
+          </defs>
+          <rect x="${ox}" y="${oy}" width="${sW}" height="${sH}" rx="3" fill="url(#paperGrad)" stroke="#1565C0" stroke-width="2.5"/>
+          <polyline points="${ox+11},${oy} ${ox+11},${oy+11} ${ox},${oy+11}" fill="none" stroke="#C62828" stroke-width="1.8"/>
+          <polyline points="${ox+sW-11},${oy} ${ox+sW-11},${oy+11} ${ox+sW},${oy+11}" fill="none" stroke="#C62828" stroke-width="1.8"/>
+          <polyline points="${ox+11},${oy+sH} ${ox+11},${oy+sH-11} ${ox},${oy+sH-11}" fill="none" stroke="#C62828" stroke-width="1.8"/>
+          <polyline points="${ox+sW-11},${oy+sH} ${ox+sW-11},${oy+sH-11} ${ox+sW},${oy+sH-11}" fill="none" stroke="#C62828" stroke-width="1.8"/>
+          <text x="${ox+sW/2}" y="${oy+sH/2-6}" font-size="13" font-weight="800" fill="#0D47A1" text-anchor="middle">Tờ giấy màu</text>
+          <text x="${ox+sW/2}" y="${oy+sH/2+12}" font-size="11" fill="#1565C0" text-anchor="middle">S = ? cm²</text>
+          <text x="${ox+sW/2}" y="${oy-8}" font-size="11" font-weight="700" fill="#1565C0" text-anchor="middle">${l} cm</text>
+          <text x="${ox-8}" y="${oy+sH/2+5}" font-size="11" font-weight="700" fill="#1565C0" text-anchor="end">${w} cm</text>
+          <text x="${ox+sW/2}" y="${oy+sH+18}" font-size="11" font-weight="700" fill="#1565C0" text-anchor="middle">S = ${l} × ${w} = ? cm²</text>
+        </svg>`;
+        const q=fill(`Tờ giấy màu hình chữ nhật: dài \${l} cm, rộng \${w} cm.\nDiện tích tờ giấy = _____ cm²`,l*w,'⬛','S = dài × rộng');
+        q.svg=svg; return q;
+      }
+      if(variant===1){
+        // Bài toán lát gạch – tính số gạch (thực tế)
+        const roomL=rnd(4,10),roomW=rnd(3,8);
+        const tileSize=rnd(1,2);  // gạch 1m×1m hoặc 2m×2m... dùng dm để đơn giản
+        const S=roomL*roomW;
+        const tileArea=tileSize*tileSize;
+        const numTiles=S/tileArea;
+        const sW=Math.min(130,roomL*12),sH=Math.min(90,roomW*12),ox=38,oy=25;
+        const tpx=Math.max(6,Math.floor(sW/roomL)),tpy=Math.max(6,Math.floor(sH/roomW));
+        let tiles='';
+        for(let r=0;r<Math.min(roomW,8);r++) for(let c=0;c<Math.min(roomL,8);c++)
+          tiles+=`<rect x="${ox+c*tpx}" y="${oy+r*tpy}" width="${tpx-1}" height="${tpy-1}" rx="1" fill="${(r+c)%2===0?'#FFF9C4':'#FFE082'}" stroke="#F9A825" stroke-width="0.8"/>`;
+        const svg=`<svg width="240" height="195" viewBox="0 0 240 195" xmlns="http://www.w3.org/2000/svg">
+          <rect x="${ox}" y="${oy}" width="${sW}" height="${sH}" fill="none" stroke="#F57F17" stroke-width="2.5"/>
+          ${tiles}
+          <polyline points="${ox+11},${oy} ${ox+11},${oy+11} ${ox},${oy+11}" fill="none" stroke="#C62828" stroke-width="1.8"/>
+          <text x="${ox+sW/2}" y="${oy-8}" font-size="11" font-weight="700" fill="#1565C0" text-anchor="middle">${roomL} m</text>
+          <text x="${ox-8}" y="${oy+sH/2+5}" font-size="11" font-weight="700" fill="#1565C0" text-anchor="end">${roomW} m</text>
+          <text x="${ox+sW/2}" y="${oy+sH+16}" font-size="11" font-weight="700" fill="#F57F17" text-anchor="middle">Gạch ${tileSize}m×${tileSize}m → cần ? viên</text>
+          <text x="${ox+sW/2}" y="${oy+sH+30}" font-size="10" text-anchor="middle" fill="#888">S phòng=${S}m², S gạch=${tileArea}m²</text>
+          <text x="${ox+sW/2}" y="${oy+sH+44}" font-size="10" text-anchor="middle" fill="#888">Số gạch = ${S} ÷ ${tileArea} = ?</text>
+        </svg>`;
+        const q=fill(`Phòng \${roomL}m×\${roomW}m, lát gạch vuông cạnh \${tileSize}m.\nCần _____ viên gạch.`,numTiles,'⬛',`S phòng=\${S}m², S gạch=\${tileArea}m², \${S}÷\${tileArea}=\${numTiles}`);
+        q.svg=svg; return q;
+      }
+      if(variant===2){
+        // So sánh 2 hình
+        const l1=rnd(6,14),w1=rnd(4,10),s2=rnd(5,12);
+        const sv1=l1*w1,sv2=s2*s2;
+        const bigger=sv1>sv2?`HCN (${sv1} cm²)`:`Hình vuông (${sv2} cm²)`;
+        const sW=Math.min(100,l1*7),sH=Math.min(70,w1*7),sq=Math.min(80,s2*7);
+        const svg=`<svg width="285" height="175" viewBox="0 0 285 175" xmlns="http://www.w3.org/2000/svg">
+          <rect x="10" y="30" width="${sW}" height="${sH}" fill="#E3F2FD" stroke="#1565C0" stroke-width="2.5"/>
+          <polyline points="10,42 22,42 22,30" fill="none" stroke="#C62828" stroke-width="1.8"/>
+          <text x="${10+sW/2}" y="22" font-size="11" font-weight="700" fill="#1565C0" text-anchor="middle">${l1}cm</text>
+          <text x="5" y="${30+sH/2+5}" font-size="11" font-weight="700" fill="#1565C0" text-anchor="end">${w1}cm</text>
+          <text x="${10+sW/2}" y="${30+sH+14}" font-size="11" font-weight="700" fill="#1565C0" text-anchor="middle">S=${sv1}cm²</text>
+          <text x="156" y="85" font-size="14" fill="#888" text-anchor="middle">so với</text>
+          <rect x="${180}" y="${55-sq/2+20}" width="${sq}" height="${sq}" fill="#FFF9C4" stroke="#F57F17" stroke-width="2.5"/>
+          <polyline points="180,${67-sq/2+20} 192,${67-sq/2+20} 192,${55-sq/2+20}" fill="none" stroke="#C62828" stroke-width="1.8"/>
+          <text x="${180+sq/2}" y="${50-sq/2+20}" font-size="11" font-weight="700" fill="#F57F17" text-anchor="middle">${s2}cm</text>
+          <text x="${180+sq/2}" y="${55+sq/2+34}" font-size="11" font-weight="700" fill="#F57F17" text-anchor="middle">S=${sv2}cm²</text>
+        </svg>`;
+        const q=mcq(`HCN ${l1}×${w1}cm và hình vuông cạnh ${s2}cm.\nHình nào diện tích lớn hơn?`,bigger,[sv1>sv2?`Hình vuông (${sv2}cm²)`:`HCN (${sv1}cm²)`,'Bằng nhau'],'⬛','Tính S từng hình rồi so sánh');
+        q.svg=svg; return q;
+      }
+      // Hình chữ L = HCN lớn − HCN nhỏ
+      const A=rnd(6,12),B=rnd(5,10),a2=rnd(2,A-2),b2=rnd(2,B-2);
+      const sL=A*B-a2*b2;
+      const U=10,px=20,py=15;
+      const svg=`<svg width="240" height="200" viewBox="0 0 240 200" xmlns="http://www.w3.org/2000/svg">
+        <rect x="${px}" y="${py}" width="${A*U}" height="${B*U}" rx="2" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <polygon points="${px},${py} ${px+A*U},${py} ${px+A*U},${py+B*U} ${px+(A-a2)*U},${py+B*U} ${px+(A-a2)*U},${py+(B-b2)*U} ${px},${py+(B-b2)*U}" fill="#BBDEFB" stroke="#1565C0" stroke-width="2.5"/>
+        <rect x="${px+(A-a2)*U}" y="${py+(B-b2)*U}" width="${a2*U}" height="${b2*U}" fill="#FFCDD2" stroke="#C62828" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <text x="${px+A*U/2}" y="${py-6}" font-size="11" font-weight="700" fill="#1565C0" text-anchor="middle">${A} cm</text>
+        <text x="${px-8}" y="${py+B*U/2+5}" font-size="11" font-weight="700" fill="#1565C0" text-anchor="end">${B} cm</text>
+        <text x="${px+(A-a2)*U+a2*U/2}" y="${py+(B-b2)*U+b2*U/2+5}" font-size="10" text-anchor="middle" fill="#C62828">−${a2*b2}cm²</text>
+        <text x="${px+A*U/2}" y="${py+B*U+18}" font-size="11" font-weight="700" fill="#1565C0" text-anchor="middle">S=${A*B}−${a2*b2}=? cm²</text>
+      </svg>`;
+      const q=fill(`Hình chữ L = HCN ${A}×${B}cm trừ góc ${a2}×${b2}cm.\nDiện tích = _____ cm²`,sL,'⬛',`S = ${A*B} − ${a2*b2} = ${sL}`);
+      q.svg=svg; return q;
+    },
+
+    hard:()=>{
+      const variant=rnd(0,2);
+      if(variant===0){
+        const s=rnd(4,12);
+        const cp=Math.min(16,Math.floor(120/s));
+        const gW=cp*s,gH=cp*s,ox=Math.floor((220-gW)/2),oy=20;
+        let grid='';
+        for(let r=0;r<s;r++) for(let c=0;c<s;c++)
+          grid+=`<rect x="${ox+c*cp}" y="${oy+r*cp}" width="${cp}" height="${cp}" fill="${(r+c)%2===0?'#EDE7F6':'#D1C4E9'}" stroke="#6A1B9A" stroke-width="0.7"/>`;
+        const svg=`<svg width="220" height="195" viewBox="0 0 220 195" xmlns="http://www.w3.org/2000/svg">
+          ${grid}
+          <rect x="${ox}" y="${oy}" width="${gW}" height="${gH}" fill="none" stroke="#6A1B9A" stroke-width="2.5"/>
+          <polyline points="${ox+10},${oy} ${ox+10},${oy+10} ${ox},${oy+10}" fill="none" stroke="#C62828" stroke-width="1.8"/>
+          <rect x="${ox+gW/2-22}" y="${oy-22}" width="44" height="18" rx="5" fill="#EDE7F6" stroke="#6A1B9A" stroke-width="1.5"/>
+          <text x="${ox+gW/2}" y="${oy-9}" font-size="11" text-anchor="middle" fill="#6A1B9A" font-weight="700">? cm</text>
+          <rect x="${ox-38}" y="${oy+gH/2-9}" width="34" height="18" rx="5" fill="#EDE7F6" stroke="#6A1B9A" stroke-width="1.5"/>
+          <text x="${ox-21}" y="${oy+gH/2+4}" font-size="11" text-anchor="middle" fill="#6A1B9A" font-weight="700">? cm</text>
+          <text x="${ox+gW/2}" y="${oy+gH/2+5}" font-size="14" font-weight="800" fill="#4A148C" text-anchor="middle">S=${s*s}cm²</text>
+          <text x="110" y="${oy+gH+20}" font-size="11" font-weight="700" fill="#6A1B9A" text-anchor="middle">Cạnh = ? vì ?×?=${s*s}</text>
+        </svg>`;
+        const q=fill(`Hình vuông có diện tích ${s*s}cm². Mỗi cạnh = _____ cm`,s,'⬛','Tìm cạnh hình vuông khi biết S');
+        q.svg=svg; return q;
+      }
+      if(variant===1){
+        const A=rnd(8,15),B=rnd(6,12),a2=rnd(3,A-3),b2=rnd(2,B-3);
+        const sL=A*B-a2*b2;
+        const U=9,px=20,py=15;
+        const svg=`<svg width="240" height="200" viewBox="0 0 240 200" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="${px},${py} ${px+A*U},${py} ${px+A*U},${py+(B-b2)*U} ${px+(A-a2)*U},${py+(B-b2)*U} ${px+(A-a2)*U},${py+B*U} ${px},${py+B*U}" fill="#E8F5E9" stroke="#2E7D32" stroke-width="2.5"/>
+          <text x="${px+A*U/2}" y="${py-6}" font-size="11" font-weight="700" fill="#1565C0" text-anchor="middle">${A} cm</text>
+          <text x="${px-8}" y="${py+B*U/2+5}" font-size="11" font-weight="700" fill="#1565C0" text-anchor="end">${B} cm</text>
+          <text x="${px+A*U+8}" y="${py+(B-b2)*U/2+4}" font-size="11" font-weight="700" fill="#1565C0">${B-b2} cm</text>
+          <text x="${px+(A-a2)*U+a2*U/2}" y="${py+B*U+14}" font-size="11" font-weight="700" fill="#1565C0" text-anchor="middle">${a2} cm</text>
+          <text x="${px+A*U/2}" y="${py+B*U+28}" font-size="11" font-weight="700" fill="#2E7D32" text-anchor="middle">S=${A*B}−${a2*b2}=? cm²</text>
+        </svg>`;
+        const q=fill(`Hình chữ L: ${A}×${B}cm, bị cắt góc ${a2}×${b2}cm.\nDiện tích = _____ cm²`,sL,'⬛',`S = ${A*B} − ${a2*b2} = ${sL}`);
+        q.svg=svg; return q;
+      }
+      const l=rnd(6,16),w=rnd(4,10),tile=rnd(1,3);
+      const total=l*w,tiles=Math.floor(total/(tile*tile));
+      const sW=Math.min(130,l*8),sH=Math.min(80,w*8),ox=40,oy=28;
+      const svg=`<svg width="240" height="188" viewBox="0 0 240 188" xmlns="http://www.w3.org/2000/svg">
+        <rect x="${ox}" y="${oy}" width="${sW}" height="${sH}" fill="#FFF9C4" stroke="#F57F17" stroke-width="2.5"/>
+        ${Array.from({length:Math.floor(sW/(tile*8))+1},(_,c)=>Array.from({length:Math.floor(sH/(tile*8))+1},(_,r)=>`<rect x="${ox+c*tile*8}" y="${oy+r*tile*8}" width="${tile*8-1}" height="${tile*8-1}" rx="1" fill="${(r+c)%2===0?'#FFF3E0':'#FFE0B2'}" stroke="#FF8F00" stroke-width="0.8"/>`).join('')).join('')}
+        <polyline points="${ox+10},${oy} ${ox+10},${oy+10} ${ox},${oy+10}" fill="none" stroke="#C62828" stroke-width="1.8"/>
+        <text x="${ox+sW/2}" y="${oy-8}" font-size="11" font-weight="700" fill="#1565C0" text-anchor="middle">${l} m</text>
+        <text x="${ox-8}" y="${oy+sH/2+5}" font-size="11" font-weight="700" fill="#1565C0" text-anchor="end">${w} m</text>
+        <text x="${ox+sW/2}" y="${oy+sH+16}" font-size="11" font-weight="700" fill="#F57F17" text-anchor="middle">Gạch ${tile}m×${tile}m → cần ? viên</text>
+        <text x="${ox+sW/2}" y="${oy+sH+30}" font-size="10" text-anchor="middle" fill="#888">S sân=${total}m², S gạch=${tile*tile}m²</text>
+      </svg>`;
+      const q=fill(`Sân ${l}m×${w}m. Lát gạch vuông cạnh ${tile}m.\nCần _____ viên gạch.`,tiles,'⬛',`S sân=${total}m² ÷ S gạch=${tile*tile}m² = ${tiles} viên`);
+      q.svg=svg; return q;
+    }
+  },
+
+  units:{
+    easy:()=>{
+      const variant=rnd(0,3);
+      if(variant===0){
+        const svg=`<svg width="260" height="158" viewBox="0 0 260 158" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="68" width="220" height="18" rx="4" fill="#CFD8DC" stroke="#90A4AE" stroke-width="1.5"/>
+          <line x1="20" y1="77" x2="240" y2="77" stroke="white" stroke-width="2" stroke-dasharray="12,8"/>
+          <line x1="30" y1="53" x2="30" y2="90" stroke="#1565C0" stroke-width="2.5"/>
+          <rect x="14" y="38" width="32" height="18" rx="4" fill="#1565C0"/>
+          <text x="30" y="51" font-size="10" font-weight="700" fill="white" text-anchor="middle">0 km</text>
+          <line x1="230" y1="53" x2="230" y2="90" stroke="#1565C0" stroke-width="2.5"/>
+          <rect x="214" y="38" width="32" height="18" rx="4" fill="#1565C0"/>
+          <text x="230" y="51" font-size="10" font-weight="700" fill="white" text-anchor="middle">1 km</text>
+          <line x1="30" y1="106" x2="230" y2="106" stroke="#E65100" stroke-width="2"/>
+          <polygon points="230,102 240,106 230,110" fill="#E65100"/>
+          <text x="130" y="122" font-size="11" font-weight="700" fill="#E65100" text-anchor="middle">1 km = 1 000 m</text>
+          <text x="130" y="145" font-size="11" text-anchor="middle" fill="#00695C" font-weight="700">1 m = 100 cm · 1 cm = 10 mm</text>
+        </svg>`;
+        const q=mcq('1 km = _____ m ?',1000,[100,10000,500],'⚖️','1 km = 1 000 m');
+        q.svg=svg; return q;
+      }
+      if(variant===1){
+        const n=rnd(2,20);
+        const svg=`<svg width="240" height="140" viewBox="0 0 240 140" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="48" width="200" height="28" rx="4" fill="#FFF9C4" stroke="#F57F17" stroke-width="2"/>
+          ${Array.from({length:21},(_,i)=>`<line x1="${20+i*10}" y1="48" x2="${20+i*10}" y2="${i%10===0?36:i%5===0?42:45}" stroke="#F57F17" stroke-width="${i%10===0?2:1}"/>${i%10===0?`<text x="${20+i*10}" y="32" font-size="9" text-anchor="middle" fill="#E65100">${i/10}cm</text>`:''}`).join('')}
+          <line x1="20" y1="78" x2="${20+n*10}" y2="78" stroke="#1565C0" stroke-width="3"/>
+          <polygon points="20,74 12,78 20,82" fill="#1565C0"/>
+          <polygon points="${20+n*10},74 ${28+n*10},78 ${20+n*10},82" fill="#1565C0"/>
+          <text x="${20+n*5}" y="98" font-size="11" font-weight="700" fill="#1565C0" text-anchor="middle">${n} cm</text>
+          <text x="120" y="125" font-size="11" font-weight="700" fill="#F57F17" text-anchor="middle">${n} cm = ? mm (1cm = 10mm)</text>
+        </svg>`;
+        const q=fill(`${n} cm = _____ mm`,n*10,'⚖️','1 cm = 10 mm');
+        q.svg=svg; return q;
+      }
+      if(variant===2){
+        const n=rnd(1,5);
+        const svg=`<svg width="240" height="140" viewBox="0 0 240 140" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="48" width="200" height="28" rx="4" fill="#E8F5E9" stroke="#2E7D32" stroke-width="2"/>
+          ${Array.from({length:n+1},(_,i)=>`<line x1="${20+i*Math.floor(200/n)}" y1="48" x2="${20+i*Math.floor(200/n)}" y2="36" stroke="#2E7D32" stroke-width="2"/><text x="${20+i*Math.floor(200/n)}" y="32" font-size="10" text-anchor="middle" fill="#1B5E20">${i}m</text>`).join('')}
+          <line x1="20" y1="78" x2="220" y2="78" stroke="#1565C0" stroke-width="3"/>
+          <polygon points="20,74 12,78 20,82" fill="#1565C0"/>
+          <polygon points="220,74 228,78 220,82" fill="#1565C0"/>
+          <text x="120" y="98" font-size="11" font-weight="700" fill="#1565C0" text-anchor="middle">${n} m</text>
+          <text x="120" y="122" font-size="11" font-weight="700" fill="#2E7D32" text-anchor="middle">${n} m = ? cm (1m = 100cm)</text>
+        </svg>`;
+        const q=fill(`${n} m = _____ cm`,n*100,'⚖️','1 m = 100 cm');
+        q.svg=svg; return q;
+      }
+      const svg=`<svg width="240" height="145" viewBox="0 0 240 145" xmlns="http://www.w3.org/2000/svg">
+        <rect x="20" y="18" width="200" height="82" rx="10" fill="#E3F2FD" stroke="#1565C0" stroke-width="2"/>
+        <text x="120" y="48" font-size="13" font-weight="800" fill="#1565C0" text-anchor="middle">Bảng đổi đơn vị độ dài</text>
+        <text x="40" y="68" font-size="12" fill="#1C2B3A" font-weight="700">1 km = 1 000 m</text>
+        <text x="40" y="84" font-size="12" fill="#1C2B3A" font-weight="700">1 m  = 100 cm</text>
+        <text x="40" y="100" font-size="12" fill="#1C2B3A" font-weight="700">1 cm = 10 mm</text>
+        <text x="120" y="130" font-size="11" fill="#888" text-anchor="middle">1 m = _____ cm ?</text>
+      </svg>`;
+      const q=mcq('1 m = _____ cm ?',100,[10,1000,1000],'⚖️','1 m = 100 cm');
+      q.svg=svg; return q;
+    },
+
+    medium:()=>{
+      const variant=rnd(0,2);
+      if(variant===0){
+        const kg=rnd(2,10),g=rnd(100,900);
+        const svg=`<svg width="240" height="175" viewBox="0 0 240 175" xmlns="http://www.w3.org/2000/svg">
+          <line x1="120" y1="145" x2="120" y2="90" stroke="#78909C" stroke-width="5" stroke-linecap="round"/>
+          <rect x="90" y="140" width="60" height="10" rx="5" fill="#607D8B"/>
+          <line x1="50" y1="90" x2="190" y2="90" stroke="#455A64" stroke-width="4" stroke-linecap="round"/>
+          <line x1="60" y1="90" x2="60" y2="108" stroke="#455A64" stroke-width="2"/>
+          <ellipse cx="60" cy="112" rx="32" ry="10" fill="#E0F2F1" stroke="#00695C" stroke-width="2"/>
+          <rect x="40" y="95" width="38" height="18" rx="4" fill="#00695C"/>
+          <text x="59" y="108" font-size="10" font-weight="700" fill="white" text-anchor="middle">${kg} kg</text>
+          <line x1="180" y1="90" x2="180" y2="108" stroke="#455A64" stroke-width="2"/>
+          <ellipse cx="180" cy="112" rx="32" ry="10" fill="#FFF3E0" stroke="#E65100" stroke-width="2"/>
+          <rect x="160" y="95" width="38" height="18" rx="4" fill="#E65100"/>
+          <text x="179" y="108" font-size="9" font-weight="700" fill="white" text-anchor="middle">${g} g</text>
+          <text x="120" y="58" font-size="13" font-weight="700" fill="#1C2B3A" text-anchor="middle">${kg} kg ${g} g = ? g</text>
+          <text x="120" y="74" font-size="11" text-anchor="middle" fill="#666">1 kg = 1 000 g</text>
+        </svg>`;
+        const q=fill(`${kg} kg ${g} g = _____ g`,kg*1000+g,'⚖️','1 kg = 1 000 g');
+        q.svg=svg; return q;
+      }
+      if(variant===1){
+        // Đổi dm + cm → cm  (tránh trùng lít+ml)
+        const dm=rnd(2,9),cm2=rnd(1,9);
+        const svg=`<svg width="240" height="155" viewBox="0 0 240 155" xmlns="http://www.w3.org/2000/svg">
+          <!-- Ruler showing dm + cm -->
+          <rect x="10" y="50" width="220" height="32" rx="5" fill="#FFF9C4" stroke="#F57F17" stroke-width="2"/>
+          ${Array.from({length:22},(_,i)=>`<line x1="${10+i*10}" y1="50" x2="${10+i*10}" y2="${i%10===0?36:i%5===0?43:47}" stroke="#F57F17" stroke-width="${i%10===0?2:1}"/>${i%10===0?`<text x="${10+i*10}" y="32" font-size="9" text-anchor="middle" fill="#E65100">${i/10}dm</text>`:''}`).join('')}
+          <!-- Bracket for dm part -->
+          <line x1="10" y1="90" x2="${10+dm*10}" y2="90" stroke="#1565C0" stroke-width="2.5"/>
+          <polygon points="${10+dm*10},86 ${18+dm*10},90 ${10+dm*10},94" fill="#1565C0"/>
+          <text x="${5+dm*5}" y="106" font-size="10" font-weight="700" fill="#1565C0" text-anchor="middle">${dm} dm</text>
+          <!-- Bracket for cm2 part -->
+          <line x1="${10+dm*10}" y1="115" x2="${10+dm*10+cm2*10}" y2="115" stroke="#C62828" stroke-width="2.5"/>
+          <polygon points="${10+dm*10+cm2*10},111 ${18+dm*10+cm2*10},115 ${10+dm*10+cm2*10},119" fill="#C62828"/>
+          <text x="${10+dm*10+cm2*5}" y="132" font-size="10" font-weight="700" fill="#C62828" text-anchor="middle">${cm2} cm</text>
+          <text x="120" y="150" font-size="11" font-weight="700" fill="#888" text-anchor="middle">${dm} dm ${cm2} cm = ? cm (1dm=10cm)</text>
+        </svg>`;
+        const q=fill(`\${dm} dm \${cm2} cm = _____ cm`,dm*10+cm2,'⚖️','1 dm = 10 cm');
+        q.svg=svg; return q;
+      }
+      // Đồng hồ - giờ và phút
+      const h=rnd(1,4),m=rnd(10,50);
+      const svg=`<svg width="240" height="155" viewBox="0 0 240 155" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="70" cy="78" r="55" fill="#E3F2FD" stroke="#1565C0" stroke-width="2.5"/>
+        <circle cx="70" cy="78" r="4" fill="#1565C0"/>
+        ${Array.from({length:12},(_,i)=>{const a=(i*30-90)*Math.PI/180;return `<line x1="${Math.round(70+44*Math.cos(a))}" y1="${Math.round(78+44*Math.sin(a))}" x2="${Math.round(70+50*Math.cos(a))}" y2="${Math.round(78+50*Math.sin(a))}" stroke="#1565C0" stroke-width="2"/><text x="${Math.round(70+38*Math.cos(a))}" y="${Math.round(78+38*Math.sin(a))+4}" font-size="9" text-anchor="middle" fill="#0D47A1" font-weight="700">${i===0?12:i}</text>`;}).join('')}
+        ${(()=>{const a=((h%12)*30-90)*Math.PI/180;return `<line x1="70" y1="78" x2="${Math.round(70+28*Math.cos(a))}" y2="${Math.round(78+28*Math.sin(a))}" stroke="#1C2B3A" stroke-width="4" stroke-linecap="round"/>`;})()}
+        ${(()=>{const a=(m*6-90)*Math.PI/180;return `<line x1="70" y1="78" x2="${Math.round(70+42*Math.cos(a))}" y2="${Math.round(78+42*Math.sin(a))}" stroke="#C62828" stroke-width="2.5" stroke-linecap="round"/>`;})()}
+        <text x="168" y="62" font-size="13" font-weight="700" fill="#1C2B3A" text-anchor="middle">${h} giờ ${m} phút</text>
+        <text x="168" y="82" font-size="11" text-anchor="middle" fill="#666">= ? phút</text>
+        <text x="168" y="102" font-size="11" text-anchor="middle" fill="#888">1 giờ = 60 phút</text>
+        <text x="168" y="130" font-size="11" font-weight="700" fill="#E65100" text-anchor="middle">${h}×60 + ${m} = ?</text>
+      </svg>`;
+      const q=fill(`${h} giờ ${m} phút = _____ phút`,h*60+m,'⚖️',`1 giờ=60 phút → ${h}×60+${m}=${h*60+m}`);
+      q.svg=svg; return q;
+    },
+
+    hard:()=>{
+      const variant=rnd(0,2);
+      if(variant===0){
+        // Đổi tổng số gam → kg + g (ngược lại với medium)
+        const kg2=rnd(2,9),g2=rnd(100,900);
+        const total_g=kg2*1000+g2;
+        const svg=`<svg width="240" height="162" viewBox="0 0 240 162" xmlns="http://www.w3.org/2000/svg">
+          <!-- Bag of rice showing total grams -->
+          <ellipse cx="70" cy="100" rx="45" ry="50" fill="#FFF9C4" stroke="#F57F17" stroke-width="2.5"/>
+          <text x="70" y="92" font-size="11" font-weight="700" fill="#E65100" text-anchor="middle">${total_g}</text>
+          <text x="70" y="108" font-size="11" fill="#E65100" text-anchor="middle">gam</text>
+          <text x="70" y="158" font-size="10" fill="#888" text-anchor="middle">Túi gạo</text>
+          <text x="130" y="100" font-size="18" fill="#888">=</text>
+          <!-- Breakdown kg + g -->
+          <rect x="150" y="58" width="38" height="30" rx="6" fill="#E0F2F1" stroke="#00695C" stroke-width="2"/>
+          <text x="169" y="78" font-size="13" font-weight="800" fill="#00695C" text-anchor="middle">?kg</text>
+          <text x="192" y="78" font-size="14" fill="#888">+</text>
+          <rect x="198" y="58" width="38" height="30" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="2"/>
+          <text x="217" y="78" font-size="13" font-weight="800" fill="#E65100" text-anchor="middle">?g</text>
+          <text x="190" y="118" font-size="11" text-anchor="middle" fill="#888">1 kg = 1 000 g</text>
+          <text x="190" y="136" font-size="11" font-weight="700" fill="#00695C" text-anchor="middle">${total_g} g = ? kg ? g</text>
+          <text x="190" y="154" font-size="10" text-anchor="middle" fill="#888">Nhập số kg: ${total_g}÷1000=${kg2} dư ${g2}</text>
+        </svg>`;
+        const q=fill(`\${total_g} g = _____ kg (làm tròn xuống)`,kg2,'⚖️',`\${total_g} g = \${kg2} kg \${g2} g → số kg = \${kg2}`);
+        q.svg=svg; return q;
+      }
+      if(variant===1){
+        const km=rnd(1,9),m2=rnd(100,900);
+        const totalW=230,pad=15,seg=Math.floor((totalW-2*pad)/km);
+        const svg=`<svg width="260" height="158" viewBox="0 0 260 158" xmlns="http://www.w3.org/2000/svg">
+          <rect x="${pad}" y="58" width="${totalW-2*pad}" height="18" rx="4" fill="#CFD8DC" stroke="#90A4AE" stroke-width="1.5"/>
+          <line x1="${pad}" y1="67" x2="${totalW-pad}" y2="67" stroke="white" stroke-width="2" stroke-dasharray="10,7"/>
+          ${Array.from({length:km+1},(_,i)=>`<line x1="${pad+i*seg}" y1="45" x2="${pad+i*seg}" y2="80" stroke="#1565C0" stroke-width="2"/><rect x="${pad+i*seg-16}" y="30" width="32" height="16" rx="4" fill="#1565C0"/><text x="${pad+i*seg}" y="42" font-size="9" font-weight="700" text-anchor="middle" fill="white">${i} km</text>`).join('')}
+          <line x1="${pad+km*seg-Math.round(m2*seg/1000)}" y1="95" x2="${pad+km*seg}" y2="95" stroke="#C62828" stroke-width="3"/>
+          <polygon points="${pad+km*seg},91 ${pad+km*seg+6},95 ${pad+km*seg},99" fill="#C62828"/>
+          <text x="${pad+km*seg-Math.round(m2*seg/2000)}" y="110" font-size="10" text-anchor="middle" fill="#C62828">${m2} m</text>
+          <text x="130" y="135" font-size="12" font-weight="700" fill="#1565C0" text-anchor="middle">${km} km ${m2} m = ? m</text>
+          <text x="130" y="152" font-size="10" text-anchor="middle" fill="#888">1 km = 1 000 m</text>
+        </svg>`;
+        const q=fill(`${km} km ${m2} m = _____ m`,km*1000+m2,'⚖️','1 km = 1 000 m');
+        q.svg=svg; return q;
+      }
+      // Bài toán: một công việc bắt đầu lúc X giờ, kéo dài Y phút, kết thúc lúc mấy giờ?
+      const startH=rnd(7,16),startM=pick([0,15,30,45]);
+      const duration=pick([30,45,60,90,120]);
+      const totalMin=startH*60+startM+duration;
+      const endH=Math.floor(totalMin/60),endM=totalMin%60;
+      const svg=`<svg width="260" height="162" viewBox="0 0 260 162" xmlns="http://www.w3.org/2000/svg">
+        <!-- Clock start -->
+        <circle cx="58" cy="78" r="46" fill="#E3F2FD" stroke="#1565C0" stroke-width="2.5"/>
+        <circle cx="58" cy="78" r="4" fill="#1565C0"/>
+        ${Array.from({length:12},(_,i)=>{const a=(i*30-90)*Math.PI/180;return `<text x="${Math.round(58+32*Math.cos(a))}" y="${Math.round(78+32*Math.sin(a))+4}" font-size="8" text-anchor="middle" fill="#0D47A1" font-weight="700">${i===0?12:i}</text>`;}).join('')}
+        ${(()=>{const a=((startH%12)*30+startM*0.5-90)*Math.PI/180;return `<line x1="58" y1="78" x2="${Math.round(58+22*Math.cos(a))}" y2="${Math.round(78+22*Math.sin(a))}" stroke="#1C2B3A" stroke-width="4" stroke-linecap="round"/>`;})()}
+        ${(()=>{const a=(startM*6-90)*Math.PI/180;return `<line x1="58" y1="78" x2="${Math.round(58+36*Math.cos(a))}" y2="${Math.round(78+36*Math.sin(a))}" stroke="#C62828" stroke-width="2.5" stroke-linecap="round"/>`;})()}
+        <text x="58" y="136" font-size="10" font-weight="700" fill="#1565C0" text-anchor="middle">Bắt đầu: ${startH}:${String(startM).padStart(2,'0')}</text>
+        <!-- Plus duration -->
+        <text x="115" y="78" font-size="24" fill="#2E7D32" font-weight="700" text-anchor="middle">+${duration}'</text>
+        <text x="115" y="100" font-size="10" fill="#888" text-anchor="middle">${duration} phút</text>
+        <!-- Clock end (unknown) -->
+        <circle cx="195" cy="78" r="46" fill="#E8F5E9" stroke="#2E7D32" stroke-width="2.5"/>
+        <text x="195" y="82" font-size="14" font-weight="800" fill="#1B5E20" text-anchor="middle">?</text>
+        <text x="195" y="136" font-size="10" font-weight="700" fill="#2E7D32" text-anchor="middle">Kết thúc: ? giờ ? phút</text>
+        <text x="130" y="155" font-size="10" fill="#888" text-anchor="middle">${startH}:${String(startM).padStart(2,'0')} + ${duration} phút = ?</text>
+      </svg>`;
+      const q=fill(`Bắt đầu lúc \${startH} giờ \${startM} phút, làm việc \${duration} phút.\nKết thúc lúc _____ giờ \${endM} phút.`,endH,'⚖️',`\${startH*60+startM}+\${duration}=\${totalMin} → \${endH} giờ \${endM} phút`);
+      q.svg=svg; return q;
+    }
+  },
+
+  // --- CHƯƠNG 7 ---
+  timeHMS:{
+    easy:()=>{
+      const h=rnd(7,12),m=pick([0,15,30,45]);
+      const mStr=m===0?'đúng':`${m} phút`;
+      return mcq(`Đồng hồ chỉ ${h} giờ ${mStr}. Đó là mấy giờ?`,
+        `${h}:${String(m).padStart(2,'0')}`,
+        [`${h+1}:${String(m).padStart(2,'0')}`,`${h}:${String((m+15)%60).padStart(2,'0')}`,`${h-1}:${String(m).padStart(2,'0')}`],
+        '⏰', 'Đọc giờ trên đồng hồ');
+    },
+    medium:()=>{
+      return mcq(`1 giờ = _____ phút`, 60, [30,100,50], '⏰', '1 giờ = 60 phút');
+    },
+    hard:()=>{
+      // Bài toán: biết giờ bắt đầu + thời gian, tính giờ kết thúc
+      const startH=rnd(7,15), startM=pick([0,15,30,45]);
+      const dur=pick([45,60,90,120,75]);
+      const totalMin=startH*60+startM+dur;
+      const endH=Math.floor(totalMin/60), endM=totalMin%60;
+      const svg=`<svg width="240" height="105" viewBox="0 0 240 105" xmlns="http://www.w3.org/2000/svg">
+        <rect x="8" y="8" width="224" height="90" rx="12" fill="#F1F8E9" stroke="#558B2F" stroke-width="1.5"/>
+        <text x="120" y="28" font-size="11" fill="#33691E" text-anchor="middle" font-weight="700">⏱ Bài toán thời gian</text>
+        <text x="120" y="48" font-size="12" fill="#1C2B3A" text-anchor="middle">Bắt đầu: <tspan font-weight="800">${startH}:${String(startM).padStart(2,'0')}</tspan></text>
+        <text x="120" y="66" font-size="12" fill="#1C2B3A" text-anchor="middle">Kéo dài: <tspan font-weight="800">${dur} phút</tspan></text>
+        <text x="120" y="86" font-size="11" fill="#558B2F" text-anchor="middle">Kết thúc lúc _____ giờ ${endM} phút?</text>
+      </svg>`;
+      const q=fill(`Bắt đầu lúc \${startH} giờ \${startM} phút, kéo dài \${dur} phút.\\nKết thúc lúc _____ giờ \${endM} phút.`,endH,'⏰',`\${startH}×60+\${startM}+\${dur}=\${totalMin} → \${endH} giờ \${endM} phút`);
+      q.svg=svg; return q;
+    }
+  },
+
+  calendar3:{
+    easy:()=>{
+      return mcq(`Một năm bình thường có _____ ngày`, 365, [360,366,364], '📅', 'Năm thường = 365 ngày');
+    },
+    medium:()=>{
+      const months=[31,28,31,30,31,30,31,31,30,31,30,31];
+      const m=rnd(0,11);
+      const mname=['1','2','3','4','5','6','7','8','9','10','11','12'][m];
+      return fill(`Tháng ${mname} có _____ ngày`, months[m], '📅', 'Nhớ số ngày các tháng trong năm');
+    },
+    hard:()=>{
+      const start=rnd(1,15),end=rnd(start+5,28);
+      return fill(`Từ ngày ${start}/${rnd(1,12)} đến ngày ${end} cùng tháng là _____ ngày`, end-start+1, '📅', 'Đếm ngày bao gồm cả ngày đầu và cuối');
+    }
+  },
+
+  timeDiff:{
+    easy:()=>{
+      const s=rnd(7,10),e=s+rnd(1,4);
+      return fill(`Lớp học bắt đầu lúc ${s} giờ, kết thúc lúc ${e} giờ.\nThời gian học = _____ giờ`, e-s, '🕐', 'Khoảng thời gian = giờ cuối − giờ đầu');
+    },
+    medium:()=>{
+      const sh=rnd(7,10),sm=rnd(0,3)*15,dur=rnd(30,90);
+      const endMin=sh*60+sm+dur;
+      const eh=Math.floor(endMin/60),em=endMin%60;
+      return fill(`Xuất phát ${sh}:${String(sm).padStart(2,'0')}, đi ${dur} phút.\nĐến nơi lúc _____:_____ — Điền giờ (hh):`, eh, '🕐', 'Cộng thêm số phút vào thời điểm xuất phát');
+    },
+    hard:()=>{
+      const s=rnd(6,10),e=s+rnd(2,5);
+      const breakMin=rnd(10,30);
+      const actual=(e-s)*60-breakMin;
+      return fill(`Từ ${s} giờ đến ${e} giờ có nghỉ giữa ${breakMin} phút.\nThời gian làm việc thực tế = _____ phút`, actual, '🕐', 'Trừ đi thời gian nghỉ');
+    }
+  },
+
+  // --- CHƯƠNG 8 ---
+  moneyDenom:{
+    easy:()=>{
+      const denoms=[1000,2000,5000,10000,20000,50000,100000,200000,500000];
+      const d=pick(denoms),n=rnd(2,5);
+      return fill(`${n} tờ ${d.toLocaleString('vi-VN')}đ = _____ đồng`, n*d, '💵', 'Nhân mệnh giá với số tờ');
+    },
+    medium:()=>{
+      const d1=pick([1000,2000,5000]),n1=rnd(2,5),d2=pick([10000,20000]),n2=rnd(1,3);
+      return fill(`${n1} tờ ${d1.toLocaleString('vi-VN')}đ và ${n2} tờ ${d2.toLocaleString('vi-VN')}đ.\nTổng = _____ đồng`, n1*d1+n2*d2, '💵', 'Cộng tiền nhiều mệnh giá');
+    },
+    hard:()=>{
+      const total=pick([50000,100000,200000]);
+      const d=pick([10000,20000,50000]);
+      return fill(`Có ${total.toLocaleString('vi-VN')}đ toàn tờ ${d.toLocaleString('vi-VN')}đ.\nCó _____ tờ.`, total/d, '💵', 'Chia tổng tiền cho mệnh giá');
+    }
+  },
+
+  moneyChange:{
+    easy:()=>{
+      const price=rnd(3,15)*1000,paid=20000;
+      return fill(`Mua đồ ${price.toLocaleString('vi-VN')}đ, đưa ${paid.toLocaleString('vi-VN')}đ.\nTiền thối = _____ đồng`, paid-price, '🔄', 'Thối tiền = tiền đưa − giá tiền');
+    },
+    medium:()=>{
+      const price=rnd(30,90)*1000,paid=100000;
+      return fill(`Mua hàng ${price.toLocaleString('vi-VN')}đ, đưa ${paid.toLocaleString('vi-VN')}đ.\nThối lại _____ đồng`, paid-price, '🔄', 'Tính tiền thối từ 100 000đ');
+    },
+    hard:()=>{
+      const budget=pick([50000,100000,200000]);
+      const spent=rnd(Math.floor(budget*0.3/1000),Math.floor(budget*0.8/1000))*1000;
+      return fill(`Có ${budget.toLocaleString('vi-VN')}đ. Chi ${spent.toLocaleString('vi-VN')}đ.\nCòn lại _____ đồng`, budget-spent, '🔄', 'Tiền còn lại sau khi chi tiêu');
+    }
+  },
+
+  moneyShopping:{
+    easy:()=>{
+      const p1=rnd(5,20)*1000,p2=rnd(3,10)*1000;
+      return fill(`Mua sách ${p1.toLocaleString('vi-VN')}đ và bút ${p2.toLocaleString('vi-VN')}đ.\nTổng tiền = _____ đồng`, p1+p2, '🛒', 'Cộng giá tiền các vật phẩm');
+    },
+    medium:()=>{
+      const have=pick([50000,100000]),p1=rnd(10,30)*1000,p2=rnd(5,15)*1000;
+      const total=p1+p2;
+      return fill(`Có ${have.toLocaleString('vi-VN')}đ, mua hai món ${p1.toLocaleString('vi-VN')}đ và ${p2.toLocaleString('vi-VN')}đ.\nCòn lại _____ đồng`, have-total, '🛒', 'Tổng chi tiêu rồi tính phần còn lại');
+    },
+    hard:()=>{
+      const unit=rnd(3,8)*1000,n=rnd(4,10);
+      return fill(`Một quyển sách giá ${unit.toLocaleString('vi-VN')}đ.\nMua ${n} quyển hết _____ đồng`, unit*n, '🛒', 'Nhân đơn giá với số lượng');
+    }
+  },
+
+  // --- CHƯƠNG 9 ---
+  statTable:{
+    easy:()=>{
+      const a=rnd(10,30),b=rnd(15,35),c=rnd(12,28);
+      return fill(`Bảng số liệu: Lớp 3A: ${a}, Lớp 3B: ${b}, Lớp 3C: ${c} học sinh.\nTổng số học sinh = _____`, a+b+c, '📊', 'Cộng các giá trị trong bảng');
+    },
+    medium:()=>{
+      const a=rnd(20,40),b=rnd(15,35),c=rnd(10,30);
+      const max=Math.max(a,b,c);
+      const which=['3A','3B','3C'][[a,b,c].indexOf(max)];
+      return mcq(`Lớp 3A:${a}, 3B:${b}, 3C:${c}. Lớp nào đông nhất?`, `Lớp ${which}`,
+        ['Lớp 3A','Lớp 3B','Lớp 3C'].filter(s=>s!==`Lớp ${which}`), '📊', 'Tìm giá trị lớn nhất trong bảng');
+    },
+    hard:()=>{
+      const rows=[rnd(10,30),rnd(15,35),rnd(12,28),rnd(8,25)];
+      const avg=Math.round(rows.reduce((a,b)=>a+b,0)/rows.length);
+      return fill(`Số liệu 4 tổ: ${rows.join(', ')}.\nTrung bình mỗi tổ = _____ (làm tròn đến hàng đơn vị)`, avg, '📊', 'Trung bình = tổng ÷ số phần tử');
+    }
+  },
+
+  barChart:{
+    easy:()=>{
+      const a=rnd(3,10)*5,b=rnd(2,8)*5;
+      return fill(`Biểu đồ: Cột A cao ${a} đơn vị, cột B cao ${b} đơn vị.\nA − B = _____ đơn vị`, Math.abs(a-b), '📈', 'Đọc và so sánh hai cột biểu đồ');
+    },
+    medium:()=>{
+      const mo=['T1','T2','T3','T4'];
+      const vals=mo.map(()=>rnd(20,80));
+      return fill(`4 tháng có số liệu: ${mo.map((m,i)=>m+':'+vals[i]).join(', ')}.\nTổng = _____`, vals.reduce((a,b)=>a+b,0), '📈', 'Đọc đủ 4 cột biểu đồ rồi cộng tổng');
+    },
+    hard:()=>{
+      const total=rnd(6,12)*50,cols=rnd(3,5);
+      const avg=total/cols;
+      return fill(`Biểu đồ có ${cols} cột, tổng tất cả = ${total}.\nTrung bình mỗi cột = _____`, avg, '📈', 'Trung bình = tổng ÷ số cột');
+    }
+  },
+
+  probability:{
+    // ─────────────────────────────────────────────────────────────────
+    // DỄ: 6 tình huống khác nhau – nhận biết 3 mức khả năng
+    // ─────────────────────────────────────────────────────────────────
+    easy:()=>{
+      const variant = rnd(0,5);
+
+      // ── V0: Đồng xu ngửa/sấp ─────────────────────────────────────
+      if(variant===0){
+        const svg=`<svg width="260" height="160" viewBox="0 0 260 160" xmlns="http://www.w3.org/2000/svg">
+          <text x="130" y="16" font-size="11" font-weight="700" fill="#1C2B3A" text-anchor="middle">Tung đồng xu: 2 khả năng bằng nhau</text>
+          <circle cx="78" cy="88" r="52" fill="#FFF9C4" stroke="#F9A825" stroke-width="3"/>
+          <circle cx="78" cy="88" r="42" fill="none" stroke="#F9A825" stroke-width="1.2" stroke-dasharray="6,4"/>
+          <text x="78" y="80" font-size="24" text-anchor="middle">🌟</text>
+          <text x="78" y="104" font-size="11" font-weight="700" fill="#E65100" text-anchor="middle">Mặt NGỬA</text>
+          <text x="140" y="92" font-size="20" fill="#AAA" text-anchor="middle">⇄</text>
+          <circle cx="200" cy="88" r="52" fill="#ECEFF1" stroke="#90A4AE" stroke-width="3"/>
+          <circle cx="200" cy="88" r="42" fill="none" stroke="#90A4AE" stroke-width="1.2" stroke-dasharray="6,4"/>
+          <text x="200" y="80" font-size="24" text-anchor="middle">🔵</text>
+          <text x="200" y="104" font-size="11" font-weight="700" fill="#607D8B" text-anchor="middle">Mặt SẤP</text>
+          <rect x="45" y="148" width="170" height="14" rx="7" fill="#E3F2FD"/>
+          <rect x="45" y="148" width="85" height="14" rx="7" fill="#FBC02D"/>
+          <text x="130" y="159" font-size="9" font-weight="700" fill="#1C2B3A" text-anchor="middle">50% – 50%</text>
+        </svg>`;
+        const q=mcq('Tung đồng xu, khả năng ra mặt ngửa là?','Có thể xảy ra',['Chắc chắn xảy ra','Không thể xảy ra','Không thể biết'],'🎲','Đồng xu 2 mặt → mỗi mặt đều có thể ra');
+        q.svg=svg; return q;
+      }
+
+      // ── V1: Hộp bi toàn xanh → không lấy được đỏ ────────────────
+      if(variant===1){
+        const n=rnd(4,8);
+        const svg=`<svg width="240" height="158" viewBox="0 0 240 158" xmlns="http://www.w3.org/2000/svg">
+          <rect x="35" y="52" width="170" height="92" rx="12" fill="#E3F2FD" stroke="#1565C0" stroke-width="2.5"/>
+          <rect x="35" y="52" width="170" height="22" rx="12" fill="#1565C0"/>
+          <text x="120" y="68" font-size="11" font-weight="700" fill="white" text-anchor="middle">Hộp bi – chỉ có BI XANH</text>
+          ${Array.from({length:Math.min(n,7)},(_,i)=>`<circle cx="${52+i*20}" cy="${104}" r="13" fill="#2196F3" stroke="#0D47A1" stroke-width="1.5"/><text x="${52+i*20}" y="108" font-size="9" text-anchor="middle" fill="white">x</text>`).join('')}
+          <text x="120" y="138" font-size="11" font-weight="700" fill="#1565C0" text-anchor="middle">${n} bi xanh · 0 bi đỏ · 0 bi vàng</text>
+          <circle cx="208" cy="32" r="16" fill="#EF5350" opacity="0.25" stroke="#EF5350" stroke-width="2"/>
+          <text x="208" y="37" font-size="15" text-anchor="middle">❌</text>
+          <text x="208" y="18" font-size="9" fill="#C62828" text-anchor="middle" font-weight="700">Bi đỏ?</text>
+        </svg>`;
+        const q=mcq(`Hộp có ${n} bi xanh, không có bi đỏ.\nLấy ngẫu nhiên được bi đỏ là?`,'Không thể xảy ra',['Có thể xảy ra','Chắc chắn xảy ra','50/50'],'🎲','Không có bi đỏ → tuyệt đối không thể lấy được');
+        q.svg=svg; return q;
+      }
+
+      // ── V2: Túi kẹo một loại → chắc chắn ─────────────────────────
+      if(variant===2){
+        const flavour=pick(['chanh 🍋','dâu 🍓','bạc hà 🌿','cam 🍊']);
+        const n=rnd(4,8);
+        const col=flavour.includes('chanh')?'#FFEE58':flavour.includes('dâu')?'#EF5350':flavour.includes('bạc hà')?'#66BB6A':'#FF9800';
+        const svg=`<svg width="240" height="155" viewBox="0 0 240 155" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="120" cy="95" rx="82" ry="52" fill="#FFF9C4" stroke="#F9A825" stroke-width="2.5"/>
+          <ellipse cx="120" cy="43" rx="22" ry="9" fill="#FFF9C4" stroke="#F9A825" stroke-width="2"/>
+          <line x1="98" y1="43" x2="104" y2="62" stroke="#F9A825" stroke-width="2"/>
+          <line x1="142" y1="43" x2="136" y2="62" stroke="#F9A825" stroke-width="2"/>
+          ${Array.from({length:Math.min(n,6)},(_,i)=>`<ellipse cx="${70+i*18}" cy="${95+Math.sin(i)*8}" rx="11" ry="8" fill="${col}" stroke="#F9A825" stroke-width="1.5"/>`).join('')}
+          <text x="120" y="136" font-size="11" font-weight="700" fill="#E65100" text-anchor="middle">Túi chỉ có kẹo ${flavour}</text>
+          <text x="120" y="150" font-size="9" fill="#888" text-anchor="middle">Lấy 1 kẹo → loại gì?</text>
+        </svg>`;
+        const name=flavour.split(' ')[0];
+        const q=mcq(`Túi có ${n} kẹo ${flavour}, không có loại khác.\nLấy ngẫu nhiên 1 kẹo chắc chắn là?`,`Kẹo ${name}`,['Kẹo sôcôla','Kẹo dừa','Không xác định được'],'🎲',`Chỉ có kẹo ${name} → chắc chắn lấy được kẹo ${name}`);
+        q.svg=svg; return q;
+      }
+
+      // ── V3: Thùng bi → lấy bi XANH khi chỉ có xanh ─────────────
+      if(variant===3){
+        const n=rnd(5,10);
+        const svg=`<svg width="240" height="155" viewBox="0 0 240 155" xmlns="http://www.w3.org/2000/svg">
+          <text x="120" y="14" font-size="11" font-weight="700" fill="#1C2B3A" text-anchor="middle">Thùng gồm ${n} bi – tất cả là bi XANH</text>
+          ${Array.from({length:Math.min(n,10)},(_,i)=>{
+            const row=Math.floor(i/5), col=i%5;
+            return `<circle cx="${40+col*35}" cy="${40+row*35}" r="14" fill="#42A5F5" stroke="#1565C0" stroke-width="2"/>
+            <circle cx="${35+col*35}" cy="${35+row*35}" r="4" fill="rgba(255,255,255,0.5)"/>`;
+          }).join('')}
+          <rect x="20" y="115" width="200" height="32" rx="10" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1.5"/>
+          <text x="120" y="133" font-size="12" font-weight="700" fill="#1B5E20" text-anchor="middle">Lấy ngẫu nhiên → chắc chắn ra bi XANH</text>
+        </svg>`;
+        const q=mcq(`Thùng có ${n} bi, tất cả đều là bi xanh.\nLấy ngẫu nhiên 1 bi, ra bi xanh là?`,'Chắc chắn xảy ra',['Có thể xảy ra','Không thể xảy ra','Khó xảy ra'],'🎲',`100% bi đều xanh → chắc chắn lấy được bi xanh`);
+        q.svg=svg; return q;
+      }
+
+      // ── V4: Thẻ số 1–5, rút số > 10 ─────────────────────────────
+      if(variant===4){
+        const maxCard=pick([5,6,8]);
+        const target=maxCard+rnd(2,5);
+        const svg=`<svg width="265" height="152" viewBox="0 0 265 152" xmlns="http://www.w3.org/2000/svg">
+          <text x="132" y="16" font-size="11" font-weight="700" fill="#1C2B3A" text-anchor="middle">${maxCard} thẻ số từ 1 đến ${maxCard}</text>
+          ${Array.from({length:maxCard},(_,i)=>`
+            <rect x="${18+i*38}" y="28" width="32" height="48" rx="7" fill="#E8F5E9" stroke="#2E7D32" stroke-width="2"/>
+            <text x="${34+i*38}" y="58" font-size="20" font-weight="800" fill="#1B5E20" text-anchor="middle">${i+1}</text>
+          `).join('')}
+          <rect x="55" y="90" width="155" height="36" rx="10" fill="#FFEBEE" stroke="#C62828" stroke-width="2" stroke-dasharray="6,3"/>
+          <text x="132" y="108" font-size="12" font-weight="700" fill="#B71C1C" text-anchor="middle">Thẻ số ${target} = ???</text>
+          <text x="132" y="124" font-size="10" fill="#888" text-anchor="middle">Không có thẻ nào lớn hơn ${maxCard}</text>
+          <text x="132" y="143" font-size="10" fill="#C62828" text-anchor="middle">→ Không thể xảy ra!</text>
+        </svg>`;
+        const q=mcq(`Có ${maxCard} thẻ số từ 1→${maxCard}. Rút ngẫu nhiên được thẻ số ${target} là?`,'Không thể xảy ra',['Có thể xảy ra','Chắc chắn xảy ra','Hiếm gặp'],'🎲',`Không có thẻ số ${target} → không thể rút được`);
+        q.svg=svg; return q;
+      }
+
+      // ── V5: Trời nắng hay mưa – có thể xảy ra ───────────────────
+      const weather=pick([
+        {q:'Ngày mai trời sẽ có MƯA',a:'Có thể xảy ra',wrong:['Chắc chắn xảy ra','Không thể xảy ra','Rất chắc'],hint:'Mưa có thể xảy ra bất kỳ ngày nào – không chắc chắn nhưng cũng không thể nói là không thể'},
+        {q:'Tháng 7 ở Hà Nội sẽ có TUYẾT RƠI',a:'Không thể xảy ra',wrong:['Có thể xảy ra','Chắc chắn xảy ra','Khó xảy ra'],hint:'Hà Nội nhiệt đới nên tháng 7 tuyết không thể rơi'},
+        {q:'Mặt trời mọc ở hướng ĐÔNG vào ngày mai',a:'Chắc chắn xảy ra',wrong:['Có thể xảy ra','Không thể xảy ra','Tuỳ ngày'],hint:'Mặt trời luôn mọc ở hướng Đông – đây là quy luật tự nhiên'},
+      ]);
+      const icons={'Có thể xảy ra':'🌤️','Chắc chắn xảy ra':'✅','Không thể xảy ra':'❌'};
+      const svg=`<svg width="260" height="145" viewBox="0 0 260 145" xmlns="http://www.w3.org/2000/svg">
+        <rect x="15" y="22" width="230" height="86" rx="14" fill="#E3F2FD" stroke="#1565C0" stroke-width="2"/>
+        <text x="130" y="14" font-size="10" fill="#888" text-anchor="middle" font-weight="700">Khả năng xảy ra sự kiện</text>
+        <text x="130" y="50" font-size="13" font-weight="800" fill="#1C2B3A" text-anchor="middle">"${weather.q}"</text>
+        <text x="130" y="75" font-size="22" text-anchor="middle">${icons[weather.a]}</text>
+        <text x="130" y="98" font-size="12" font-weight="700" fill="#1565C0" text-anchor="middle">${weather.a}</text>
+        <text x="130" y="132" font-size="10" fill="#888" text-anchor="middle">Phân loại: Chắc chắn / Có thể / Không thể</text>
+      </svg>`;
+      const q=mcq(`Sự kiện: "${weather.q}"\nKhả năng xảy ra là?`,weather.a,weather.wrong,'🎲',weather.hint);
+      q.svg=svg; return q;
+    },
+
+    // ─────────────────────────────────────────────────────────────────
+    // TRUNG BÌNH: 6 variant – tính xác suất, so sánh, biểu diễn
+    // ─────────────────────────────────────────────────────────────────
+    medium:()=>{
+      const variant = rnd(0,5);
+
+      // ── V0: Xúc xắc – mặt chẵn hoặc lẻ ─────────────────────────
+      if(variant===0){
+        const type=pick(['chẵn','lẻ','lớn hơn 4','nhỏ hơn 3']);
+        const faces=[1,2,3,4,5,6];
+        const okFaces=type==='chẵn'?[2,4,6]:type==='lẻ'?[1,3,5]:type==='lớn hơn 4'?[5,6]:[1,2];
+        const probNum=okFaces.length, probDen=6;
+        const barW=Math.round(200*probNum/probDen);
+        const dotPos=[[108,48],[128,48],[148,48],[108,68],[128,68],[148,68]];
+        const svg=`<svg width="260" height="180" viewBox="0 0 260 180" xmlns="http://www.w3.org/2000/svg">
+          <text x="130" y="14" font-size="11" font-weight="700" fill="#1C2B3A" text-anchor="middle">Xúc xắc 6 mặt</text>
+          <rect x="88" y="22" width="84" height="84" rx="14" fill="white" stroke="#37474F" stroke-width="3"/>
+          ${dotPos.map(([cx,cy],i)=>`<circle cx="${cx}" cy="${cy}" r="7" fill="${okFaces.includes(i+1)?'#1565C0':'#CFD8DC'}"/>
+          <text x="${cx+22}" y="${cy+4}" font-size="9" fill="${okFaces.includes(i+1)?'#0D47A1':'#90A4AE'}" font-weight="700">mặt ${i+1} ${okFaces.includes(i+1)?'✓':''}</text>`).join('')}
+          <text x="130" y="122" font-size="11" font-weight="700" fill="#1565C0" text-anchor="middle">Mặt ${type}: {${okFaces.join(',')}} → ${probNum}/${probDen}</text>
+          <rect x="30" y="134" width="200" height="16" rx="8" fill="#ECEFF1"/>
+          <rect x="30" y="134" width="${barW}" height="16" rx="8" fill="#1565C0"/>
+          <text x="${30+barW/2}" y="146" font-size="10" font-weight="700" fill="white" text-anchor="middle">${probNum}/6</text>
+          <text x="130" y="166" font-size="10" fill="#888" text-anchor="middle">Xác suất = số mặt thỏa / tổng 6 mặt</text>
+        </svg>`;
+        const wrong=faces.filter(f=>!okFaces.includes(f)).slice(0,2).map(f=>`${f}/6`);
+        wrong.push(`${probNum+1}/6`);
+        const q=mcq(`Gieo xúc xắc. Xác suất ra mặt ${type} là?`,`${probNum}/6`,wrong,'🎲',`Mặt ${type}: {${okFaces.join(',')}} → ${probNum} trong 6`);
+        q.svg=svg; return q;
+      }
+
+      // ── V1: So sánh xác suất 2 màu bi ────────────────────────────
+      if(variant===1){
+        const blue=rnd(4,8), red=rnd(1,blue-2);
+        const total=blue+red;
+        const bW=Math.round(220*blue/total);
+        const svg=`<svg width="260" height="175" viewBox="0 0 260 175" xmlns="http://www.w3.org/2000/svg">
+          <text x="130" y="14" font-size="11" font-weight="700" fill="#1C2B3A" text-anchor="middle">Hộp bi: ${blue} xanh + ${red} đỏ = ${total} bi</text>
+          <rect x="25" y="24" width="210" height="72" rx="12" fill="#F5F5F5" stroke="#90A4AE" stroke-width="2"/>
+          ${Array.from({length:Math.min(blue,8)},(_,i)=>`<circle cx="${42+i*22}" cy="${60}" r="13" fill="#42A5F5" stroke="#1565C0" stroke-width="1.5"/>
+          <circle cx="${38+i*22}" cy="${56}" r="4" fill="rgba(255,255,255,0.5)"/>`).join('')}
+          ${Array.from({length:Math.min(red,4)},(_,i)=>`<circle cx="${42+Math.min(blue,8)*22+i*22}" cy="${60}" r="13" fill="#EF5350" stroke="#B71C1C" stroke-width="1.5"/>
+          <circle cx="${38+Math.min(blue,8)*22+i*22}" cy="${56}" r="4" fill="rgba(255,255,255,0.5)"/>`).join('')}
+          <rect x="20" y="108" width="220" height="18" rx="9" fill="#FFCDD2"/>
+          <rect x="20" y="108" width="${bW}" height="18" rx="9" fill="#42A5F5"/>
+          <text x="${20+bW/2}" y="121" font-size="10" font-weight="700" fill="white" text-anchor="middle">P(xanh)=${blue}/${total}</text>
+          <text x="${20+bW+(220-bW)/2}" y="121" font-size="10" font-weight="700" fill="#B71C1C" text-anchor="middle">P(đỏ)=${red}/${total}</text>
+          <text x="130" y="148" font-size="11" fill="#1C2B3A" text-anchor="middle">P(xanh) ${blue}/${total} > P(đỏ) ${red}/${total}</text>
+          <text x="130" y="165" font-size="10" fill="#888" text-anchor="middle">→ Khả năng lấy bi xanh cao hơn</text>
+        </svg>`;
+        const q=mcq(`Hộp có ${blue} bi xanh và ${red} bi đỏ.\nLấy ngẫu nhiên 1 bi – màu nào có P cao hơn?`,`Xanh (${blue}/${total})`,['Bằng nhau',`Đỏ (${red}/${total})`,`Không tính được`],'🎲',`P(xanh)=${blue}/${total} > P(đỏ)=${red}/${total}`);
+        q.svg=svg; return q;
+      }
+
+      // ── V2: Vòng quay nhiều màu ───────────────────────────────────
+      if(variant===2){
+        const totalSec=pick([4,6,8]);
+        const greenSec=rnd(1,totalSec-1);
+        const redSec=rnd(1,totalSec-greenSec);
+        const yellowSec=totalSec-greenSec-redSec;
+        const targetColor=pick(['xanh','đỏ','vàng']);
+        const targetSec=targetColor==='xanh'?greenSec:targetColor==='đỏ'?redSec:yellowSec;
+        const colorFill=targetColor==='xanh'?'#4CAF50':targetColor==='đỏ'?'#EF5350':'#FDD835';
+        const r=64,cx=80,cy=84;
+        const toRad=a=>a*Math.PI/180;
+        // Draw sectors
+        const sectors=[
+          {n:greenSec,fill:'#4CAF50'},
+          {n:redSec,fill:'#EF5350'},
+          {n:yellowSec,fill:'#FDD835'}
+        ].filter(s=>s.n>0);
+        let cumAngle=-90;
+        const sectorPaths=sectors.map(s=>{
+          const sweep=360*s.n/totalSec;
+          const x1=cx+r*Math.cos(toRad(cumAngle));
+          const y1=cy+r*Math.sin(toRad(cumAngle));
+          const x2=cx+r*Math.cos(toRad(cumAngle+sweep));
+          const y2=cy+r*Math.sin(toRad(cumAngle+sweep));
+          const la=sweep>180?1:0;
+          const path=`<path d="M${cx},${cy} L${Math.round(x1)},${Math.round(y1)} A${r},${r} 0 ${la},1 ${Math.round(x2)},${Math.round(y2)} Z" fill="${s.fill}"/>`;
+          cumAngle+=sweep;
+          return path;
+        }).join('');
+        const divLines=Array.from({length:totalSec},(_,i)=>{
+          const a=toRad(-90+i*360/totalSec);
+          return `<line x1="${cx}" y1="${cy}" x2="${Math.round(cx+r*Math.cos(a))}" y2="${Math.round(cy+r*Math.sin(a))}" stroke="white" stroke-width="1.5"/>`;
+        }).join('');
+        const svg=`<svg width="260" height="178" viewBox="0 0 260 178" xmlns="http://www.w3.org/2000/svg">
+          <text x="130" y="14" font-size="11" font-weight="700" fill="#1C2B3A" text-anchor="middle">Vòng quay ${totalSec} ô đều nhau</text>
+          <circle cx="${cx}" cy="${cy}" r="${r}" fill="#EEE"/>
+          ${sectorPaths}${divLines}
+          <circle cx="${cx}" cy="${cy}" r="7" fill="white" stroke="#666" stroke-width="1.5"/>
+          <polygon points="${cx},${cy-r+6} ${cx-5},${cy-r+20} ${cx+5},${cy-r+20}" fill="#1C2B3A"/>
+          <text x="168" y="44" font-size="11" font-weight="700" fill="#4CAF50">Xanh: ${greenSec} ô</text>
+          <text x="168" y="62" font-size="11" font-weight="700" fill="#EF5350">Đỏ: ${redSec} ô</text>
+          ${yellowSec>0?`<text x="168" y="80" font-size="11" font-weight="700" fill="#F9A825">Vàng: ${yellowSec} ô</text>`:''}
+          <rect x="155" y="100" width="92" height="18" rx="9" fill="#EEE"/>
+          <rect x="155" y="100" width="${Math.round(92*targetSec/totalSec)}" height="18" rx="9" fill="${colorFill}"/>
+          <text x="201" y="113" font-size="10" font-weight="700" fill="white" text-anchor="middle">P(${targetColor})?</text>
+          <text x="168" y="136" font-size="11" fill="#1C2B3A">${targetSec}/${totalSec} ô ${targetColor}</text>
+          <text x="168" y="154" font-size="10" fill="#888">→ P = ${targetSec}/${totalSec}</text>
+        </svg>`;
+        const wrong=[`${targetSec+1}/${totalSec}`,`${Math.max(1,targetSec-1)}/${totalSec}`,`1/${totalSec}`].filter(w=>w!==`${targetSec}/${totalSec}`).slice(0,3);
+        const q=mcq(`Vòng quay ${totalSec} ô: xanh ${greenSec}, đỏ ${redSec}${yellowSec>0?`, vàng ${yellowSec}`:''}.\nXác suất ra màu ${targetColor} là?`,`${targetSec}/${totalSec}`,wrong,'🎲',`${targetSec} ô ${targetColor} / ${totalSec} tổng ô`);
+        q.svg=svg; return q;
+      }
+
+      // ── V3: Bộ bài 4 chất – rút 1 lá ────────────────────────────
+      if(variant===3){
+        const suits=[{name:'cơ ♥',col:'#EF5350'},{name:'rô ♦',col:'#EF5350'},{name:'bích ♠',col:'#212121'},{name:'chuồn ♣',col:'#212121'}];
+        const target=pick(['đỏ (cơ hoặc rô)','đen (bích hoặc chuồn)','cơ ♥','rô ♦','bích ♠','chuồn ♣']);
+        const countMap={'đỏ (cơ hoặc rô)':26,'đen (bích hoặc chuồn)':26,'cơ ♥':13,'rô ♦':13,'bích ♠':13,'chuồn ♣':13};
+        const cnt=countMap[target];
+        const svg=`<svg width="265" height="168" viewBox="0 0 265 168" xmlns="http://www.w3.org/2000/svg">
+          <text x="132" y="14" font-size="11" font-weight="700" fill="#1C2B3A" text-anchor="middle">Bộ bài 52 lá – 4 chất, mỗi chất 13 lá</text>
+          ${suits.map((s,i)=>`
+            <rect x="${18+i*60}" y="26" width="52" height="72" rx="8" fill="white" stroke="#90A4AE" stroke-width="1.5"/>
+            <text x="${44+i*60}" y="52" font-size="18" fill="${s.col}" text-anchor="middle">${s.name.split(' ')[1]}</text>
+            <text x="${44+i*60}" y="70" font-size="9" fill="#666" text-anchor="middle">13 lá</text>
+            <text x="${44+i*60}" y="88" font-size="9" fill="${s.col}" font-weight="700" text-anchor="middle">${s.name.split(' ')[0]}</text>
+          `).join('')}
+          <rect x="20" y="110" width="225" height="16" rx="8" fill="#ECEFF1"/>
+          <rect x="20" y="110" width="${Math.round(225*cnt/52)}" height="16" rx="8" fill="${target.includes('đỏ')||target.includes('cơ')||target.includes('rô')?'#EF5350':'#212121'}"/>
+          <text x="132" y="141" font-size="11" fill="#1C2B3A" text-anchor="middle">Rút ngẫu nhiên 1 lá – P(${target}) = ?</text>
+          <text x="132" y="158" font-size="10" fill="#888" text-anchor="middle">${cnt} lá / 52 lá tổng</text>
+        </svg>`;
+        const frac=cnt===26?'26/52 (= 1/2)':'13/52 (= 1/4)';
+        const q=mcq(`Bộ bài 52 lá. Rút ngẫu nhiên 1 lá.\nXác suất ra lá ${target} là?`,frac,['1/52','2/52','1/13'],'🎲',`${cnt} lá ${target} trong 52 → ${frac}`);
+        q.svg=svg; return q;
+      }
+
+      // ── V4: Hộp bóng màu – tính xác suất bằng phân số ───────────
+      if(variant===4){
+        const colors=[
+          {name:'đỏ',fill:'#EF5350',n:rnd(2,5)},
+          {name:'xanh',fill:'#42A5F5',n:rnd(2,5)},
+          {name:'vàng',fill:'#FDD835',n:rnd(1,4)},
+        ];
+        const total=colors.reduce((s,c)=>s+c.n,0);
+        const target=pick(colors);
+        const svg=`<svg width="260" height="172" viewBox="0 0 260 172" xmlns="http://www.w3.org/2000/svg">
+          <text x="130" y="14" font-size="11" font-weight="700" fill="#1C2B3A" text-anchor="middle">Hộp: ${colors.map(c=>c.n+' '+c.name).join(' · ')} = ${total} bóng</text>
+          <rect x="22" y="24" width="216" height="80" rx="12" fill="#F5F5F5" stroke="#90A4AE" stroke-width="2"/>
+          ${colors.flatMap((c,ci)=>Array.from({length:Math.min(c.n,5)},(_,i)=>`
+            <circle cx="${40+ci*80+i*16}" cy="${64}" r="14" fill="${c.fill}" stroke="rgba(0,0,0,0.15)" stroke-width="1.5"/>
+            <circle cx="${36+ci*80+i*16}" cy="${60}" r="5" fill="rgba(255,255,255,0.45)"/>
+          `)).join('')}
+          ${colors.map((c,i)=>`<text x="${60+i*80}" y="120" font-size="10" font-weight="700" fill="${c.fill}" text-anchor="middle">${c.n} ${c.name}</text>`).join('')}
+          <rect x="22" y="132" width="216" height="14" rx="7" fill="#EEE"/>
+          <rect x="22" y="132" width="${Math.round(216*target.n/total)}" height="14" rx="7" fill="${target.fill}"/>
+          <text x="130" y="158" font-size="11" font-weight="700" fill="${target.fill}" text-anchor="middle">P(${target.name}) = ${target.n}/${total}</text>
+          <text x="130" y="170" font-size="10" fill="#888" text-anchor="middle">= ${target.n} bóng ${target.name} / ${total} tổng</text>
+        </svg>`;
+        const wrong=colors.filter(c=>c!==target).map(c=>`${c.n}/${total}`);
+        wrong.push(`${target.n+1}/${total}`);
+        const q=mcq(`Hộp ${colors.map(c=>c.n+' bóng '+c.name).join(', ')}.\nLấy ngẫu nhiên 1 bóng – P(${target.name}) = ?`,`${target.n}/${total}`,wrong.slice(0,3),'🎲',`${target.n} bóng ${target.name} trong ${total} bóng → ${target.n}/${total}`);
+        q.svg=svg; return q;
+      }
+
+      // ── V5: Bình thăm – ai trúng thưởng ─────────────────────────
+      const total=pick([5,8,10]);
+      const prizes=rnd(1,Math.floor(total/2));
+      const names=['An','Bình','Chi','Duy','Em'];
+      const svg=`<svg width="260" height="168" viewBox="0 0 260 168" xmlns="http://www.w3.org/2000/svg">
+        <text x="130" y="14" font-size="11" font-weight="700" fill="#1C2B3A" text-anchor="middle">Bình thăm: ${total} phiếu – ${prizes} phiếu trúng</text>
+        <ellipse cx="130" cy="78" rx="80" ry="54" fill="#FFF3E0" stroke="#E65100" stroke-width="2.5"/>
+        <ellipse cx="130" cy="30" rx="25" ry="10" fill="#FFF3E0" stroke="#E65100" stroke-width="2"/>
+        <line x1="105" y1="30" x2="110" y2="46" stroke="#E65100" stroke-width="2"/>
+        <line x1="155" y1="30" x2="150" y2="46" stroke="#E65100" stroke-width="2"/>
+        ${Array.from({length:Math.min(prizes,4)},(_,i)=>`<rect x="${68+i*30}" y="${65}" width="22" height="30" rx="4" fill="#FFC107" stroke="#FF8F00" stroke-width="1.5"/><text x="${79+i*30}" y="${84}" font-size="9" text-anchor="middle" fill="#1C2B3A" font-weight="700">✓</text>`).join('')}
+        ${Array.from({length:Math.min(total-prizes,4)},(_,i)=>`<rect x="${68+(prizes+i)*30}" y="${65}" width="22" height="30" rx="4" fill="#ECEFF1" stroke="#90A4AE" stroke-width="1.5"/><text x="${79+(prizes+i)*30}" y="${84}" font-size="9" text-anchor="middle" fill="#888">✗</text>`).join('')}
+        <text x="130" y="122" font-size="11" fill="#1C2B3A" text-anchor="middle">🟡 Trúng: ${prizes}   ⬜ Trắng: ${total-prizes}</text>
+        <rect x="22" y="136" width="216" height="14" rx="7" fill="#ECEFF1"/>
+        <rect x="22" y="136" width="${Math.round(216*prizes/total)}" height="14" rx="7" fill="#FFC107"/>
+        <text x="130" y="160" font-size="11" font-weight="700" fill="#E65100" text-anchor="middle">P(trúng thưởng) = ${prizes}/${total}</text>
+      </svg>`;
+      const q=mcq(`Bình thăm có ${total} phiếu: ${prizes} phiếu trúng, ${total-prizes} phiếu trắng.\n${names[rnd(0,4)]} thăm 1 phiếu. P(trúng) = ?`,`${prizes}/${total}`,[`${prizes+1}/${total}`,`${total-prizes}/${total}`,`1/${total}`],'🎲',`${prizes} phiếu trúng trong ${total} → P = ${prizes}/${total}`);
+      q.svg=svg; return q;
+    },
+
+    // ─────────────────────────────────────────────────────────────────
+    // KHÓ: 6 variant – thực nghiệm, tần số, dự đoán, phân tích bảng
+    // ─────────────────────────────────────────────────────────────────
+    hard:()=>{
+      const variant = rnd(0,5);
+
+      // ── V0: Tung xu N lần – tính tần số tương đối ────────────────
+      if(variant===0){
+        const total=pick([20,30,40]);
+        const heads=rnd(Math.floor(total*0.3),Math.floor(total*0.7));
+        const tails=total-heads;
+        const bW=Math.round(220*heads/total);
+        const svg=`<svg width="260" height="185" viewBox="0 0 260 185" xmlns="http://www.w3.org/2000/svg">
+          <text x="130" y="14" font-size="11" font-weight="700" fill="#1C2B3A" text-anchor="middle">Tung đồng xu ${total} lần – ghi kết quả</text>
+          ${Array.from({length:Math.min(total,30)},(_,i)=>{
+            const isH=i<heads, row=Math.floor(i/10), col=i%10;
+            return `<circle cx="${22+col*24}" cy="${30+row*28}" r="10"
+              fill="${isH?'#FFF9C4':'#ECEFF1'}" stroke="${isH?'#F9A825':'#90A4AE'}" stroke-width="1.5"/>
+            <text x="${22+col*24}" y="${34+row*28}" font-size="8" text-anchor="middle"
+              fill="${isH?'#E65100':'#607D8B'}" font-weight="700">${isH?'N':'S'}</text>`;
+          }).join('')}
+          <rect x="20" y="116" width="220" height="18" rx="9" fill="#ECEFF1"/>
+          <rect x="20" y="116" width="${bW}" height="18" rx="9" fill="#FBC02D"/>
+          <text x="${20+bW/2}" y="129" font-size="10" font-weight="700" fill="#1C2B3A" text-anchor="middle">N: ${heads}</text>
+          <text x="${20+bW+(220-bW)/2}" y="129" font-size="10" font-weight="700" fill="#607D8B" text-anchor="middle">S: ${tails}</text>
+          <text x="130" y="152" font-size="11" fill="#1C2B3A" text-anchor="middle">Tần số tương đối mặt ngửa = ___/total</text>
+          <text x="130" y="170" font-size="10" fill="#888" text-anchor="middle">= số lần N ÷ tổng lần tung = ${heads}/${total}</text>
+        </svg>`;
+        const q=fill(`Tung đồng xu ${total} lần: ngửa ${heads} lần, sấp ${tails} lần.\nTần số tương đối mặt ngửa = _____/${total}`,heads,'🎲',`Tần số tương đối = số lần xuất hiện / tổng = ${heads}/${total}`);
+        q.svg=svg; return q;
+      }
+
+      // ── V1: Xúc xắc N lần – bảng tần số đầy đủ ──────────────────
+      if(variant===1){
+        const total=pick([24,30,36]);
+        const target=rnd(1,6);
+        const base=Math.floor(total/6);
+        const counts=Array(6).fill(0).map((_,i)=>i===target-1?base+rnd(1,4):Math.max(1,base+rnd(-2,2)));
+        const diff=total-counts.reduce((a,b)=>a+b,0);
+        counts[target===1?5:0]+=diff;
+        const bW=Math.round(200*counts[target-1]/total);
+        const headers=['Mặt','1','2','3','4','5','6'];
+        const svg=`<svg width="265" height="196" viewBox="0 0 265 196" xmlns="http://www.w3.org/2000/svg">
+          <text x="132" y="14" font-size="11" font-weight="700" fill="#1C2B3A" text-anchor="middle">Gieo xúc xắc ${total} lần – kết quả</text>
+          <rect x="8" y="22" width="249" height="22" rx="4" fill="#455A64"/>
+          ${headers.map((h,i)=>`<text x="${8+i*36+18}" y="37" font-size="10" font-weight="700" fill="white" text-anchor="middle">${h}</text>`).join('')}
+          <rect x="8" y="44" width="249" height="22" fill="#FAFAFA" stroke="#DDD" stroke-width="0.5"/>
+          ${['Lần',...counts].map((v,i)=>`
+            <rect x="${8+i*36}" y="44" width="36" height="22" fill="${i===target?'#FFF9C4':i===0?'#ECEFF1':'#FAFAFA'}" stroke="#EEE" stroke-width="0.5"/>
+            <text x="${8+i*36+18}" y="59" font-size="${i===0?9:11}" font-weight="${i===target?'800':'600'}" fill="${i===target?'#E65100':'#1C2B3A'}" text-anchor="middle">${v}</text>
+          `).join('')}
+          <text x="10" y="84" font-size="11" fill="#1C2B3A" font-weight="700">Tần số mặt ${target}:</text>
+          <rect x="10" y="90" width="200" height="14" rx="7" fill="#ECEFF1"/>
+          <rect x="10" y="90" width="${bW}" height="14" rx="7" fill="#E65100"/>
+          <text x="${10+bW/2}" y="101" font-size="9" font-weight="700" fill="white" text-anchor="middle">${counts[target-1]}/${total}</text>
+          <text x="132" y="124" font-size="11" fill="#1C2B3A" text-anchor="middle">Tần số tương đối mặt ${target} = ?/${total}</text>
+          <text x="132" y="142" font-size="10" fill="#888" text-anchor="middle">= số lần mặt ${target} / tổng lần gieo</text>
+          <text x="132" y="162" font-size="12" font-weight="800" fill="#E65100" text-anchor="middle">= ${counts[target-1]}/${total}</text>
+        </svg>`;
+        const q=fill(`Gieo xúc xắc ${total} lần. Mặt ${target} xuất hiện ${counts[target-1]} lần.\nTần số tương đối mặt ${target} = _____/${total}`,counts[target-1],'🎲',`Tần số = ${counts[target-1]} / ${total}`);
+        q.svg=svg; return q;
+      }
+
+      // ── V2: Vòng quay N lần – dự đoán số lần ra màu ─────────────
+      if(variant===2){
+        const totalSec=pick([4,5,8,10]);
+        const greenSec=rnd(1,totalSec-1);
+        const spins=pick([20,30,40,50]);
+        const expected=Math.round(spins*greenSec/totalSec);
+        const r=60,cx=80,cy=82;
+        const toRad=a=>a*Math.PI/180;
+        const gAngle=360*greenSec/totalSec;
+        const x1=cx+r*Math.cos(toRad(-90));
+        const y1=cy+r*Math.sin(toRad(-90));
+        const x2=cx+r*Math.cos(toRad(-90+gAngle));
+        const y2=cy+r*Math.sin(toRad(-90+gAngle));
+        const divLines=Array.from({length:totalSec},(_,i)=>{
+          const a=toRad(-90+i*360/totalSec);
+          return `<line x1="${cx}" y1="${cy}" x2="${Math.round(cx+r*Math.cos(a))}" y2="${Math.round(cy+r*Math.sin(a))}" stroke="white" stroke-width="1.5"/>`;
+        }).join('');
+        const svg=`<svg width="260" height="185" viewBox="0 0 260 185" xmlns="http://www.w3.org/2000/svg">
+          <text x="130" y="14" font-size="11" font-weight="700" fill="#1C2B3A" text-anchor="middle">Vòng quay ${totalSec} ô – quay ${spins} lần</text>
+          <circle cx="${cx}" cy="${cy}" r="${r}" fill="#EF5350"/>
+          <path d="M${cx},${cy} L${Math.round(x1)},${Math.round(y1)} A${r},${r} 0 ${gAngle>180?1:0},1 ${Math.round(x2)},${Math.round(y2)} Z" fill="#4CAF50"/>
+          ${divLines}
+          <circle cx="${cx}" cy="${cy}" r="6" fill="white" stroke="#666" stroke-width="1.5"/>
+          <polygon points="${cx},${cy-r+6} ${cx-5},${cy-r+20} ${cx+5},${cy-r+20}" fill="#1C2B3A"/>
+          <text x="175" y="50" font-size="12" font-weight="700" fill="#4CAF50">Xanh: ${greenSec}/${totalSec} ô</text>
+          <text x="175" y="68" font-size="12" font-weight="700" fill="#EF5350">Đỏ: ${totalSec-greenSec}/${totalSec} ô</text>
+          <rect x="155" y="84" width="90" height="18" rx="9" fill="#ECEFF1"/>
+          <rect x="155" y="84" width="${Math.round(90*greenSec/totalSec)}" height="18" rx="9" fill="#4CAF50"/>
+          <text x="175" y="118" font-size="11" fill="#1C2B3A">Quay ${spins} lần</text>
+          <text x="175" y="136" font-size="11" fill="#1C2B3A">Dự kiến xanh:</text>
+          <text x="175" y="154" font-size="13" font-weight="800" fill="#4CAF50">_____ lần</text>
+          <text x="130" y="175" font-size="10" fill="#888" text-anchor="middle">${spins} × ${greenSec}/${totalSec} = ?</text>
+        </svg>`;
+        const q=fill(`Vòng quay ${totalSec} ô đều: ${greenSec} ô xanh, ${totalSec-greenSec} ô đỏ.\nQuay ${spins} lần → dự kiến ra XANH _____ lần.`,expected,'🎲',`${spins} × ${greenSec}/${totalSec} = ${expected}`);
+        q.svg=svg; return q;
+      }
+
+      // ── V3: Đọc bảng thực nghiệm – tìm màu xuất hiện nhiều nhất ──
+      if(variant===3){
+        const colors2=[
+          {name:'Đỏ',fill:'#EF5350',n:rnd(8,18)},
+          {name:'Xanh',fill:'#42A5F5',n:rnd(8,18)},
+          {name:'Vàng',fill:'#FDD835',n:rnd(5,15)},
+          {name:'Trắng',fill:'#BDBDBD',n:rnd(4,12)},
+        ];
+        const total=colors2.reduce((s,c)=>s+c.n,0);
+        const maxColor=colors2.reduce((a,b)=>a.n>b.n?a:b);
+        const barMax=Math.max(...colors2.map(c=>c.n));
+        const svg=`<svg width="265" height="195" viewBox="0 0 265 195" xmlns="http://www.w3.org/2000/svg">
+          <text x="132" y="14" font-size="11" font-weight="700" fill="#1C2B3A" text-anchor="middle">Kết quả lấy bi ngẫu nhiên ${total} lần</text>
+          ${colors2.map((c,i)=>{
+            const bw=Math.round(180*c.n/barMax);
+            return `<text x="8" y="${40+i*36}" font-size="11" font-weight="700" fill="${c.fill}">${c.name}</text>
+            <rect x="52" y="${26+i*36}" width="${bw}" height="20" rx="4" fill="${c.fill}" opacity="0.85"/>
+            <text x="${56+bw}" y="${40+i*36}" font-size="11" font-weight="700" fill="${c.fill}">${c.n} lần</text>`;
+          }).join('')}
+          <line x1="52" y1="18" x2="52" y2="${26+colors2.length*36}" stroke="#DDD" stroke-width="1"/>
+          <text x="132" y="${26+colors2.length*36+18}" font-size="11" fill="#1C2B3A" text-anchor="middle">Màu nào xuất hiện nhiều nhất?</text>
+          <text x="132" y="${26+colors2.length*36+35}" font-size="10" fill="#888" text-anchor="middle">Đọc cột dài nhất trong biểu đồ</text>
+        </svg>`;
+        const wrong=colors2.filter(c=>c!==maxColor).slice(0,3).map(c=>c.name);
+        const q=mcq(`Bảng thực nghiệm lấy bi ngẫu nhiên:\n${colors2.map(c=>c.name+': '+c.n+' lần').join(', ')}.\nMàu nào xuất hiện nhiều nhất?`,maxColor.name,wrong,'🎲',`${maxColor.name} xuất hiện ${maxColor.n} lần – nhiều nhất`);
+        q.svg=svg; return q;
+      }
+
+      // ── V4: Dự đoán từ bảng tần số – 100 lần ────────────────────
+      if(variant===4){
+        const redP=pick([2,3,4]), totalP=pick([8,10]);
+        const bigN=pick([50,80,100]);
+        const expN=Math.round(bigN*redP/totalP);
+        const barW=Math.round(200*redP/totalP);
+        const svg=`<svg width="260" height="185" viewBox="0 0 260 185" xmlns="http://www.w3.org/2000/svg">
+          <text x="130" y="14" font-size="11" font-weight="700" fill="#1C2B3A" text-anchor="middle">Thực nghiệm ban đầu – rút ${totalP} lần</text>
+          <rect x="15" y="22" width="230" height="38" rx="8" fill="#ECEFF1" stroke="#90A4AE" stroke-width="1.5"/>
+          <text x="130" y="38" font-size="12" fill="#1C2B3A" text-anchor="middle">Bi đỏ xuất hiện: <tspan font-weight="800" fill="#EF5350">${redP}/${totalP}</tspan> lần</text>
+          <text x="130" y="54" font-size="10" fill="#888" text-anchor="middle">Tần số tương đối = ${redP}/${totalP}</text>
+          <rect x="15" y="70" width="230" height="16" rx="8" fill="#ECEFF1"/>
+          <rect x="15" y="70" width="${barW}" height="16" rx="8" fill="#EF5350"/>
+          <text x="${15+barW/2}" y="82" font-size="10" font-weight="700" fill="white" text-anchor="middle">${redP}/${totalP} = ${Math.round(100*redP/totalP)}%</text>
+          <rect x="15" y="100" width="230" height="54" rx="10" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+          <text x="130" y="120" font-size="11" fill="#1C2B3A" text-anchor="middle">Nếu rút thêm <tspan font-weight="800">${bigN} lần</tspan> nữa</text>
+          <text x="130" y="138" font-size="11" fill="#1C2B3A" text-anchor="middle">Dự kiến ra bi đỏ khoảng _____ lần</text>
+          <text x="130" y="156" font-size="10" fill="#E65100" text-anchor="middle">${bigN} × ${redP}/${totalP} = ?</text>
+          <text x="130" y="174" font-size="10" fill="#888" text-anchor="middle">Dùng tần số tương đối để dự đoán</text>
+        </svg>`;
+        const q=fill(`Thực nghiệm: ${redP}/${totalP} lần ra bi đỏ.\nNếu rút thêm ${bigN} lần → dự kiến ra bi đỏ _____ lần.`,expN,'🎲',`${bigN} × ${redP}/${totalP} = ${expN}`);
+        q.svg=svg; return q;
+      }
+
+      // ── V5: So sánh lý thuyết vs thực nghiệm ────────────────────
+      const theoryN=pick([3,4,5]), theoryD=pick([8,10,12]);
+      const bigN2=pick([40,60,80]);
+      const expTheory=Math.round(bigN2*theoryN/theoryD);
+      const actualN=expTheory+rnd(-3,4);
+      const diff=Math.abs(actualN-expTheory);
+      const svg=`<svg width="265" height="192" viewBox="0 0 265 192" xmlns="http://www.w3.org/2000/svg">
+        <text x="132" y="14" font-size="11" font-weight="700" fill="#1C2B3A" text-anchor="middle">So sánh: Lý thuyết vs Thực nghiệm</text>
+        <rect x="10" y="24" width="245" height="60" rx="10" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
+        <text x="132" y="44" font-size="11" fill="#1C2B3A" text-anchor="middle">Hộp ${theoryN}/${theoryD} bi đỏ · Rút có hoàn lại ${bigN2} lần</text>
+        <text x="132" y="62" font-size="11" fill="#1565C0" text-anchor="middle">Lý thuyết: ${bigN2}×${theoryN}/${theoryD} = <tspan font-weight="800">${expTheory}</tspan> lần đỏ</text>
+        <text x="132" y="78" font-size="10" fill="#888" text-anchor="middle">(dự đoán theo công thức)</text>
+        <rect x="10" y="96" width="245" height="60" rx="10" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+        <text x="132" y="116" font-size="11" fill="#1C2B3A" text-anchor="middle">Thực nghiệm: đếm thực tế</text>
+        <text x="132" y="134" font-size="13" font-weight="800" fill="#E65100" text-anchor="middle">Kết quả đo được: ${actualN} lần đỏ</text>
+        <text x="132" y="150" font-size="10" fill="#888" text-anchor="middle">(ghi nhận từ thực tế)</text>
+        <text x="132" y="172" font-size="11" fill="#1C2B3A" text-anchor="middle">Chênh lệch = |${actualN} − ${expTheory}| = ${diff} lần</text>
+        <text x="132" y="188" font-size="10" fill="#888" text-anchor="middle">Thực nghiệm càng nhiều lần → càng gần lý thuyết</text>
+      </svg>`;
+      const q=fill(`Hộp có ${theoryN}/${theoryD} bi đỏ. Rút ${bigN2} lần.\nLý thuyết dự đoán _____ lần đỏ.`,expTheory,'🎲',`${bigN2} × ${theoryN}/${theoryD} = ${expTheory}`);
+      q.svg=svg; return q;
+    }
+  }
+};
+
+// ============================================================
+//  STATE & LOGIC
+// ============================================================
+const state = {
+  currentChapter:null, currentTopic:null, level:'easy',
+  qIndex:0, correct:0, wrong:0, streak:0, totalQ:10, answered:false
+};
+
+function generateQuestion(key, level){ return (GEN[key]||GEN['addSub1000'])[level](); }
+
+function initHome(){
+  const grid=document.getElementById('chapters-grid');
+  grid.innerHTML='';
+  CHAPTERS.forEach(ch=>{
+    const card=document.createElement('div');
+    card.className=`chapter-card ${ch.color}`;
+    card.innerHTML=`<div class="ch-icon">${ch.icon}</div>
+      <div class="ch-num">${ch.num}</div>
+      <div class="ch-title">${ch.title}</div>
+      <div class="ch-desc">${ch.desc}</div>
+      <div class="ch-topics">${ch.tags.map(t=>`<span class="ch-tag">${t}</span>`).join('')}</div>`;
+    card.onclick=()=>startChapter(ch);
+    grid.appendChild(card);
+  });
+}
+
+const TOPIC_COLORS={
+  c1:['#E3F2FD','#0D47A1','#1565C0'],
+  c2:['#E8F5E9','#1B5E20','#2E7D32'],
+  c3:['#FFEBEE','#B71C1C','#C62828'],
+  c4:['#F3E5F5','#4A148C','#6A1B9A'],
+  c5:['#FFF3E0','#BF360C','#E65100'],
+  c6:['#E0F2F1','#004D40','#00695C'],
+  c7:['#F1F8E9','#33691E','#558B2F'],
+  c8:['#FCE4EC','#880E4F','#AD1457'],
+  c9:['#EDE7F6','#311B92','#4527A0'],
+};
+
+function getTopicActiveStyle(colorClass){
+  const c=TOPIC_COLORS[colorClass]||['#EEE','#333','#555'];
+  return `background:${c[0]};color:${c[1]};border-color:${c[2]};`;
+}
+
+function startChapter(ch){
+  state.currentChapter=ch;
+  state.currentTopic=ch.topics[0];
+  state.level='easy';
+  resetScores();
+  document.getElementById('prac-chapter-title').textContent=`${ch.num}: ${ch.title}`;
+  document.getElementById('prac-chapter-desc').textContent=ch.desc;
+
+  const row=document.getElementById('topic-row');
+  row.innerHTML='';
+  ch.topics.forEach((t,i)=>{
+    const pill=document.createElement('button');
+    pill.className='topic-pill'+(i===0?' active-topic':'');
+    pill.textContent=t.label;
+    if(i===0) pill.style.cssText=getTopicActiveStyle(ch.color);
+    pill.onclick=()=>{
+      document.querySelectorAll('.topic-pill').forEach(p=>{p.classList.remove('active-topic');p.style.cssText='';});
+      pill.classList.add('active-topic');
+      pill.style.cssText=getTopicActiveStyle(ch.color);
+      state.currentTopic=t; state.qIndex=0; resetScores(); generateNextQuestion();
+    };
+    row.appendChild(pill);
+  });
+
+  document.querySelectorAll('.level-btn').forEach(b=>b.className='level-btn');
+  document.getElementById('btn-easy').classList.add('active-easy');
+  showScreen('screen-practice');
+  generateNextQuestion();
+}
+
+function setLevel(level,btn){
+  state.level=level; state.qIndex=0; resetScores();
+  document.querySelectorAll('.level-btn').forEach(b=>b.className='level-btn');
+  btn.classList.add(`active-${level}`);
+  generateNextQuestion();
+}
+
+function resetScores(){
+  state.correct=0; state.wrong=0; state.streak=0; updateScoreBar();
+}
+
+function generateNextQuestion(){
+  if(state.qIndex>=state.totalQ){ showResult(); return; }
+  state.answered=false;
+  renderQuestion(generateQuestion(state.currentTopic.key, state.level));
+}
+
+function renderQuestion(q){
+  document.getElementById('q-icon').textContent=q.icon||'🔢';
+  document.getElementById('q-text').textContent=q.question;
+  document.getElementById('q-hint').textContent=q.hint?`💡 ${q.hint}`:'';
+  document.getElementById('q-progress').textContent=`Câu ${state.qIndex+1} / ${state.totalQ}`;
+  document.getElementById('feedback').className='feedback';
+  document.getElementById('next-btn').className='next-btn';
+
+  // Show/hide illustration
+  const illDiv=document.getElementById('q-illustration');
+  if(q.svg){
+    illDiv.innerHTML=q.svg;
+    illDiv.style.display='flex';
+  } else {
+    illDiv.innerHTML='';
+    illDiv.style.display='none';
+  }
+
+  const area=document.getElementById('answer-area');
+  area.innerHTML='';
+
+  if(q.type==='mcq'){
+    const grid=document.createElement('div');
+    grid.className='answers-grid';
+    q.options.forEach(opt=>{
+      const btn=document.createElement('button');
+      btn.className='ans-btn';
+      btn.textContent=opt;
+      btn.onclick=()=>checkMCQ(btn,opt,q.correct,grid);
+      grid.appendChild(btn);
+    });
+    area.appendChild(grid);
+  } else {
+    const wrap=document.createElement('div');
+    wrap.className='fill-wrap';
+    const inp=document.createElement('input');
+    inp.type='number'; inp.className='fill-input'; inp.placeholder='?'; inp.id='fill-inp';
+    inp.onkeydown=e=>{if(e.key==='Enter') checkFill(q.correct);};
+    const btn=document.createElement('button');
+    btn.className='check-btn'; btn.textContent='Kiểm tra ✓'; btn.id='check-btn';
+    btn.onclick=()=>checkFill(q.correct);
+    wrap.appendChild(inp); wrap.appendChild(btn);
+    area.appendChild(wrap);
+    setTimeout(()=>inp.focus(),100);
+  }
+}
+
+function checkMCQ(clickedBtn,selected,correct,grid){
+  if(state.answered) return;
+  state.answered=true;
+  const ok=String(selected)===String(correct);
+  grid.querySelectorAll('.ans-btn').forEach(b=>{
+    b.disabled=true;
+    if(String(b.textContent)===String(correct)) b.classList.add('correct');
+  });
+  if(!ok) clickedBtn.classList.add('wrong');
+  showFeedback(ok,correct);
+}
+
+function checkFill(correct){
+  if(state.answered) return;
+  const inp=document.getElementById('fill-inp');
+  const val=inp.value.trim();
+  if(!val) return;
+  state.answered=true;
+  const ok=String(val)===String(correct);
+  inp.classList.add(ok?'correct-inp':'wrong-inp');
+  inp.disabled=true;
+  document.getElementById('check-btn').disabled=true;
+  showFeedback(ok,correct);
+}
+
+function showFeedback(ok,correct){
+  const fb=document.getElementById('feedback');
+  if(ok){
+    state.correct++; state.streak++;
+    fb.className='feedback correct show';
+    fb.textContent=pick(['🎉 Xuất sắc!','✅ Chính xác!','🌟 Tuyệt vời!','👏 Giỏi lắm!','🏆 Đúng rồi!','🎯 Bắn trúng đích!']);
+  } else {
+    state.wrong++; state.streak=0;
+    fb.className='feedback wrong show';
+    fb.textContent=`❌ Chưa đúng! Đáp án đúng là: ${correct}`;
+  }
+  updateScoreBar();
+  document.getElementById('next-btn').className='next-btn show';
+}
+
+function updateScoreBar(){
+  document.getElementById('sc-correct').textContent=state.correct;
+  document.getElementById('sc-wrong').textContent=state.wrong;
+  document.getElementById('sc-streak').textContent=state.streak;
+}
+
+function nextQuestion(){ state.qIndex++; generateNextQuestion(); }
+
+function showResult(){
+  const pct=Math.round(state.correct/state.totalQ*100);
+  let emoji,title,stars;
+  if(pct>=90){emoji='🏆';title='Xuất sắc! Bạn là ngôi sao!';stars='⭐⭐⭐';}
+  else if(pct>=70){emoji='🎉';title='Giỏi lắm! Tiếp tục cố gắng!';stars='⭐⭐';}
+  else if(pct>=50){emoji='😊';title='Tốt! Ôn thêm để giỏi hơn nhé!';stars='⭐';}
+  else{emoji='💪';title='Cố lên! Thử lại nhé!';stars='✨';}
+  document.getElementById('res-emoji').textContent=emoji;
+  document.getElementById('res-title').textContent=title;
+  document.getElementById('res-stars').textContent=stars;
+  document.getElementById('res-score').textContent=`${state.correct}/${state.totalQ}`;
+  document.getElementById('res-sub').textContent=`Trả lời đúng ${state.correct} câu (${pct}%) — Chuỗi đúng cao nhất: ${state.streak}`;
+  showScreen('screen-result');
+}
+
+function retryChapter(){ startChapter(state.currentChapter); }
+
+function goHarder(){
+  const lvls=['easy','medium','hard'];
+  const idx=lvls.indexOf(state.level);
+  if(idx<2){
+    state.level=lvls[idx+1];
+    document.querySelectorAll('.level-btn').forEach(b=>b.className='level-btn');
+    document.getElementById(['btn-easy','btn-medium','btn-hard'][idx+1]).classList.add(`active-${lvls[idx+1]}`);
+  }
+  state.qIndex=0; resetScores();
+  showScreen('screen-practice'); generateNextQuestion();
+}
+
+function goHome(){ showScreen('screen-home'); }
+
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+initHome();
+</script>
+</body>
+</html>
