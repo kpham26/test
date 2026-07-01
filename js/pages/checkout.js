@@ -51,14 +51,13 @@
           btn.textContent = 'Xác nhận mua khoá học';
           return;
         }
-        HV.Toast.success('Mua khoá học thành công! Đang chuyển về trang chủ...');
+        HV.Toast.success('Mua khoá học thành công!');
         renderNotice(
           root, '🎉', 'Thanh toán thành công!',
-          'Bạn đã mở khoá "' + course.title + '". Đang chuyển về trang chủ...',
+          'Bạn đã mở khoá "' + course.title + '". Học ngay bây giờ hoặc quay lại trang chủ sau.',
           '<a class="hv-btn hv-btn-primary" href="' + BASE + course.lessonPath + '">Học ngay</a>' +
           '<a class="hv-btn hv-btn-ghost" href="' + BASE + 'index.html">Về trang chủ</a>'
         );
-        setTimeout(function () { window.location.href = BASE + 'index.html'; }, 1800);
       }, 500);
     });
   }
