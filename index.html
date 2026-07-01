@@ -93,6 +93,11 @@
   .cc-vio .course-top{background:linear-gradient(90deg,var(--coral),var(--gold),var(--mint));}
   .cc-ielts .course-top{background:linear-gradient(90deg,var(--navy),var(--blue2),var(--teal));}
 
+  .cc-price-tag{position:absolute;top:16px;right:16px;font-size:11px;font-weight:800;padding:5px 11px;border-radius:20px;z-index:2;}
+  .cc-price-tag.is-free{background:#0f5132;color:#fff;}
+  .cc-price-tag.is-paid{background:#fff;color:var(--navy);border:1.5px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,0.08);}
+  .cc-owned-tag{position:absolute;top:16px;right:16px;font-size:11px;font-weight:800;padding:5px 11px;border-radius:20px;background:var(--mint);color:#fff;z-index:2;}
+
   .course-body{padding:22px 20px 24px;display:flex;flex-direction:column;flex:1;}
   .cc-icon{width:54px;height:54px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:1.7rem;margin-bottom:14px;}
   .cc-blue .cc-icon{background:#E3F2FD;}
@@ -112,11 +117,30 @@
   .cc-vio .cc-tag{background:#FFF8E8;color:#BF360C;}
   .cc-ielts .cc-tag{background:#EEF2FF;color:#1e3a5f;}
 
-  .cc-cta{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-radius:13px;font-size:0.85rem;font-weight:700;color:#fff;transition:opacity 0.15s;}
+  .cc-cta{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-radius:13px;font-size:0.85rem;font-weight:700;color:#fff;transition:opacity 0.15s;text-decoration:none;}
   .cc-blue .cc-cta{background:#1565C0;}
   .cc-vio .cc-cta{background:var(--navy);}
   .cc-ielts .cc-cta{background:var(--navy);}
-  .course-card:hover .cc-cta{opacity:0.88;}
+  .cc-cta:hover{opacity:0.88;}
+  .cc-cta.owned{background:var(--mint) !important;}
+  .cc-preview-link{display:block;text-align:center;font-size:0.78rem;font-weight:700;color:var(--muted);text-decoration:none;margin-top:10px;padding:4px;}
+  .cc-preview-link:hover{color:var(--blue);}
+
+
+  /* trust strip */
+  .trust-strip{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:52px;}
+  .trust-chip{font-size:12px;font-weight:700;color:var(--muted);background:#fff;border:1.5px solid var(--border);border-radius:20px;padding:8px 15px;}
+
+  /* faq */
+  .faq-section{margin-bottom:56px;}
+  .faq-card{background:#fff;border:1.5px solid var(--border);border-radius:18px;padding:6px 20px;max-width:680px;margin:0 auto;}
+  .faq-item{border-top:1px solid #f1f5f9;padding:15px 0;}
+  .faq-item:first-child{border-top:none;}
+  .faq-q{font-size:0.9rem;font-weight:700;cursor:pointer;display:flex;justify-content:space-between;align-items:center;color:var(--ink);}
+  .faq-a{font-size:0.83rem;color:var(--muted);line-height:1.6;margin-top:9px;display:none;}
+  .faq-item.open .faq-a{display:block;}
+  .faq-item.open .chev{transform:rotate(180deg);}
+  .chev{transition:transform .15s;font-size:12px;color:var(--muted);}
 
   /* features */
   .features{margin-bottom:56px;}
@@ -179,55 +203,14 @@
   </div>
 
   <div class="courses-grid" id="courses-grid">
+    <!-- course cards are rendered dynamically by js/site.js from the course data store -->
+  </div>
 
-    <a href="math32.html" class="course-card cc-blue" data-category="math">
-      <div class="course-top"></div>
-      <div class="course-body">
-        <div class="cc-icon">🎓</div>
-        <span class="cc-badge">Toán lớp 3 · KNTT</span>
-        <div class="cc-title">Toán Lớp 3 – Kết Nối Tri Thức Với Cuộc Sống</div>
-        <div class="cc-desc">Luyện tập bám sát chương trình SGK mới: 9 chương đầy đủ từ số học, hình học, đo lường đến tiền Việt Nam và thống kê.</div>
-        <div class="cc-tags">
-          <span class="cc-tag">9 chương</span>
-          <span class="cc-tag">3 cấp độ</span>
-          <span class="cc-tag">Trắc nghiệm & điền số</span>
-        </div>
-        <div class="cc-cta"><span>Bắt đầu học</span><span>→</span></div>
-      </div>
-    </a>
-
-    <a href="math3.html" class="course-card cc-vio" data-category="math">
-      <div class="course-top"></div>
-      <div class="course-body">
-        <div class="cc-icon">🏆</div>
-        <span class="cc-badge">Toán lớp 3 · Đấu trường</span>
-        <div class="cc-title">Vui Học Toán 3 – Đấu Trường Trí Tuệ</div>
-        <div class="cc-desc">Thi đấu toán học theo phong cách VioEdu: 6 vòng đấu, 30 câu mỗi vòng, có tính giờ để bé rèn tốc độ và sự tự tin.</div>
-        <div class="cc-tags">
-          <span class="cc-tag">6 vòng đấu</span>
-          <span class="cc-tag">Tính giờ</span>
-          <span class="cc-tag">3 cấp độ</span>
-        </div>
-        <div class="cc-cta"><span>Bắt đầu học</span><span>→</span></div>
-      </div>
-    </a>
-
-    <a href="ielts.html" class="course-card cc-ielts" data-category="english">
-      <div class="course-top"></div>
-      <div class="course-body">
-        <div class="cc-icon">🎯</div>
-        <span class="cc-badge">IELTS · 4 kỹ năng</span>
-        <div class="cc-title">IELTS Master – Luyện Thi 4 Kỹ Năng</div>
-        <div class="cc-desc">Luyện Listening, Reading, Writing, Speaking theo từng mức band điểm từ 5.0 đến 8.0+, kèm lý thuyết, mẹo làm bài và chấm điểm AI.</div>
-        <div class="cc-tags">
-          <span class="cc-tag">4 kỹ năng</span>
-          <span class="cc-tag">Theo band điểm</span>
-          <span class="cc-tag">Chấm điểm AI</span>
-        </div>
-        <div class="cc-cta"><span>Bắt đầu học</span><span>→</span></div>
-      </div>
-    </a>
-
+  <div class="trust-strip">
+    <span class="trust-chip">🔒 Thanh toán an toàn</span>
+    <span class="trust-chip">🔁 Hoàn tiền trong 7 ngày</span>
+    <span class="trust-chip">♾️ Học không giới hạn thời gian</span>
+    <span class="trust-chip">👀 Xem thử miễn phí trước khi mua</span>
   </div>
 
   <div class="features">
@@ -258,6 +241,30 @@
     </div>
   </div>
 
+  <div class="faq-section">
+    <div class="section-head" style="margin-top:0;">
+      <h2>❓ Câu hỏi thường gặp</h2>
+    </div>
+    <div class="faq-card">
+      <div class="faq-item">
+        <div class="faq-q">Tôi cần tạo tài khoản để học không? <span class="chev">▾</span></div>
+        <div class="faq-a">Khóa học miễn phí có thể học ngay không cần tài khoản. Với khóa học trả phí, bạn cần đăng nhập để mua và lưu tiến độ học tập.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Tôi có thể xem thử trước khi mua không? <span class="chev">▾</span></div>
+        <div class="faq-a">Có! Mỗi khóa học trả phí đều có mục "Xem thử miễn phí" để bạn hình dung nội dung trước khi quyết định mua.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Có được hoàn tiền không? <span class="chev">▾</span></div>
+        <div class="faq-a">Được, bạn có 7 ngày kể từ ngày mua để yêu cầu hoàn tiền toàn bộ nếu không hài lòng.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Khóa học có giới hạn thời gian sử dụng không? <span class="chev">▾</span></div>
+        <div class="faq-a">Không, sau khi mua bạn có thể truy cập khóa học không giới hạn thời gian, học lại bao nhiêu lần tùy thích.</div>
+      </div>
+    </div>
+  </div>
+
   <div class="cta-band">
     <h3>Sẵn sàng bắt đầu chưa nào?</h3>
     <p>Chọn một khóa học phía trên để vào học ngay, hoặc liên hệ để được tư vấn thêm.</p>
@@ -267,20 +274,71 @@
 
 <footer>© 2026 Học Vui · Nền tảng luyện tập Toán & IELTS</footer>
 
+<script src="js/auth.js"></script>
 <script>
-  const pills = document.querySelectorAll('.filter-pill');
-  const cards = document.querySelectorAll('.course-card');
-  pills.forEach(pill=>{
-    pill.addEventListener('click', ()=>{
-      pills.forEach(p=>p.classList.remove('active'));
+  function renderCourseCards(){
+    var courses = HV.getCourses();
+    var grid = document.getElementById('courses-grid');
+    grid.innerHTML = courses.map(function(c){
+      var owned = HV.hasPurchased(c.id);
+      var priceTagHtml = owned && !c.free
+        ? '<span class="cc-owned-tag">✓ Đã sở hữu</span>'
+        : '<span class="cc-price-tag ' + (c.free ? 'is-free' : 'is-paid') + '">' + (c.free ? 'MIỄN PHÍ' : HV.formatVND(c.price)) + '</span>';
+
+      var ctaHtml;
+      if (c.free) {
+        ctaHtml = '<a href="' + HV.escapeHtml(c.file) + '" class="cc-cta"><span>Bắt đầu học</span><span>→</span></a>';
+      } else if (owned) {
+        ctaHtml = '<a href="' + HV.escapeHtml(c.file) + '" class="cc-cta owned"><span>Vào học</span><span>→</span></a>';
+      } else {
+        ctaHtml = '<a href="checkout.html?course=' + encodeURIComponent(c.id) + '" class="cc-cta"><span>Mua khóa học</span><span>🔒</span></a>';
+      }
+
+      var previewHtml = (!c.free && !owned)
+        ? '<a href="#" class="cc-preview-link" onclick="HV.openPreviewModal(\'' + c.id + '\');return false;">👀 Xem thử miễn phí</a>'
+        : '';
+
+      return '<div class="course-card ' + c.colorClass + '" data-category="' + c.category + '" style="position:relative;">' +
+        '<div class="course-top"></div>' +
+        priceTagHtml +
+        '<div class="course-body">' +
+        '<div class="cc-icon">' + c.icon + '</div>' +
+        '<span class="cc-badge">' + HV.escapeHtml(c.badgeText) + '</span>' +
+        '<div class="cc-title">' + HV.escapeHtml(c.title) + '</div>' +
+        '<div class="cc-desc">' + HV.escapeHtml(c.desc) + '</div>' +
+        '<div class="cc-tags">' + c.tags.map(function(t){ return '<span class="cc-tag">' + HV.escapeHtml(t) + '</span>'; }).join('') + '</div>' +
+        ctaHtml +
+        previewHtml +
+        '</div></div>';
+    }).join('');
+
+    applyActiveFilter();
+  }
+
+  function applyActiveFilter(){
+    var activePill = document.querySelector('.filter-pill.active');
+    var cat = activePill ? activePill.dataset.filter : 'all';
+    document.querySelectorAll('.course-card').forEach(function(card){
+      var show = (cat === 'all' || card.dataset.category === cat);
+      card.style.display = show ? 'flex' : 'none';
+    });
+  }
+
+  document.querySelectorAll('.filter-pill').forEach(function(pill){
+    pill.addEventListener('click', function(){
+      document.querySelectorAll('.filter-pill').forEach(function(p){ p.classList.remove('active'); });
       pill.classList.add('active');
-      const cat = pill.dataset.filter;
-      cards.forEach(card=>{
-        const show = (cat === 'all' || card.dataset.category === cat);
-        card.style.display = show ? 'flex' : 'none';
-      });
+      applyActiveFilter();
     });
   });
+
+  document.querySelectorAll('.faq-item').forEach(function(item){
+    item.querySelector('.faq-q').addEventListener('click', function(){
+      item.classList.toggle('open');
+    });
+  });
+
+  renderCourseCards();
 </script>
 
 </body>
