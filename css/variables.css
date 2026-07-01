@@ -1,0 +1,86 @@
+/* ==========================================================================
+   HocLab — Design Tokens
+   Single source of truth for the platform shell's visual language.
+   The 3 lesson files under /lessons are NOT governed by this file — they
+   keep their own original styling untouched.
+   ========================================================================== */
+
+:root {
+  /* ---- Core navy scale (bridges the navy already used across all 3 lessons) ---- */
+  --hv-navy-950: #0A1628;   /* deepest background */
+  --hv-navy-900: #0F1F38;
+  --hv-navy-800: #16294A;   /* exact match to Đấu Trường Anh Ngữ --navy-deep */
+  --hv-navy-700: #1F3A5F;   /* exact match to Đấu Trường Anh Ngữ --navy */
+  --hv-navy-600: #2C4E7C;
+
+  /* ---- Accent ---- */
+  --hv-gold: #F2C94C;       /* exact match to Đấu Trường Anh Ngữ --gold */
+  --hv-gold-deep: #D97A2B;
+  --hv-gold-soft: #FFE9A8;
+  --hv-blue: #1565C0;       /* ties to Toán 3's primary blue */
+  --hv-blue-soft: #E3F2FD;
+
+  /* ---- Semantic ---- */
+  --hv-green: #3FA66B;
+  --hv-green-soft: #E8F6EE;
+  --hv-red: #EB5757;
+  --hv-red-soft: #FDECEC;
+
+  /* ---- Neutrals / surfaces ---- */
+  --hv-cream: #FBF6EC;
+  --hv-white: #FFFFFF;
+  --hv-ink: #16213A;
+  --hv-ink-soft: #55607A;
+  --hv-line: rgba(15, 31, 56, 0.10);
+  --hv-line-on-dark: rgba(255, 255, 255, 0.14);
+
+  /* ---- Glass panel (signature treatment) ---- */
+  --hv-glass-bg: rgba(255, 255, 255, 0.06);
+  --hv-glass-bg-strong: rgba(255, 255, 255, 0.10);
+  --hv-glass-border: rgba(255, 255, 255, 0.14);
+  --hv-glass-blur: blur(18px);
+
+  /* ---- Type ---- */
+  --hv-font-display: 'Space Grotesk', system-ui, sans-serif;
+  --hv-font-body: 'Inter', system-ui, -apple-system, sans-serif;
+
+  /* ---- Radii ---- */
+  --hv-r-sm: 10px;
+  --hv-r-md: 16px;
+  --hv-r-lg: 22px;
+  --hv-r-pill: 999px;
+
+  /* ---- Shadows ---- */
+  --hv-shadow-sm: 0 2px 10px rgba(10, 22, 40, 0.10);
+  --hv-shadow-md: 0 10px 28px rgba(10, 22, 40, 0.16);
+  --hv-shadow-lg: 0 20px 48px rgba(10, 22, 40, 0.28);
+  --hv-shadow-gold: 0 8px 24px rgba(242, 201, 76, 0.28);
+
+  /* ---- Spacing scale ---- */
+  --hv-space-1: 4px;
+  --hv-space-2: 8px;
+  --hv-space-3: 12px;
+  --hv-space-4: 16px;
+  --hv-space-5: 24px;
+  --hv-space-6: 32px;
+  --hv-space-7: 48px;
+  --hv-space-8: 64px;
+
+  /* ---- Layout ---- */
+  --hv-max-width: 1180px;
+  --hv-nav-height: 72px;
+
+  /* ---- Motion ---- */
+  --hv-ease: cubic-bezier(.4, 0, .2, 1);
+  --hv-fast: 150ms;
+  --hv-med: 260ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

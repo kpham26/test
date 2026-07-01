@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250" role="img" aria-label="IELTS Master – Luyện Thi 4 Kỹ Năng">
+  <defs>
+    <linearGradient id="bg4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0A1628"/>
+      <stop offset="55%" stop-color="#12305a"/>
+      <stop offset="100%" stop-color="#2563eb"/>
+    </linearGradient>
+    <radialGradient id="glow4" cx="50%" cy="38%" r="62%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="card4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#E0F2FE"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="400" height="250" fill="url(#bg4)"/>
+  <circle cx="200" cy="92" r="150" fill="url(#glow4)"/>
+
+  <!-- faint sound-wave line, echoing the listening/speaking focus -->
+  <path d="M20,190 Q60,170 90,190 T160,190 T230,190 T300,190 T380,190" stroke="#38bdf8" stroke-opacity="0.18" stroke-width="2.5" fill="none"/>
+
+  <!-- 4-skills glyphs -->
+  <g fill="#FFFFFF" fill-opacity="0.18" font-family="Arial, sans-serif" font-weight="700">
+    <text x="34" y="66" font-size="26">🎧</text>
+    <text x="326" y="64" font-size="24">📖</text>
+    <text x="40" y="208" font-size="24">✍️</text>
+    <text x="320" y="210" font-size="24">🗣️</text>
+  </g>
+
+  <g transform="translate(200,116)">
+    <circle r="54" fill="url(#card4)"/>
+    <circle r="54" fill="none" stroke="#FFFFFF" stroke-opacity="0.5" stroke-width="2"/>
+    <text x="0" y="17" font-size="48" text-anchor="middle" font-family="Arial, sans-serif">🎯</text>
+  </g>
+
+  <g transform="translate(200,196)">
+    <rect x="-58" y="-14" width="116" height="28" rx="14" fill="#0A1628" fill-opacity="0.55"/>
+    <text x="0" y="6" font-size="12" letter-spacing="1.5" text-anchor="middle" fill="#BAE6FD" font-family="Arial, sans-serif" font-weight="700">IELTS</text>
+  </g>
+</svg>

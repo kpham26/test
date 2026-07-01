@@ -1,0 +1,377 @@
+/* ==========================================================================
+   HocLab — Homepage (hero + course grid)
+   ========================================================================== */
+
+.hv-hero {
+  position: relative;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(242,201,76,0.14), transparent 42%),
+    radial-gradient(circle at 88% 12%, rgba(21,101,192,0.18), transparent 40%),
+    radial-gradient(circle at 50% 100%, rgba(63,166,107,0.10), transparent 45%),
+    linear-gradient(165deg, var(--hv-navy-950) 0%, var(--hv-navy-800) 100%);
+  padding: var(--hv-space-8) 0 var(--hv-space-7);
+  overflow: hidden;
+}
+.hv-hero-glyphs span {
+  position: absolute;
+  opacity: 0.16;
+  font-size: 44px;
+  animation: hv-float 9s ease-in-out infinite;
+  pointer-events: none;
+}
+.hv-hero-glyphs span:nth-child(1) { top: 12%; left: 6%; font-size: 40px; animation-delay: 0s; }
+.hv-hero-glyphs span:nth-child(2) { top: 65%; left: 12%; font-size: 30px; animation-delay: 1.4s; }
+.hv-hero-glyphs span:nth-child(3) { top: 18%; right: 8%; font-size: 52px; animation-delay: .7s; }
+.hv-hero-glyphs span:nth-child(4) { top: 68%; right: 14%; font-size: 34px; animation-delay: 2.1s; }
+
+.hv-hero-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: var(--hv-space-6);
+  align-items: center;
+}
+@media (max-width: 920px) {
+  .hv-hero-grid { grid-template-columns: 1fr; }
+}
+
+.hv-hero-inner {
+  max-width: 560px;
+}
+.hv-hero-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--hv-glass-bg-strong);
+  border: 1px solid var(--hv-glass-border);
+  color: var(--hv-gold-soft);
+  font-family: var(--hv-font-display);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 7px 15px;
+  border-radius: var(--hv-r-pill);
+  margin-bottom: var(--hv-space-4);
+}
+.hv-hero h1 {
+  color: var(--hv-white);
+  font-size: clamp(2rem, 4.2vw, 3.1rem);
+  margin-bottom: var(--hv-space-3);
+}
+.hv-hero h1 em {
+  font-style: normal;
+  background: linear-gradient(135deg, var(--hv-gold), var(--hv-gold-deep));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.hv-hero p {
+  color: rgba(255,255,255,0.72);
+  font-size: 1.05rem;
+  max-width: 480px;
+  margin-bottom: var(--hv-space-4);
+}
+
+.hv-hero-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: var(--hv-space-5);
+}
+.hv-hero-chip {
+  background: var(--hv-glass-bg);
+  border: 1px solid var(--hv-glass-border);
+  color: rgba(255,255,255,0.85);
+  font-size: 0.82rem;
+  font-weight: 500;
+  padding: 7px 13px;
+  border-radius: var(--hv-r-pill);
+}
+
+.hv-hero-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: var(--hv-space-6);
+}
+
+.hv-hero-stats {
+  display: flex;
+  gap: var(--hv-space-6);
+}
+.hv-hero-stat strong {
+  display: block;
+  font-family: var(--hv-font-display);
+  font-size: 1.5rem;
+  color: var(--hv-white);
+}
+.hv-hero-stat span {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.6);
+}
+
+.hv-hero-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.hv-hero-visual svg { width: 100%; max-width: 380px; height: auto; }
+.hv-hero-visual g { animation: hv-float 7s ease-in-out infinite; }
+.hv-hero-visual g:nth-of-type(2) { animation-delay: 0.4s; }
+.hv-hero-visual g:nth-of-type(3) { animation-delay: 0.9s; }
+@media (max-width: 920px) {
+  .hv-hero-visual { display: none; }
+}
+
+/* ---- Course grid section ---- */
+.hv-courses-section {
+  background: var(--hv-cream);
+  padding: var(--hv-space-7) 0 var(--hv-space-8);
+}
+.hv-section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: var(--hv-space-4);
+  margin-bottom: var(--hv-space-6);
+  flex-wrap: wrap;
+}
+.hv-section-head h2 { font-size: 1.7rem; margin-bottom: 4px; }
+.hv-section-head p { color: var(--hv-ink-soft); margin: 0; }
+
+.hv-course-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--hv-space-5);
+}
+@media (max-width: 1180px) {
+  .hv-course-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 860px) {
+  .hv-course-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .hv-course-grid { grid-template-columns: 1fr; }
+}
+
+.hv-course-card {
+  position: relative;
+  background: var(--hv-white);
+  border-radius: var(--hv-r-lg);
+  overflow: hidden;
+  border: 1px solid var(--hv-line);
+  box-shadow: var(--hv-shadow-sm);
+  transition: transform var(--hv-med) var(--hv-ease), box-shadow var(--hv-med) var(--hv-ease);
+  display: flex;
+  flex-direction: column;
+}
+.hv-course-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--hv-shadow-lg);
+}
+.hv-course-card-accent {
+  height: 5px;
+  width: 100%;
+  background: var(--accent, var(--hv-gold));
+  box-shadow: 0 0 18px 1px var(--accent, var(--hv-gold));
+}
+.hv-course-thumb {
+  aspect-ratio: 16 / 10;
+  width: 100%;
+  background: var(--hv-navy-900);
+  position: relative;
+  overflow: hidden;
+}
+.hv-course-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+.hv-course-body {
+  padding: var(--hv-space-4) var(--hv-space-4) var(--hv-space-5);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+.hv-course-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.hv-course-subject {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent-deep, var(--hv-gold-deep));
+}
+.hv-course-title {
+  font-size: 1.08rem;
+  margin: 0;
+  color: var(--hv-navy-900);
+  line-height: 1.3;
+}
+.hv-course-desc {
+  font-size: 0.86rem;
+  color: var(--hv-ink-soft);
+  margin: 0;
+}
+.hv-course-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.hv-course-tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  background: color-mix(in srgb, var(--accent-deep, var(--hv-gold-deep)) 12%, white);
+  color: var(--accent-deep, var(--hv-ink-soft));
+  padding: 4px 9px;
+  border-radius: var(--hv-r-pill);
+}
+.hv-course-checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+.hv-course-checklist li {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: var(--hv-ink-soft);
+  line-height: 1.4;
+}
+.hv-course-checklist li::before { content: "✓"; color: var(--hv-green); font-weight: 700; flex-shrink: 0; }
+
+.hv-course-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 6px;
+}
+.hv-course-price {
+  font-family: var(--hv-font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--hv-navy-900);
+}
+.hv-course-price.hv-price-free { color: #1E7A46; }
+.hv-course-price-unit { font-size: 0.68rem; font-weight: 500; color: var(--hv-ink-soft); display: block; }
+
+/* ---- Subject filter pills ---- */
+.hv-filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: var(--hv-space-5);
+}
+.hv-filter-pill {
+  font-family: var(--hv-font-display);
+  font-weight: 600;
+  font-size: 0.85rem;
+  background: var(--hv-white);
+  color: var(--hv-ink-soft);
+  border: 1.5px solid var(--hv-line);
+  padding: 8px 16px;
+  border-radius: var(--hv-r-pill);
+  cursor: pointer;
+  transition: all var(--hv-fast) var(--hv-ease);
+}
+.hv-filter-pill:hover { border-color: var(--hv-gold-deep); color: var(--hv-navy-900); transform: translateY(-1px); }
+.hv-filter-pill.hv-active {
+  background: var(--hv-navy-900);
+  border-color: var(--hv-navy-900);
+  color: var(--hv-white);
+}
+
+/* ---- Combo banner ---- */
+.hv-combo-banner {
+  margin-top: var(--hv-space-7);
+  background: linear-gradient(120deg, var(--hv-navy-900) 0%, var(--hv-navy-700) 100%);
+  border-radius: var(--hv-r-lg);
+  padding: var(--hv-space-5) var(--hv-space-6);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--hv-space-4);
+  flex-wrap: wrap;
+  box-shadow: var(--hv-shadow-md);
+}
+.hv-combo-text h3 {
+  color: var(--hv-white);
+  font-size: 1.1rem;
+  margin-bottom: 4px;
+}
+.hv-combo-text p {
+  color: rgba(255,255,255,0.7);
+  font-size: 0.85rem;
+  margin: 0;
+}
+.hv-combo-price-block { text-align: right; }
+.hv-combo-original {
+  color: rgba(255,255,255,0.45);
+  text-decoration: line-through;
+  font-size: 0.82rem;
+}
+.hv-combo-price-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 2px;
+}
+.hv-combo-discounted {
+  font-family: var(--hv-font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--hv-gold-soft);
+}
+.hv-combo-save {
+  background: var(--hv-green);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: var(--hv-r-pill);
+}
+.hv-combo-banner .hv-btn { margin-top: 10px; }
+
+@media (max-width: 680px) {
+  .hv-combo-banner { flex-direction: column; align-items: flex-start; }
+  .hv-combo-price-block { text-align: left; }
+}
+
+/* ---- Reviews ---- */
+.hv-reviews-section {
+  background: var(--hv-white);
+  padding: var(--hv-space-7) 0 var(--hv-space-8);
+}
+.hv-reviews-kicker {
+  display: block;
+  font-family: var(--hv-font-display);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--hv-gold-deep);
+  margin-bottom: 8px;
+}
+.hv-review-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--hv-space-4);
+}
+@media (max-width: 860px) {
+  .hv-review-grid { grid-template-columns: 1fr; }
+}
+.hv-review-card {
+  background: var(--hv-cream);
+  border-radius: var(--hv-r-md);
+  padding: var(--hv-space-5);
+  border: 1px solid var(--hv-line);
+}
+.hv-review-stars { color: var(--hv-gold-deep); font-size: 0.95rem; margin-bottom: 12px; letter-spacing: 2px; }
+.hv-review-quote { font-size: 0.92rem; color: var(--hv-ink); line-height: 1.55; margin-bottom: 16px; }
+.hv-review-author { font-size: 0.82rem; font-weight: 700; color: var(--hv-ink-soft); }
