@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thanh toán – Học Vui</title>
+<style>
+  :root{
+    --navy:#0b1f3a; --blue:#1565C0; --blue2:#2563eb; --sky:#38bdf8;
+    --gold:#ffb627; --mint:#2ec4b6; --ink:#1c2b3a; --muted:#64748b; --bg:#F0F6FF; --border:#e2e8f0;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;}
+
+  .topbar{background:linear-gradient(135deg,var(--navy),var(--blue));padding:22px 20px;text-align:center;}
+  .topbar a.logo{color:#fff;font-weight:800;font-size:1.15rem;text-decoration:none;}
+
+  main{max-width:920px;margin:0 auto;padding:32px 18px 60px;}
+  .checkout-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:22px;align-items:start;}
+  @media (max-width:760px){ .checkout-grid{grid-template-columns:1fr;} }
+
+  .card{background:#fff;border-radius:20px;border:1.5px solid var(--border);box-shadow:0 2px 14px rgba(11,31,58,0.06);padding:24px 22px;}
+  .card h3{font-size:1.02rem;font-weight:800;margin-bottom:16px;color:var(--navy);}
+
+  .course-summary{display:flex;gap:14px;align-items:flex-start;margin-bottom:18px;}
+  .course-summary .icon{width:52px;height:52px;border-radius:14px;background:#E3F2FD;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;}
+  .course-summary .title{font-weight:800;font-size:0.98rem;margin-bottom:4px;}
+  .course-summary .desc{font-size:0.82rem;color:var(--muted);line-height:1.5;}
+
+  .price-row{display:flex;justify-content:space-between;font-size:0.88rem;padding:9px 0;border-top:1px solid #f1f5f9;}
+  .price-row.total{font-weight:800;font-size:1.05rem;color:var(--navy);border-top:2px solid var(--border);margin-top:6px;padding-top:14px;}
+  .price-row .strike{text-decoration:line-through;color:#94a3b8;margin-right:6px;font-weight:500;}
+  .price-row .save{color:#0f5132;font-weight:700;}
+
+  .coupon-row{display:flex;gap:8px;margin-top:14px;}
+  .coupon-row input{flex:1;padding:11px 13px;border-radius:10px;border:1.5px solid var(--border);font-size:13px;font-family:inherit;text-transform:uppercase;}
+  .coupon-row button{padding:11px 16px;border-radius:10px;border:none;background:var(--navy);color:#fff;font-weight:700;font-size:12.5px;cursor:pointer;white-space:nowrap;}
+  .coupon-row button:hover{background:#13294f;}
+  .coupon-hint{font-size:11px;color:#94a3b8;margin-top:6px;}
+  .coupon-applied{font-size:12px;color:#0f5132;font-weight:700;margin-top:8px;display:none;}
+  .coupon-applied.show{display:block;}
+
+  .field{margin-bottom:14px;}
+  .field label{display:block;font-size:12px;font-weight:700;color:#334155;margin-bottom:6px;}
+  .field input{width:100%;padding:12px 13px;border-radius:10px;border:1.5px solid var(--border);font-size:13.5px;font-family:inherit;}
+  .field input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(21,101,192,0.12);}
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+
+  .pay-btn{width:100%;padding:14px;border-radius:12px;border:none;background:linear-gradient(135deg,var(--navy),var(--blue2));color:#fff;font-weight:800;font-size:14.5px;cursor:pointer;margin-top:6px;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .15s;}
+  .pay-btn:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(21,101,192,0.3);}
+  .pay-btn:disabled{opacity:0.7;cursor:not-allowed;transform:none;}
+  .spinner{width:16px;height:16px;border:2.5px solid rgba(255,255,255,0.4);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:none;}
+  .spinner.show{display:inline-block;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+
+  .trust-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;}
+  .trust-chip{font-size:11px;font-weight:700;color:var(--muted);background:#F8FAFC;border:1px solid var(--border);border-radius:8px;padding:6px 10px;}
+
+  .refund-note{font-size:11.5px;color:var(--muted);background:#F0FBF6;border:1px dashed #b7e4cb;border-radius:10px;padding:10px 12px;margin-top:16px;line-height:1.5;}
+
+  .faq-item{border-top:1px solid #f1f5f9;padding:12px 0;}
+  .faq-item:first-child{border-top:none;padding-top:0;}
+  .faq-q{font-size:0.85rem;font-weight:700;cursor:pointer;display:flex;justify-content:space-between;align-items:center;}
+  .faq-a{font-size:0.8rem;color:var(--muted);line-height:1.55;margin-top:8px;display:none;}
+  .faq-item.open .faq-a{display:block;}
+  .faq-item.open .faq-q .chev{transform:rotate(180deg);}
+  .chev{transition:transform .15s;font-size:11px;}
+
+  /* success screen */
+  .success-wrap{max-width:480px;margin:60px auto;text-align:center;}
+  .success-icon{width:80px;height:80px;border-radius:50%;background:#E8F8F0;display:flex;align-items:center;justify-content:center;font-size:2.4rem;margin:0 auto 20px;}
+  .success-wrap h2{font-size:1.35rem;font-weight:800;color:var(--navy);margin-bottom:8px;}
+  .success-wrap p{color:var(--muted);font-size:0.9rem;margin-bottom:20px;}
+  .receipt{background:#fff;border-radius:16px;border:1.5px solid var(--border);padding:18px 20px;text-align:left;margin-bottom:22px;}
+  .receipt-row{display:flex;justify-content:space-between;font-size:0.83rem;padding:6px 0;color:#334155;}
+  .receipt-row.total{font-weight:800;color:var(--navy);border-top:1px solid var(--border);margin-top:6px;padding-top:10px;}
+  .success-actions{display:flex;gap:10px;flex-direction:column;}
+  .btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:13px;border-radius:12px;font-size:14px;font-weight:800;text-decoration:none;cursor:pointer;border:none;}
+  .btn-primary{background:linear-gradient(135deg,var(--navy),var(--blue2));color:#fff;}
+  .btn-secondary{background:var(--bg);color:var(--navy);border:1.5px solid var(--border);}
+
+  #checkoutView, #successView{display:none;}
+  #checkoutView.active, #successView.active{display:block;}
+
+  #emptyView{display:none;text-align:center;padding:80px 20px;}
+</style>
+</head>
+<body>
+
+<div class="topbar"><a href="index.html" class="logo">🎓 Học Vui</a></div>
+
+<main>
+
+  <div id="checkoutView">
+    <div class="checkout-grid">
+      <div class="card">
+        <h3>💳 Thông tin thanh toán</h3>
+        <div class="field-row">
+          <div class="field">
+            <label>Số thẻ</label>
+            <input type="text" id="cardNumber" placeholder="4242 4242 4242 4242" maxlength="19">
+          </div>
+          <div class="field">
+            <label>Tên chủ thẻ</label>
+            <input type="text" id="cardName" placeholder="NGUYEN VAN A">
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Ngày hết hạn</label>
+            <input type="text" id="cardExpiry" placeholder="MM/YY" maxlength="5">
+          </div>
+          <div class="field">
+            <label>CVC</label>
+            <input type="text" id="cardCvc" placeholder="123" maxlength="4">
+          </div>
+        </div>
+
+        <button class="pay-btn" id="payBtn">
+          <span class="spinner" id="paySpinner"></span>
+          <span id="payBtnLabel">Thanh toán ngay</span>
+        </button>
+
+        <div class="trust-row">
+          <span class="trust-chip">🔒 Thanh toán an toàn</span>
+          <span class="trust-chip">💳 Visa/Mastercard</span>
+          <span class="trust-chip">📱 Momo</span>
+          <span class="trust-chip">💰 ZaloPay</span>
+        </div>
+
+        <div class="refund-note">
+          🔁 <strong>Hoàn tiền trong 7 ngày</strong> nếu bạn không hài lòng với khóa học — không cần lý do.
+        </div>
+
+        <p style="font-size:10.5px;color:#cbd5e1;margin-top:14px;">
+          🧪 Đây là trang thanh toán demo — không có khoản tiền thực nào được xử lý.
+        </p>
+      </div>
+
+      <div>
+        <div class="card" style="margin-bottom:16px;">
+          <h3>🧾 Đơn hàng của bạn</h3>
+          <div class="course-summary">
+            <div class="icon" id="sumIcon">📘</div>
+            <div>
+              <div class="title" id="sumTitle">—</div>
+              <div class="desc" id="sumDesc">—</div>
+            </div>
+          </div>
+
+          <div class="coupon-row">
+            <input type="text" id="couponInput" placeholder="Mã giảm giá (VD: WELCOME10)">
+            <button type="button" id="applyCouponBtn">Áp dụng</button>
+          </div>
+          <div class="coupon-hint">Thử mã: WELCOME10 hoặc SUMMER20</div>
+          <div class="coupon-applied" id="couponApplied"></div>
+
+          <div class="price-row">
+            <span>Giá gốc</span>
+            <span id="priceOriginal">0đ</span>
+          </div>
+          <div class="price-row" id="discountRow" style="display:none;">
+            <span>Giảm giá</span>
+            <span class="save" id="priceDiscount">-0đ</span>
+          </div>
+          <div class="price-row total">
+            <span>Tổng cộng</span>
+            <span id="priceTotal">0đ</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>❓ Câu hỏi thường gặp</h3>
+          <div class="faq-item">
+            <div class="faq-q">Tôi có thể học trên điện thoại không? <span class="chev">▾</span></div>
+            <div class="faq-a">Có, toàn bộ khóa học hoạt động tốt trên điện thoại, máy tính bảng và máy tính.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">Tôi có được hoàn tiền không? <span class="chev">▾</span></div>
+            <div class="faq-a">Được, bạn có 7 ngày để yêu cầu hoàn tiền toàn bộ nếu không hài lòng.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">Khóa học có giới hạn thời gian không? <span class="chev">▾</span></div>
+            <div class="faq-a">Không, sau khi mua bạn có thể truy cập không giới hạn thời gian.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="successView">
+    <div class="success-wrap">
+      <div class="success-icon">✅</div>
+      <h2>Thanh toán thành công!</h2>
+      <p>Bạn đã mở khoá khóa học. Chúc bạn học vui!</p>
+      <div class="receipt" id="receiptBox"></div>
+      <div class="success-actions">
+        <a href="#" class="btn btn-primary" id="goToLessonBtn">Vào học ngay →</a>
+        <a href="account.html" class="btn btn-secondary">Xem đơn hàng của tôi</a>
+        <a href="index.html" class="btn btn-secondary">Về trang chủ</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="emptyView">
+    <h2 style="color:var(--navy);margin-bottom:10px;">Không tìm thấy khóa học</h2>
+    <p style="color:var(--muted);margin-bottom:20px;">Vui lòng chọn một khóa học từ trang chủ.</p>
+    <a href="index.html" class="btn btn-primary" style="display:inline-flex;">Về trang chủ</a>
+  </div>
+
+</main>
+
+<script src="js/auth.js"></script>
+<script>
+  var courseId = HV.qs('course');
+  var course = courseId ? HV.getCourseById(courseId) : null;
+
+  if (!course) {
+    document.getElementById('emptyView').style.display = 'block';
+  } else if (course.free) {
+    // free courses never need checkout
+    window.location.href = course.file;
+  } else if (!HV.isLoggedIn()) {
+    HV.requireLogin('checkout.html?course=' + encodeURIComponent(courseId));
+  } else if (HV.hasPurchased(courseId)) {
+    // already owns it — send straight to the lesson
+    window.location.href = course.file;
+  } else {
+    document.getElementById('checkoutView').classList.add('active');
+    initCheckout();
+  }
+
+  var appliedDiscount = null;
+
+  function initCheckout(){
+    document.getElementById('sumIcon').textContent = course.icon;
+    document.getElementById('sumTitle').textContent = course.title;
+    document.getElementById('sumDesc').textContent = course.desc;
+    updatePriceDisplay();
+  }
+
+  function updatePriceDisplay(){
+    var original = course.price;
+    document.getElementById('priceOriginal').textContent = HV.formatVND(original);
+    var total = original;
+    if (appliedDiscount) {
+      var discountAmt = Math.round(original * appliedDiscount.percent / 100);
+      total = original - discountAmt;
+      document.getElementById('discountRow').style.display = 'flex';
+      document.getElementById('priceDiscount').textContent = '-' + HV.formatVND(discountAmt);
+    } else {
+      document.getElementById('discountRow').style.display = 'none';
+    }
+    document.getElementById('priceTotal').textContent = HV.formatVND(total);
+  }
+
+  document.getElementById('applyCouponBtn').addEventListener('click', function(){
+    var code = document.getElementById('couponInput').value;
+    var res = HV.applyDiscount(code);
+    var appliedEl = document.getElementById('couponApplied');
+    if (res.ok) {
+      appliedDiscount = res;
+      appliedEl.textContent = '✅ Đã áp dụng mã "' + res.code + '" (-' + res.percent + '%)';
+      appliedEl.classList.add('show');
+      HV.toast('Áp dụng mã giảm giá thành công!', 'success');
+    } else {
+      appliedDiscount = null;
+      appliedEl.classList.remove('show');
+      HV.toast(res.message, 'error');
+    }
+    updatePriceDisplay();
+  });
+
+  document.getElementById('payBtn').addEventListener('click', function(){
+    var num = document.getElementById('cardNumber').value.trim();
+    var name = document.getElementById('cardName').value.trim();
+    var exp = document.getElementById('cardExpiry').value.trim();
+    var cvc = document.getElementById('cardCvc').value.trim();
+    if (!num || !name || !exp || !cvc) {
+      HV.toast('Vui lòng điền đầy đủ thông tin thẻ.', 'error');
+      return;
+    }
+
+    var btn = document.getElementById('payBtn');
+    var spinner = document.getElementById('paySpinner');
+    var label = document.getElementById('payBtnLabel');
+    btn.disabled = true;
+    spinner.classList.add('show');
+    label.textContent = 'Đang xử lý...';
+
+    setTimeout(function(){
+      var res = HV.purchaseCourse(courseId, appliedDiscount ? appliedDiscount.code : null);
+      if (!res.ok) {
+        HV.toast(res.message, 'error');
+        btn.disabled = false;
+        spinner.classList.remove('show');
+        label.textContent = 'Thanh toán ngay';
+        return;
+      }
+      showSuccess(res.order);
+    }, 1200);
+  });
+
+  function showSuccess(order){
+    document.getElementById('checkoutView').classList.remove('active');
+    document.getElementById('successView').classList.add('active');
+
+    var receiptHtml =
+      '<div class="receipt-row"><span>Mã đơn hàng</span><span>#' + HV.escapeHtml(order.id) + '</span></div>' +
+      '<div class="receipt-row"><span>Khóa học</span><span>' + HV.escapeHtml(order.courseTitle) + '</span></div>' +
+      '<div class="receipt-row"><span>Ngày mua</span><span>' + HV.formatDate(order.date) + '</span></div>' +
+      (order.discountCode ? '<div class="receipt-row"><span>Mã giảm giá</span><span>' + HV.escapeHtml(order.discountCode) + ' (-' + order.discountPercent + '%)</span></div>' : '') +
+      '<div class="receipt-row total"><span>Đã thanh toán</span><span>' + HV.formatVND(order.amount) + '</span></div>';
+    document.getElementById('receiptBox').innerHTML = receiptHtml;
+    document.getElementById('goToLessonBtn').href = course.file;
+
+    HV.toast('Thanh toán thành công!', 'success');
+  }
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(function(item){
+    item.querySelector('.faq-q').addEventListener('click', function(){
+      item.classList.toggle('open');
+    });
+  });
+</script>
+
+</body>
+</html>
