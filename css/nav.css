@@ -79,6 +79,19 @@
   background: var(--hv-glass-bg-strong);
   border: 1px solid var(--hv-glass-border);
 }
+
+/* .hv-btn-ghost defaults to dark text for light surfaces (e.g. the profile
+   page). The nav bar is dark, so Login/Logout need a light-on-dark variant
+   instead — scoped to .hv-nav so every other ghost button elsewhere keeps
+   its normal light-surface styling. */
+.hv-nav .hv-btn-ghost {
+  color: var(--hv-white);
+  background: var(--hv-glass-bg-strong);
+  border-color: var(--hv-glass-border);
+}
+.hv-nav .hv-btn-ghost:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.16);
+}
 .hv-nav-avatar {
   width: 26px; height: 26px;
   border-radius: 50%;
