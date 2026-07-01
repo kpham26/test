@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Đăng ký · HTMLVault</title>
+<link rel="icon" href="../assets/images/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../css/variables.css">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/components.css">
+<link rel="stylesheet" href="../css/nav.css">
+<link rel="stylesheet" href="../css/auth.css">
+</head>
+<body>
+<a href="#main" class="hv-skip-link">Bỏ qua đến nội dung chính</a>
+<div id="site-header"></div>
+
+<main id="main" class="hv-auth-wrap">
+  <div class="hv-auth-card">
+    <div class="hv-auth-icon">✨</div>
+    <h1>Tạo tài khoản</h1>
+    <p class="hv-auth-sub">Tham gia HTMLVault để bắt đầu học ngay.</p>
+
+    <div class="hv-auth-banner"></div>
+
+    <form id="form-register" novalidate>
+      <div class="hv-auth-form-error"></div>
+
+      <div class="hv-field">
+        <label class="hv-label" for="reg-username">Tên đăng nhập</label>
+        <input class="hv-input" type="text" id="reg-username" name="username" autocomplete="username" required minlength="3">
+      </div>
+
+      <div class="hv-field">
+        <label class="hv-label" for="reg-email">Email</label>
+        <input class="hv-input" type="email" id="reg-email" name="email" autocomplete="email" required>
+      </div>
+
+      <div class="hv-field">
+        <label class="hv-label" for="reg-password">Mật khẩu</label>
+        <input class="hv-input" type="password" id="reg-password" name="password" autocomplete="new-password" required minlength="6">
+      </div>
+
+      <div class="hv-field">
+        <label class="hv-label" for="reg-confirm">Xác nhận mật khẩu</label>
+        <input class="hv-input" type="password" id="reg-confirm" name="confirmPassword" autocomplete="new-password" required minlength="6">
+      </div>
+
+      <button type="submit" class="hv-btn hv-btn-primary hv-btn-block">Tạo tài khoản</button>
+    </form>
+
+    <p class="hv-auth-switch">Đã có tài khoản? <a href="login.html" data-auth-switch>Đăng nhập</a></p>
+  </div>
+</main>
+
+<div id="site-footer"></div>
+
+<script>window.HV_BASE = "../";</script>
+<script src="../js/config/courses.config.js"></script>
+<script src="../js/core/utils.js"></script>
+<script src="../js/core/storage.js"></script>
+<script src="../js/core/auth.js"></script>
+<script src="../js/core/purchases.js"></script>
+<script src="../js/ui/nav.js"></script>
+<script src="../js/ui/feedback.js"></script>
+<script src="../js/pages/auth-pages.js"></script>
+</body>
+</html>
