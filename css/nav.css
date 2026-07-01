@@ -1,0 +1,181 @@
+/* ==========================================================================
+   HocLab — Nav & Footer
+   ========================================================================== */
+
+.hv-nav {
+  position: sticky;
+  top: 0;
+  z-index: 500;
+  height: var(--hv-nav-height);
+  display: flex;
+  align-items: center;
+  background: rgba(10, 22, 40, 0.72);
+  backdrop-filter: var(--hv-glass-blur);
+  -webkit-backdrop-filter: var(--hv-glass-blur);
+  border-bottom: 1px solid var(--hv-line-on-dark);
+}
+
+.hv-nav-inner {
+  max-width: var(--hv-max-width);
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 var(--hv-space-5);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--hv-space-4);
+}
+
+.hv-brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--hv-font-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--hv-white);
+  flex-shrink: 0;
+}
+.hv-brand-mark {
+  width: 32px; height: 32px;
+  border-radius: 9px;
+  background: linear-gradient(135deg, var(--hv-gold), var(--hv-gold-deep));
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--hv-font-display);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--hv-navy-900);
+  box-shadow: var(--hv-shadow-gold);
+}
+
+.hv-nav-links {
+  display: flex;
+  align-items: center;
+  gap: var(--hv-space-5);
+}
+.hv-nav-link {
+  color: rgba(255,255,255,0.82);
+  font-weight: 500;
+  font-size: 0.92rem;
+  padding: 8px 2px;
+  border-bottom: 2px solid transparent;
+  transition: color var(--hv-fast) var(--hv-ease), border-color var(--hv-fast) var(--hv-ease);
+}
+.hv-nav-link:hover { color: var(--hv-white); }
+.hv-nav-link.hv-active { color: var(--hv-white); border-color: var(--hv-gold); }
+
+.hv-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--hv-space-3);
+}
+
+.hv-nav-user {
+  color: var(--hv-white);
+  background: var(--hv-glass-bg-strong);
+  border: 1px solid var(--hv-glass-border);
+  text-decoration: none;
+}
+.hv-nav-user:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+/* .hv-btn-ghost and .hv-btn-danger both default to colors tuned for light
+   surfaces (e.g. the profile page). The nav bar is dark, so Login/Account
+   and Logout need light-on-dark variants instead — scoped to .hv-nav so
+   every other use of these classes elsewhere keeps its normal styling. */
+.hv-nav .hv-btn-ghost {
+  color: var(--hv-white);
+  background: var(--hv-glass-bg-strong);
+  border-color: var(--hv-glass-border);
+}
+.hv-nav .hv-btn-ghost:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.16);
+}
+.hv-nav .hv-btn-danger {
+  color: #FFC9C9;
+  background: rgba(235, 87, 87, 0.16);
+  border-color: rgba(235, 87, 87, 0.45);
+}
+.hv-nav .hv-btn-danger:hover:not(:disabled) {
+  background: rgba(235, 87, 87, 0.28);
+}
+.hv-nav-avatar {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--hv-blue), #42A5F5);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+.hv-nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--hv-white);
+  font-size: 1.4rem;
+  padding: 6px;
+}
+
+@media (max-width: 860px) {
+  .hv-nav-links {
+    position: fixed;
+    top: var(--hv-nav-height);
+    left: 0; right: 0;
+    background: var(--hv-navy-900);
+    border-bottom: 1px solid var(--hv-line-on-dark);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    padding: var(--hv-space-2) var(--hv-space-5) var(--hv-space-4);
+    transform: translateY(-8px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--hv-fast) var(--hv-ease);
+  }
+  .hv-nav-links.hv-open {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+  .hv-nav-link { width: 100%; padding: 12px 0; border-bottom: 1px solid var(--hv-line-on-dark); }
+  .hv-nav-toggle { display: block; }
+  .hv-nav-actions-desktop { display: none; }
+}
+.hv-nav-actions-mobile {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--hv-line-on-dark);
+}
+@media (min-width: 861px) {
+  .hv-nav-actions-mobile { display: none; }
+}
+
+/* ---- Footer ---- */
+.hv-footer {
+  background: var(--hv-navy-950);
+  border-top: 1px solid var(--hv-line-on-dark);
+  padding: var(--hv-space-6) 0 var(--hv-space-5);
+  color: rgba(255,255,255,0.55);
+  font-size: 0.85rem;
+}
+.hv-footer-inner {
+  max-width: var(--hv-max-width);
+  margin: 0 auto;
+  padding: 0 var(--hv-space-5);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--hv-space-3);
+}
+.hv-footer-links { display: flex; gap: var(--hv-space-4); }
+.hv-footer-links a:hover { color: var(--hv-white); }

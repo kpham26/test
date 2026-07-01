@@ -1,0 +1,238 @@
+/* ==========================================================================
+   HocLab — Components
+   ========================================================================== */
+
+/* ---- Buttons ---- */
+.hv-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--hv-font-display);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 12px 22px;
+  border-radius: var(--hv-r-pill);
+  border: none;
+  cursor: pointer;
+  transition: transform var(--hv-fast) var(--hv-ease),
+              box-shadow var(--hv-fast) var(--hv-ease),
+              background var(--hv-fast) var(--hv-ease),
+              opacity var(--hv-fast) var(--hv-ease);
+  white-space: nowrap;
+}
+.hv-btn:active { transform: translateY(1px); }
+.hv-btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
+
+.hv-btn-primary {
+  background: linear-gradient(135deg, var(--hv-gold) 0%, var(--hv-gold-deep) 100%);
+  color: var(--hv-navy-900);
+  box-shadow: var(--hv-shadow-gold);
+}
+.hv-btn-primary:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(242,201,76,0.38); }
+
+.hv-btn-secondary {
+  background: var(--hv-glass-bg-strong);
+  color: var(--hv-white);
+  border: 1px solid var(--hv-glass-border);
+  backdrop-filter: var(--hv-glass-blur);
+  -webkit-backdrop-filter: var(--hv-glass-blur);
+}
+.hv-btn-secondary:hover:not(:disabled) { background: rgba(255,255,255,0.16); }
+
+.hv-btn-light {
+  background: var(--hv-white);
+  color: var(--hv-navy-800);
+  box-shadow: var(--hv-shadow-sm);
+  border: 1px solid var(--hv-line);
+}
+.hv-btn-light:hover:not(:disabled) { transform: translateY(-2px); box-shadow: var(--hv-shadow-md); }
+
+.hv-btn-ghost {
+  background: transparent;
+  color: var(--hv-navy-800);
+  border: 1.5px solid var(--hv-line);
+}
+.hv-btn-ghost:hover:not(:disabled) { background: rgba(15,31,56,0.05); }
+
+.hv-btn-danger {
+  background: var(--hv-red-soft);
+  color: #B42323;
+  border: 1.5px solid rgba(235,87,87,0.35);
+}
+.hv-btn-danger:hover:not(:disabled) { background: #FBDADA; }
+
+.hv-btn-block { width: 100%; }
+.hv-btn-sm { padding: 8px 16px; font-size: 0.85rem; }
+
+/* ---- Badges ---- */
+.hv-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--hv-font-display);
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: var(--hv-r-pill);
+}
+.hv-badge-free { background: var(--hv-green-soft); color: #1E7A46; }
+.hv-badge-paid { background: var(--hv-gold-soft); color: #8A5A10; }
+.hv-badge-owned { background: var(--hv-blue-soft); color: #0D47A1; }
+.hv-badge-locked { background: #F1F3F6; color: #667; }
+
+/* ---- Cards (glass, on dark navy) ---- */
+.hv-card-glass {
+  background: var(--hv-glass-bg);
+  border: 1px solid var(--hv-glass-border);
+  backdrop-filter: var(--hv-glass-blur);
+  -webkit-backdrop-filter: var(--hv-glass-blur);
+  border-radius: var(--hv-r-lg);
+}
+
+/* ---- Cards (solid, on light surfaces) ---- */
+.hv-card {
+  background: var(--hv-white);
+  border: 1px solid var(--hv-line);
+  border-radius: var(--hv-r-lg);
+  box-shadow: var(--hv-shadow-sm);
+  transition: transform var(--hv-fast) var(--hv-ease), box-shadow var(--hv-fast) var(--hv-ease);
+}
+
+/* ---- Forms ---- */
+.hv-field { margin-bottom: var(--hv-space-4); }
+.hv-label {
+  display: block;
+  font-weight: 700;
+  font-size: 0.85rem;
+  margin-bottom: 6px;
+  color: var(--hv-ink);
+}
+.hv-input {
+  width: 100%;
+  padding: 13px 16px;
+  border-radius: var(--hv-r-sm);
+  border: 1.5px solid var(--hv-line);
+  background: var(--hv-white);
+  font-size: 0.95rem;
+  transition: border-color var(--hv-fast) var(--hv-ease), box-shadow var(--hv-fast) var(--hv-ease);
+}
+.hv-input:focus {
+  border-color: var(--hv-blue);
+  box-shadow: 0 0 0 3px rgba(21,101,192,0.14);
+  outline: none;
+}
+.hv-input.hv-input-error { border-color: var(--hv-red); }
+.hv-error-text {
+  color: #B42323;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-top: 6px;
+  display: none;
+}
+.hv-error-text.hv-show { display: block; }
+
+/* ---- Spinner ---- */
+.hv-spinner {
+  width: 18px; height: 18px;
+  border: 2.5px solid rgba(0,0,0,0.15);
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: hv-spin 0.7s linear infinite;
+  display: inline-block;
+}
+
+/* ---- Empty state ---- */
+.hv-empty {
+  text-align: center;
+  padding: var(--hv-space-7) var(--hv-space-4);
+  color: var(--hv-ink-soft);
+}
+.hv-empty-icon { font-size: 2.4rem; margin-bottom: var(--hv-space-3); }
+
+/* ==========================================================================
+   Toast notifications
+   ========================================================================== */
+#hv-toast-root {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: min(360px, calc(100vw - 40px));
+}
+.hv-toast {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: var(--hv-navy-800);
+  color: var(--hv-white);
+  padding: 14px 16px;
+  border-radius: var(--hv-r-md);
+  box-shadow: var(--hv-shadow-lg);
+  font-size: 0.88rem;
+  font-weight: 500;
+  animation: hv-toast-in var(--hv-med) var(--hv-ease) both;
+  border-left: 4px solid var(--hv-gold);
+}
+.hv-toast-success { border-left-color: var(--hv-green); }
+.hv-toast-error { border-left-color: var(--hv-red); }
+.hv-toast.hv-toast-out { animation: hv-toast-out var(--hv-fast) var(--hv-ease) both; }
+.hv-toast-icon { font-size: 1.05rem; line-height: 1.3; }
+@keyframes hv-toast-in {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes hv-toast-out {
+  from { opacity: 1; transform: translateX(0); }
+  to { opacity: 0; transform: translateX(30px); }
+}
+
+@media (max-width: 640px) {
+  #hv-toast-root { left: 16px; right: 16px; top: 12px; max-width: none; }
+}
+
+/* ==========================================================================
+   Modal / confirmation dialog
+   ========================================================================== */
+.hv-modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(10, 18, 36, 0.55);
+  backdrop-filter: blur(3px);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 10000;
+  padding: 20px;
+  animation: hv-fade-in var(--hv-fast) var(--hv-ease) both;
+}
+.hv-modal {
+  background: var(--hv-white);
+  border-radius: var(--hv-r-lg);
+  padding: var(--hv-space-6);
+  max-width: 420px;
+  width: 100%;
+  box-shadow: var(--hv-shadow-lg);
+  animation: hv-fade-up var(--hv-med) var(--hv-ease) both;
+}
+.hv-modal h3 {
+  font-size: 1.15rem;
+  margin-bottom: var(--hv-space-2);
+}
+.hv-modal p {
+  color: var(--hv-ink-soft);
+  font-size: 0.92rem;
+  margin-bottom: var(--hv-space-5);
+}
+.hv-modal-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+@media (max-width: 480px) {
+  .hv-modal-actions { flex-direction: column-reverse; }
+  .hv-modal-actions .hv-btn { width: 100%; }
+}

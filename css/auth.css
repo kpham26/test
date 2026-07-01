@@ -1,0 +1,78 @@
+/* ==========================================================================
+   HocLab — Auth (login / register)
+   ========================================================================== */
+
+.hv-auth-wrap {
+  min-height: calc(100vh - var(--hv-nav-height));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(242,201,76,0.12), transparent 40%),
+    radial-gradient(circle at 85% 80%, rgba(21,101,192,0.16), transparent 42%),
+    var(--hv-navy-950);
+  padding: var(--hv-space-6) var(--hv-space-4);
+}
+
+.hv-auth-card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--hv-white);
+  border-radius: var(--hv-r-lg);
+  padding: var(--hv-space-6);
+  box-shadow: var(--hv-shadow-lg);
+  animation: hv-fade-up var(--hv-med) var(--hv-ease) both;
+}
+
+.hv-auth-icon {
+  width: 48px; height: 48px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--hv-gold), var(--hv-gold-deep));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem;
+  margin-bottom: var(--hv-space-4);
+  box-shadow: var(--hv-shadow-gold);
+}
+
+.hv-auth-card h1 { font-size: 1.4rem; margin-bottom: 6px; }
+.hv-auth-sub { color: var(--hv-ink-soft); font-size: 0.9rem; margin-bottom: var(--hv-space-5); }
+
+.hv-auth-banner {
+  background: var(--hv-blue-soft);
+  color: #0D47A1;
+  border-radius: var(--hv-r-sm);
+  padding: 12px 14px;
+  font-size: 0.85rem;
+  margin-bottom: var(--hv-space-5);
+  display: none;
+}
+.hv-auth-banner.hv-show { display: block; }
+
+.hv-auth-switch {
+  text-align: center;
+  font-size: 0.88rem;
+  color: var(--hv-ink-soft);
+  margin-top: var(--hv-space-5);
+}
+.hv-auth-switch a { color: var(--hv-blue); font-weight: 700; }
+
+.hv-auth-form-error {
+  background: var(--hv-red-soft);
+  color: #B42323;
+  border-radius: var(--hv-r-sm);
+  padding: 12px 14px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: var(--hv-space-4);
+  display: none;
+}
+.hv-auth-form-error.hv-show { display: block; }
+
+.hv-admin-hint {
+  margin-top: var(--hv-space-5);
+  padding-top: var(--hv-space-4);
+  border-top: 1px dashed var(--hv-line);
+  font-size: 0.75rem;
+  color: var(--hv-ink-soft);
+  text-align: center;
+}
