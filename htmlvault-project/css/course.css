@@ -1,0 +1,154 @@
+/* ==========================================================================
+   HTMLVault — Course detail & checkout
+   ========================================================================== */
+
+.hv-detail-hero {
+  background: linear-gradient(165deg, var(--hv-navy-950) 0%, var(--hv-navy-800) 100%);
+  padding: var(--hv-space-6) 0 var(--hv-space-7);
+}
+.hv-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255,255,255,0.75);
+  font-size: 0.88rem;
+  font-weight: 600;
+  margin-bottom: var(--hv-space-5);
+  transition: color var(--hv-fast) var(--hv-ease);
+}
+.hv-back-link:hover { color: var(--hv-white); }
+
+.hv-detail-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 0.9fr;
+  gap: var(--hv-space-6);
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .hv-detail-grid { grid-template-columns: 1fr; }
+}
+
+.hv-detail-subject {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--hv-gold-soft);
+  margin-bottom: 10px;
+}
+.hv-detail-grid h1 {
+  color: var(--hv-white);
+  font-size: clamp(1.6rem, 3.4vw, 2.3rem);
+  margin-bottom: var(--hv-space-3);
+}
+.hv-detail-desc {
+  color: rgba(255,255,255,0.75);
+  font-size: 1rem;
+  max-width: 60ch;
+}
+.hv-detail-badges { display: flex; gap: 8px; margin-bottom: var(--hv-space-4); }
+
+.hv-detail-thumb {
+  border-radius: var(--hv-r-lg);
+  overflow: hidden;
+  aspect-ratio: 16/10;
+  box-shadow: var(--hv-shadow-lg);
+  border: 1px solid var(--hv-glass-border);
+}
+.hv-detail-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+.hv-buy-card {
+  background: var(--hv-white);
+  border-radius: var(--hv-r-lg);
+  padding: var(--hv-space-5);
+  box-shadow: var(--hv-shadow-lg);
+  margin-top: calc(-1 * var(--hv-space-6));
+  position: relative;
+  z-index: 2;
+}
+.hv-buy-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: var(--hv-space-4);
+}
+.hv-buy-price {
+  font-family: var(--hv-font-display);
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--hv-navy-900);
+}
+.hv-buy-price.hv-price-free { color: #1E7A46; }
+.hv-buy-list { margin: var(--hv-space-4) 0; }
+.hv-buy-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.87rem;
+  color: var(--hv-ink-soft);
+  margin-bottom: 8px;
+}
+.hv-buy-list li::before { content: "✓"; color: var(--hv-green); font-weight: 700; }
+
+.hv-lesson-included {
+  margin-top: var(--hv-space-3);
+  padding-top: var(--hv-space-3);
+  border-top: 1px solid var(--hv-line);
+  font-size: 0.8rem;
+  color: var(--hv-ink-soft);
+}
+
+/* ---- Curriculum / content body on light surface below hero ---- */
+.hv-detail-body {
+  background: var(--hv-cream);
+  padding: var(--hv-space-7) 0;
+}
+.hv-detail-body h2 { font-size: 1.3rem; margin-bottom: var(--hv-space-3); }
+
+/* ---- Checkout page ---- */
+.hv-checkout-wrap {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: var(--hv-space-7) 0;
+}
+.hv-checkout-card {
+  background: var(--hv-white);
+  border-radius: var(--hv-r-lg);
+  box-shadow: var(--hv-shadow-md);
+  padding: var(--hv-space-6);
+}
+.hv-checkout-course {
+  display: flex;
+  gap: var(--hv-space-4);
+  align-items: center;
+  padding-bottom: var(--hv-space-5);
+  margin-bottom: var(--hv-space-5);
+  border-bottom: 1px solid var(--hv-line);
+}
+.hv-checkout-thumb {
+  width: 84px; height: 84px;
+  border-radius: var(--hv-r-md);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.hv-checkout-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.hv-checkout-course h2 { font-size: 1.05rem; margin-bottom: 4px; }
+.hv-checkout-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: var(--hv-space-5) 0;
+  font-family: var(--hv-font-display);
+}
+.hv-checkout-total-row strong { font-size: 1.5rem; }
+.hv-checkout-note {
+  font-size: 0.78rem;
+  color: var(--hv-ink-soft);
+  text-align: center;
+  margin-top: var(--hv-space-4);
+}
+.hv-checkout-lock-notice {
+  text-align: center;
+  padding: var(--hv-space-7) var(--hv-space-4);
+}
+.hv-checkout-lock-notice .hv-empty-icon { font-size: 2.6rem; }
